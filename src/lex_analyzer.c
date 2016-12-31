@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/31 14:32:40 by ariard            #+#    #+#             */
-/*   Updated: 2016/12/31 15:25:50 by ariard           ###   ########.fr       */
+/*   Updated: 2016/12/31 15:36:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int		ft_scan_stream(char *tab)
 			}
 			break;
 		}
-		only_spaces = ft_isspace(*tab);
+		only_spaces += ft_isspace(*tab);
 		tab++;
 	}
 	if (only_spaces == len)
