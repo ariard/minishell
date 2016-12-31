@@ -6,42 +6,43 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/31 14:32:40 by ariard            #+#    #+#             */
-/*   Updated: 2016/12/31 15:36:52 by ariard           ###   ########.fr       */
+/*   Updated: 2016/12/31 16:32:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int		ft_scan_stream(char *tab)
+static int		ft_scan_stream(char *stream)
 {
 	int			only_spaces;
 	int			len;
 
 	only_spaces = 0;
-	len = ft_strlenchr(tab, '#');
-	while (*tab)
+	len = ft_strlenchr(stream, '#');
+	while (*stream)
 	{
-		if (*tab == '#')
+		if (*stream == '#')
 		{
-			while (*tab)
+			while (*stream)
 			{
-				*tab = '\0';
-				tab++;
+				*stream = '\0';
+				stream++;
 			}
 			break;
 		}
-		only_spaces += ft_isspace(*tab);
-		tab++;
+		only_spaces += ft_isspace(*stream);
+		stream++;
 	}
 	if (only_spaces == len)
 	   return (1);
 	return (0);	
 }
 
-void			ft_lex_analyze(char	*tab)
+void			ft_lex_analyze(char	*stream)
 {
-	if (ft_scan_stream(tab))
+	if (ft_scan_stream(stream))
 		return ;
-	ft_putstr(tab);
+	ft_lexer(stream);
+	ft_putstr(stream);
 	ft_putstr("\n");
 }

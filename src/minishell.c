@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2016/12/31 14:31:54 by ariard           ###   ########.fr       */
+/*   Updated: 2016/12/31 16:23:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,33 @@ static int			getchar(const int fd, char *c)
 	return (ret);
 }
 
-static void			ft_process_stream(char *tab)
+static void			ft_process_stream(char *stream)
 {
-	ft_lex_analyze(tab);
+	ft_lex_analyze(stream);
 }
 
 int		main(void)
 {
-	char	*tab;
+	char	*stream;
 	char	c;
 	
-	tab = ft_strnew(1024);
+	stream = ft_strnew(1024);
 	c = '\0';
 	while (42)
 	{
 		ft_putstr("ariard-0.1$ ");
 		while (c != '\n')
 		{
-			ft_strncat(tab, &c, 1);
+			ft_strncat(stream, &c, 1);
 			getchar(0, &c);
 		}
-		if (ft_strcmp(tab, "exit") == 0)
+		if (ft_strcmp(stream, "exit") == 0)
 		{
 			ft_putstr("exit");
 			break;
 		}
-		ft_process_stream(tab);
+		ft_process_stream(stream);
 		c = '\0';
-		ft_bzero(tab, 1024);
+		ft_bzero(stream, 1024);
 	}
 }
