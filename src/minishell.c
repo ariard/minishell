@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2016/12/31 01:16:18 by ariard           ###   ########.fr       */
+/*   Updated: 2016/12/31 14:31:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ static int			getchar(const int fd, char *c)
 		return (-1);
 	ret = read(fd, c, 1);
 	return (ret);
+}
+
+static void			ft_process_stream(char *tab)
+{
+	ft_lex_analyze(tab);
 }
 
 int		main(void)
@@ -37,8 +42,12 @@ int		main(void)
 			ft_strncat(tab, &c, 1);
 			getchar(0, &c);
 		}
-		ft_putstr(tab);
-		ft_putstr("\n");
+		if (ft_strcmp(tab, "exit") == 0)
+		{
+			ft_putstr("exit");
+			break;
+		}
+		ft_process_stream(tab);
 		c = '\0';
 		ft_bzero(tab, 1024);
 	}
