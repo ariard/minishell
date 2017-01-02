@@ -16,6 +16,7 @@
 
 # include "./../libft/inc/free.h"
 # include <sys/wait.h>
+# include <dirent.h>
 
 void		ft_lex_analyze(char *tab);
 
