@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2016/12/31 15:31:15 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/02 23:58:00 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ LIB= freelib.a
 
 SRC = src/minishell.c \
 	  src/lex_analyzer.c \
-#	  src/lexer.c
+	  src/lexer.c \
+	  src/lexicon.c \
+	  src/sym_tab.c
 
 OBJS = $(SRC:.c=.o)
 

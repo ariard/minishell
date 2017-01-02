@@ -1,38 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexicon.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/31 15:47:32 by ariard            #+#    #+#             */
-/*   Updated: 2016/12/31 17:11:41 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/02 22:37:30 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/02 23:10:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/wait.h>
 
-int			ft_isoperator(char *stream)
+int			main(int ac, char **av)
 {
-	if (*stream == '|')
-		return (1);
-	if (*stream == ';')
-		return (1);
-	if (*(stream + 1))
-		if (*stream == '&' && *(stream + 1) == '&')
-			return (2);
-	return (0);
-}
+	pid_t	father;
+	int		qdeux;
 
-int			ft_isoperand(char *stream)
-{
-	int		ret;
-
-	ret = 0;
-	while (*stream != '&' && *stream != ';' && *stream != '|' && *stream)
+	(void)ac;
+	(void)av;
+	father = fork();
+	qdeux = 5;
+	if (father > 0)
 	{
-		stream++;
-		ret++;
+		while (42)
+		{
+			wait(0);
+			printf("hello world !\n");
+		}
 	}
-	return (ret);
+	if (father == 0)
+	{
+		while (qdeux--)
+		{
+			sleep(2);
+			printf("coucou\n");
+		}
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2016/12/31 16:23:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/03 00:00:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,18 @@ static int			getchar(const int fd, char *c)
 static void			ft_process_stream(char *stream)
 {
 	ft_lex_analyze(stream);
+	//wait;
 }
 
-int		main(void)
+int		main(int __unused ac, char __unused **av, char **ev)
 {
 	char	*stream;
 	char	c;
+	t_cht	*sym_tab;
 	
 	stream = ft_strnew(1024);
 	c = '\0';
+	sym_tab = ft_gen_symtab(ev); 
 	while (42)
 	{
 		ft_putstr("ariard-0.1$ ");

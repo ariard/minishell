@@ -1,3 +1,4 @@
+	int				taken_buckets;
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2016/12/31 15:10:58 by ariard           ###   ########.fr       */
+/*   Updated: 2016/12/31 17:11:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +20,12 @@
 void		ft_lex_analyze(char *tab);
 
 void		ft_lexer(char *tab);
+
+int			ft_isoperand(char *stream);
+
+int			ft_isoperator(char *stream);
+
+t_cht		*ft_gen_symtab(char **env);
 
 #endif
 
