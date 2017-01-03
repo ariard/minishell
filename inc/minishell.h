@@ -18,6 +18,13 @@
 # include <sys/wait.h>
 # include <dirent.h>
 
+typedef struct		s_entry
+{
+	char			*bin;
+	char			*path;
+	int				x;
+}					t_entry;
+
 void		ft_lex_analyze(char *tab);
 
 void		ft_lexer(char *tab);

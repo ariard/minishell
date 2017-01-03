@@ -6,53 +6,78 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 22:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/03 00:44:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/03 19:13:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char		**ft_array_strdup(char **env)
+static t_entry		*ft_gen_entry(char *bin, char *path)
 {
-	int			size;
-	char		**tmp;
-	char		**new;
+	t_entry			*entry;
 
-	size = 0;
-	tmp = env;
-	while (*tmp++)
-		size++;
-	new = ft_memalloc(sizeof(char *) * (size + 1));
-	tmp = new;
-	while (*env)
-		*new++ = ft_strdup(*env++);
-	*new = 0;
-	return (tmp);
+	entry = ft_memalloc(sizeof(t_entry));
+	entry->bin = bin;
+	entry->path = ft_strdup(path);
+	entry->x = access(path, X_OK);
+	return (entry);
 }
 
-static void		ft_read_path(char *exe)
+static void			ft_clear_entry(void __unused *entry)
+{
+	return ;
+}
+
+/*static void			ft_read_entry(t_cht *htb)
+{
+	int i;
+
+	i = 0;
+	while (i < 2300)
+	{
+		if (htb->head)	
+			if (htb->head[i])
+				if (htb->head[i]->key)
+				{
+					ft_putstr("entree: ");
+					ft_putstr(htb->head[i]->key);
+					ft_putchar(10);
+				}
+		i++;
+	}
+}*/
+
+static void			ft_read_path(t_cht *htb, char *exe)
 {
 	DIR				*ds;
 	struct dirent 	*lu;
+	char			path[256];
 
 	ds = opendir(exe);
 	while ((lu = readdir(ds)))
 	{
 		if (lu->d_name[0] != '.')
 		{
-			ft_putstr(lu->d_name);
-			ft_putchar(10);
+			ft_bzero(path, 256);
+			ft_strcpy(path, exe);
+			ft_strncat(path, "/", 1);
+			ft_strcat(path, lu->d_name);
+			ft_cht_insert(htb, ft_gen_entry(lu->d_name, path), 
+					ft_strdup(lu->d_name), &ft_strcmp);
 		}
 	}
 	closedir(ds);
 }
 
-t_cht			*ft_gen_symtab(char **env)
+t_cht				*ft_gen_symtab(char **env)
 {
 	char		**array;
 	char		*path;
 	char		exe[128];
+	t_cht		*htb;	
 
+	htb = ft_memalloc(sizeof(htb));
+	ft_cht_init(htb, 2441, &ft_hash_string, &ft_clear_entry);
 	array =	ft_array_strdup(env);
 	while (ft_strncmp(*array, "PATH", 4) != 0)
 		array++;
@@ -64,7 +89,7 @@ t_cht			*ft_gen_symtab(char **env)
 	{
 		ft_bzero(exe, 128);
 		ft_strchrcpy(exe, path, ':');
-		ft_read_path(exe);
+		ft_read_path(htb, exe);
 		path += ft_strlen(exe) + 1;
 	}
 	return (NULL);

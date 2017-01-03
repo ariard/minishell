@@ -6,21 +6,11 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/03 00:00:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/03 19:13:19 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int			getchar(const int fd, char *c)
-{
-	int				ret;
-
-	if (-fd < 0 || c == NULL)
-		return (-1);
-	ret = read(fd, c, 1);
-	return (ret);
-}
 
 static void			ft_process_stream(char *stream)
 {
@@ -43,7 +33,7 @@ int		main(int __unused ac, char __unused **av, char **ev)
 		while (c != '\n')
 		{
 			ft_strncat(stream, &c, 1);
-			getchar(0, &c);
+			ft_getchar(0, &c);
 		}
 		if (ft_strcmp(stream, "exit") == 0)
 		{
