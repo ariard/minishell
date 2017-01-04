@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2016/12/30 16:00:42 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/04 22:19:49 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,26 @@ CFLAGS += -Wall -Wextra -Werror
 CFLAGS += -I ./inc/
 LIB= freelib.a
 
-SRC = src/main.c
+SRC = src/minishell.c \
+	  src/lex_analyzer.c \
+	  src/lexer.c \
+	  src/lexicon.c \
+	  src/sym_tab.c \
+	  src/syntax_analyze.c \
+	  src/error.c \
+	  src/read.c
 
 OBJS = $(SRC:.c=.o)
 
-all : $(NAME)
+all: $(NAME)
 
-$(NAME): 
-	@ make -C ./libft fclean
-	@ make -C ./libft	
-	@ $(CC) $(CFLAGS) -c $(SRC) -o $(OBJS)
-	@ $(CC) $(OBJS) $(LIB) -o $(NAME)
+%.o: %.c
+	  $(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJS) 
+	  make -C ./libft fclean
+	  make -C ./libft	
+	  $(CC) $(OBJS) $(LIB) -o $(NAME)
 
 clean :
 	@ rm -rf $(OBJS) $(LIB)
