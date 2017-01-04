@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/04 19:55:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/04 22:48:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 static void			ft_process_stream(char *stream)
 {
-	t_dlist			*list_token;
+	t_dlist			**list_token;
 
 	list_token = ft_lex_analyze(stream);
 	ft_read_list(list_token);
-//	ft_syntax_analyze(list_token);		
+	if (list_token)
+		ft_syntax_analyze(list_token);		
 
 }
 
@@ -33,7 +34,6 @@ int					main(int __unused ac, char __unused **av, char **ev)
 	c = '\0';
 	env = ft_array_strdup(ev);
 	sym_tab = ft_gen_symtab(env);
-	ft_read_entry(sym_tab);
 	while (42)
 	{
 		ft_putstr("ariard-0.1$ ");
@@ -51,4 +51,5 @@ int					main(int __unused ac, char __unused **av, char **ev)
 		c = '\0';
 		ft_bzero(stream, 1024);
 	}
+	return (0);
 }

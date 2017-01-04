@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 20:39:19 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/04 19:55:52 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/04 21:48:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@ void			ft_read_entry(t_cht *htb)
 	}
 }
 
-void			ft_read_list(t_dlist *list)
+void			ft_read_list(t_dlist **list)
 {
 	t_dlist		*tmp;
 	t_token		*token;
+	int			i;
 
-	tmp = list;
+	tmp = *list;
+	i = 0;
 	while (tmp)
 	{
 		if (tmp->data)

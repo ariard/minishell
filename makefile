@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/03 23:08:00 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/04 22:19:49 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRC = src/minishell.c \
 	  src/lexer.c \
 	  src/lexicon.c \
 	  src/sym_tab.c \
+	  src/syntax_analyze.c \
+	  src/error.c \
 	  src/read.c
 
 OBJS = $(SRC:.c=.o)

@@ -31,9 +31,18 @@ typedef struct		s_token
 	char			*id;
 }					t_token;
 
-t_dlist		*ft_lex_analyze(char *tab);
+typedef struct		s_expr
+{
+	char			*id1;
+	char			*id2;
+	char			*id3;
+}					t_expr;
 
-t_dlist		*ft_lexer(char *tab);
+t_dlist		**ft_lex_analyze(char *tab);
+
+void		ft_syntax_analyze(t_dlist **list_token);
+
+t_dlist		**ft_lexer(char *tab);
 
 int			ft_isoperand(char *stream);
 
@@ -41,11 +50,13 @@ int			ft_isoperator(char *stream);
 
 t_cht		*ft_gen_symtab(char **env);
 
+int			ft_syntax_error(t_dlist *list_token);
+
 void		ft_read_entry(t_cht *htb);
 
 void		ft_read_env(char **str);
 
-void		ft_read_list(t_dlist *list);
+void		ft_read_list(t_dlist **list);
 
 #endif
 
