@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 22:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/04 19:52:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/04 18:05:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_entry		*ft_gen_entry(char *bin, char *path)
+static t_entry		*ft_gen_entry(char *bin, char *path)
 {
 	t_entry			*entry;
 
@@ -35,8 +35,13 @@ static void			ft_read_path(t_cht *htb, char *exe)
 	char			path[256];
 	int				i;
 
-	(void)htb;
 	i = 0;
+	while (i < htb->capacity)
+	{
+		if (htb->head[i])
+			ft_putstr("yolo");
+		i++;
+	}
 	ds = opendir(exe);
 	while ((lu = readdir(ds)))
 	{
@@ -53,17 +58,21 @@ static void			ft_read_path(t_cht *htb, char *exe)
 	closedir(ds);
 }
 
-t_cht				*ft_gen_symtab(char **array)
+t_cht				*ft_gen_symtab(char **env)
 {
+	char		**array;
 	char		*path;
 	char		exe[128];
 	char		*new;
 	t_cht		*htb;
 	int			i;	
 
+	(void)env;
 	i = 0;
-	htb = ft_memalloc(sizeof(t_cht));
+	htb = ft_memalloc(sizeof(htb));
 	ft_cht_init(htb, 2441, &ft_hash_string, &ft_clear_entry);
+	array = env; 
+	ft_read_env(array);
 	while (ft_strncmp(*array, "PATH", 4) != 0)
 		array++;
 	path = *array;

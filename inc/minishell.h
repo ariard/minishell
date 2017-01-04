@@ -25,15 +25,27 @@ typedef struct		s_entry
 	int				x;
 }					t_entry;
 
-void		ft_lex_analyze(char *tab);
+typedef struct		s_token
+{
+	char			*name;
+	char			*id;
+}					t_token;
 
-void		ft_lexer(char *tab);
+t_dlist		*ft_lex_analyze(char *tab);
+
+t_dlist		*ft_lexer(char *tab);
 
 int			ft_isoperand(char *stream);
 
 int			ft_isoperator(char *stream);
 
 t_cht		*ft_gen_symtab(char **env);
+
+void		ft_read_entry(t_cht *htb);
+
+void		ft_read_env(char **str);
+
+void		ft_read_list(t_dlist *list);
 
 #endif
 

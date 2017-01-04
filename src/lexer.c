@@ -6,18 +6,17 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/31 14:54:04 by ariard            #+#    #+#             */
-/*   Updated: 2016/12/31 17:11:36 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/04 17:36:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char		*ft_detect_pattern(char *stream)
+static char			*ft_detect_pattern(char *stream)
 {
 	char	*lexem;
 	int		ret;
 
-	(void)stream;
 	lexem = ft_strnew(1024);
 	if ((ret = ft_isoperator(stream)))
 		return (ft_strncpy(lexem, stream, ret));
@@ -26,18 +25,35 @@ static char		*ft_detect_pattern(char *stream)
 	return (NULL);
 }
 
-void		ft_lexer(char *stream)
+static t_token		*ft_gen_token(char *lexem)
+{
+	t_token			*token;
+
+	token = ft_memalloc(sizeof(t_token));
+	token->name = ft_strdup(ft_strtrim(lexem)); 
+	if (ft_isoperator(lexem))
+		token->id = ft_strdup("operator");
+	else if (ft_isoperand(lexem))
+		token->id = ft_strdup("operand");
+	else
+		token->id = ft_strdup("null");
+	return (token);
+}
+
+t_dlist				*ft_lexer(char *stream)
 {
 	char	*lexem;
+	t_dlist	*list_token;
 
+	list_token = ft_memalloc(sizeof(t_dlist)); 
 	while (*stream)
 	{
 		lexem = ft_detect_pattern(stream);
-		//		ft_match_pattern();
-		//		ft_gen_lexemes;
+		ft_list_push_front(&list_token, ft_gen_token(lexem), lexem);
 		if (lexem)
 			stream += ft_strlen(lexem);
 		else
 			stream++;
 	}
+	return (list_token);
 }
