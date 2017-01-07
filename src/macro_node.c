@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 21:17:20 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/07 18:04:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/07 18:58:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_nodeis(t_btree *node)
+int			ft_node_typeis(t_btree *node)
 {
 	t_token		*token;
 
@@ -26,13 +26,22 @@ int			ft_nodeis(t_btree *node)
 	return (-1);
 }
 
+int			ft_node_islast(int size, char *s)
+{
+	if (!s)
+		return (-1);
+	if (size == ft_atoi(s) + 1)
+		return (1);
+	return (0);
+}
+
 char		*ft_node_nameis(t_btree *node)
 {
 	t_token		*token;
 
 	if (!node)
 		return (NULL);
-	if (ft_nodeis(node) == 0)
+	if (ft_node_typeis(node) == 0)
 		return (NULL);
 	token = node->data;
 	return (token->name);
