@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/07 18:04:45 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/07 19:01:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_btree			*ft_goto_nxt_operand(t_btree *node, t_btree *father)
 		{
 			if (father->right)
 			{
-				if (ft_nodeis(father->right) == 0)
+				if (ft_node_typeis(father->right) == 0)
 					return ((father->right)->left);
 				else
 					return (father->right);
@@ -38,8 +38,20 @@ t_btree			*ft_goto_nxt_operand(t_btree *node, t_btree *father)
 	return (NULL);
 }
 
+int				ft_execute_cmd(char	*path, t_btree *node, t_btree *father,
+		char **env, t_root *tree)
+{
+	if (ft_node_islast(tree->size, node->key) == 1)
+		return (ft_execute_regular(path, node, env));
+	if (ft_ispipe(father) == 1)
+		return (ft_execute_pipe(path, node, env));
+	if (ft_isregular(father) == 1)
+		return (ft_execute_regular(path, node, env));
+	return (0);
+}
+
 int				ft_execute_operand(t_btree *node, t_btree *father, char **env,
-		t_cht *sym_tab)
+		t_cht *sym_tab, t_root *tree)
 {
 	t_entry		*entry;
 	char		*operand;
@@ -51,10 +63,10 @@ int				ft_execute_operand(t_btree *node, t_btree *father, char **env,
 		return (ft_semantic_error(ft_strduptr(operand, &ft_isspace)));
 	else
 	{
-		if (entry->x == -1)
+		if (entry->perm == -1)
 			return (ft_permission_error(operand, env));
-		else if (entry->x == 0)
-			return (ft_execute_cmd(entry->path, node, father, env));
+		else if (entry->perm == 0)
+			return (ft_execute_cmd(entry->path, node, father, env, tree));
 	}
 	return (0);	
 }
@@ -66,41 +78,14 @@ void			ft_execute_ast(t_root *tree, char **env, t_cht *sym_tab)
 	int			ret;
 
 	tmp = tree->root;
-	if (ft_nodeis(tree->root) == 0)
+	if (ft_node_typeis(tree->root) == 0)
 		tmp = (tree->root)->left;
 	while (tmp)
 	{
 		father = ft_get_father(tree->root, tree->root, tmp->key, &ft_itoacmp);
-		ret = ft_execute_operand(tmp, father, env, sym_tab);
+		ret = ft_execute_operand(tmp, father, env, sym_tab, tree);
 //		if (ft_islist(father) == 1 && ret = -1)
 //			tmp = ft_jump_nxt_operand;
 		tmp = ft_goto_nxt_operand(tmp, father);
 	}
 }
-
-/*void			ft_execute_ast(t_root *tree, char **env, t_cht *sym_tab)
-{
-	t_btree		*tmp;
-	t_btree		*father;
-	t_entry		*entry;
-	char		*cmd;
-
-	tmp = tree->root;
-	if (ft_nodeis(tree->root) == 0)
-		tmp = (tree->root)->left;
-	while (tmp)
-	{
-		cmd = ft_read_cmd(tmp);
-		entry = ft_cht_lookup(sym_tab, ft_strduptr(cmd, &ft_isspace), &ft_strcmp);
-		if (!entry)
-			ft_semantic_error(ft_strduptr(cmd, &ft_isspace));
-		if (entry)
-			if (entry->x == -1)
-				ft_permission_error(cmd, env);
-		father = ft_get_father(tree->root, tree->root, tmp->key, &ft_itoacmp);
-		if (entry)
-			if (entry->x == 0)
-				ft_execute_cmd(entry->path, tmp, father, env);
-		tmp = ft_goto_nxt_cmd(tmp, father);
-	}
-}*/

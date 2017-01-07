@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/07 17:56:42 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/07 18:40:08 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRC = src/minishell.c \
 	  src/semantic_analyzer.c \
 	  src/execution.c \
 	  src/error.c \
-	  src/macro.c \
+	  src/macro_node.c \
+	  src/macro_operand.c \
 	  src/read.c
 
 OBJS = $(SRC:.c=.o)

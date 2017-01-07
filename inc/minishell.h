@@ -22,7 +22,7 @@ typedef struct		s_entry
 {
 	char			*bin;
 	char			*path;
-	int				x;
+	int				perm;
 }					t_entry;
 
 typedef struct		s_token
@@ -61,17 +61,37 @@ t_btree		*ft_ast_insert_sequence(t_root *tree, t_btree *father, t_dlist *operand
 
 t_btree		*ft_ast_insert_cmd(t_root *tree, t_btree *father, t_dlist *operand);
 
-int			ft_execute_cmd(char *path, t_btree *node, t_btree *father, char **env);
+/*
+** Functions to execute command according to its operator
+*/
 
-void		ft_execute_operator(t_btree *father);
+int			ft_execute_regular(char *path, t_btree *node, char **env);
 
-int			ft_nodeis(t_btree *node);
+int			ft_execute_pipe(char *path, t_btree *node, char **env);
+
+/*
+** Macros to extract data from node
+*/
+
+int			ft_node_typeis(t_btree *node);
+
+int			ft_node_islast(int size, char *s);
 
 char		*ft_node_nameis(t_btree *node);
 
 char		**ft_node_argis(t_btree *node);
 
-int			ft_ispipe(t_btree *node);
+/*
+** Macros to detect operator type
+*/
+
+int			ft_ispipe(t_btree *father);
+
+int			ft_isregular(t_btree *father);
+
+/*
+** Read functions to verify struct generation
+*/
 
 void		ft_read_entry(t_cht *htb);
 

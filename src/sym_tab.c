@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 22:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/05 22:22:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/07 18:29:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_entry		*ft_gen_entry(char *bin, char *path)
 	entry = ft_memalloc(sizeof(t_entry));
 	entry->bin = ft_strdup(bin); 
 	entry->path = ft_strdup(path);
-	entry->x = access(path, X_OK);
+	entry->perm = access(path, X_OK);
 	return (entry);
 }
 

@@ -6,25 +6,31 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 22:23:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/07 17:53:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/07 18:23:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_execute_cmd(char *path, t_btree *node, t_btree *father,
-		char **env)
+int			ft_execute_regular(char *path, t_btree *node, char **env)
 {
 	char	**arg;
 	pid_t	status;
 
-	(void)father;
 	arg = ft_node_argis(node);
 	status = fork();
 	if (status == 0)
 		execve(path, arg, env);
 	if (status > 0)
 		wait(0);
+	return (1);
+}
+
+int			ft_execute_pipe(char *path, t_btree *node, char **env)
+{
+	(void)path;
+	(void)node;
+	(void)env;
 	return (1);
 }
 
