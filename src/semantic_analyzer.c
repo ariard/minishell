@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/07 23:41:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/08 00:20:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int				ft_execute_operand(t_btree *node, t_btree *father, char **env,
 
 	if (!(operand = ft_node_nameis(node))) 
 		return (-1);
+	if (ft_builtin(operand, node, father, env) == 1)
+		return (1);
 	entry = ft_cht_lookup(sym_tab, ft_strduptr(operand, &ft_isspace), &ft_strcmp);
 	if (!entry)
 		return (ft_semantic_error(ft_strduptr(operand, &ft_isspace)));
@@ -97,6 +99,9 @@ void			ft_execute_ast(t_root *tree, char **env, t_cht *sym_tab)
 	{
 		father = ft_get_father(tree->root, tree->root, tmp->key, &ft_itoacmp);
 		ret = ft_execute_operand(tmp, father, env, sym_tab, tree);
+		if (ft_isredir_out(father) == 1 || ft_isredir_in(father) == 1
+				|| ft_isappredir_out(father) == 1)
+			tmp = ft_goto_nxt_operand(tmp, father);
 //		if (ft_islist(father) == 1 && ret = -1)
 //			tmp = ft_jump_nxt_operand;
 		tmp = ft_goto_nxt_operand(tmp, father);
