@@ -52,20 +52,22 @@ t_cht		*ft_gen_symtab(char **env);
 
 int			ft_syntax_error(t_dlist *list_token);
 
-void		ft_semantic_error(char *s);
+int			ft_semantic_error(char *s);
 
-void		ft_permission_error(char *s, char **env);
+int			ft_permission_error(char *s, char **env);
 
 t_btree		*ft_ast_insert_sequence(t_root *tree, t_btree *father, t_dlist *operand,
 		t_dlist *operator);
 
 t_btree		*ft_ast_insert_cmd(t_root *tree, t_btree *father, t_dlist *operand);
 
-void		ft_execute_cmd(char *path, t_btree *node, t_btree *father, char **env);
+int			ft_execute_cmd(char *path, t_btree *node, t_btree *father, char **env);
 
 void		ft_execute_operator(t_btree *father);
 
 int			ft_nodeis(t_btree *node);
+
+char		*ft_node_nameis(t_btree *node);
 
 char		**ft_node_argis(t_btree *node);
 

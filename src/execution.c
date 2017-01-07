@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 22:23:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/07 16:46:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/07 17:53:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		ft_execute_cmd(char *path, t_btree *node, t_btree *father,
+int			ft_execute_cmd(char *path, t_btree *node, t_btree *father,
 		char **env)
 {
 	char	**arg;
@@ -25,6 +25,7 @@ void		ft_execute_cmd(char *path, t_btree *node, t_btree *father,
 		execve(path, arg, env);
 	if (status > 0)
 		wait(0);
+	return (1);
 }
 
 /*void		ft_execute_cmd(char	*path, t_btree *node, t_btree *father, 

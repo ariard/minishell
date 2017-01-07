@@ -6,35 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/07 16:26:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/07 18:04:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char		*ft_read_cmd(t_btree *node)
-{
-	t_token		*token;
-
-	if (node)
-	{
-		token = node->data;
-		if (ft_strcmp(token->id, "operator") == 0)
-		{
-			node = node->left;
-			if (node)
-			{
-				token = node->data;
-				return (token->name);
-			}
-		}
-		else
-			return (token->name);
-	}
-	return (NULL);
-}
-
-t_btree			*ft_goto_nxt_cmd(t_btree *node, t_btree *father)
+t_btree			*ft_goto_nxt_operand(t_btree *node, t_btree *father)
 {
 	if (!father)
 		return (NULL);
@@ -60,14 +38,47 @@ t_btree			*ft_goto_nxt_cmd(t_btree *node, t_btree *father)
 	return (NULL);
 }
 
-static int		ft_itoacmp(const char *str1, const char *str2)
+int				ft_execute_operand(t_btree *node, t_btree *father, char **env,
+		t_cht *sym_tab)
 {
-	if (ft_atoi(str1) == ft_atoi(str2))
-		return (0);
-	return (1);
+	t_entry		*entry;
+	char		*operand;
+
+	if (!(operand = ft_node_nameis(node))) 
+		return (-1);
+	entry = ft_cht_lookup(sym_tab, ft_strduptr(operand, &ft_isspace), &ft_strcmp);
+	if (!entry)
+		return (ft_semantic_error(ft_strduptr(operand, &ft_isspace)));
+	else
+	{
+		if (entry->x == -1)
+			return (ft_permission_error(operand, env));
+		else if (entry->x == 0)
+			return (ft_execute_cmd(entry->path, node, father, env));
+	}
+	return (0);	
 }
 
 void			ft_execute_ast(t_root *tree, char **env, t_cht *sym_tab)
+{
+	t_btree 	*tmp;
+	t_btree		*father;
+	int			ret;
+
+	tmp = tree->root;
+	if (ft_nodeis(tree->root) == 0)
+		tmp = (tree->root)->left;
+	while (tmp)
+	{
+		father = ft_get_father(tree->root, tree->root, tmp->key, &ft_itoacmp);
+		ret = ft_execute_operand(tmp, father, env, sym_tab);
+//		if (ft_islist(father) == 1 && ret = -1)
+//			tmp = ft_jump_nxt_operand;
+		tmp = ft_goto_nxt_operand(tmp, father);
+	}
+}
+
+/*void			ft_execute_ast(t_root *tree, char **env, t_cht *sym_tab)
 {
 	t_btree		*tmp;
 	t_btree		*father;
@@ -92,4 +103,4 @@ void			ft_execute_ast(t_root *tree, char **env, t_cht *sym_tab)
 				ft_execute_cmd(entry->path, tmp, father, env);
 		tmp = ft_goto_nxt_cmd(tmp, father);
 	}
-}
+}*/
