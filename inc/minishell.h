@@ -82,6 +82,13 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 		char **env);
 
 /*
+** Functions to execute builtin utility
+*/
+
+int			ft_builtin(char *operand, t_btree *node, t_btree *father,
+		char **env);
+
+/*
 ** Macros to extract data from node
 */
 
