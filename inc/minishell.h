@@ -61,13 +61,19 @@ t_btree		*ft_ast_insert_sequence(t_root *tree, t_btree *father, t_dlist *operand
 
 t_btree		*ft_ast_insert_cmd(t_root *tree, t_btree *father, t_dlist *operand);
 
+t_btree		*ft_goto_nxt_operand(t_btree *node, t_btree *father);
+
 /*
 ** Functions to execute command according to its operator
 */
 
-int			ft_execute_regular(char *path, t_btree *node, char **env);
+int			ft_execute_regular(char *path, t_btree *node, char **env,
+		int isinpipe);
 
 int			ft_execute_pipe(char *path, t_btree *node, char **env);
+
+int			ft_execute_redir_out(char *path, t_btree *node, t_btree *father,
+		char **env);
 
 /*
 ** Macros to extract data from node
@@ -88,6 +94,8 @@ char		**ft_node_argis(t_btree *node);
 int			ft_ispipe(t_btree *father);
 
 int			ft_isregular(t_btree *father);
+
+int			ft_isredir_out(t_btree *father);
 
 /*
 ** Read functions to verify struct generation

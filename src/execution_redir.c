@@ -6,55 +6,47 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 22:23:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/07 22:25:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/07 22:47:13 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_execute_regular(char *path, t_btree *node, char **env,
-		int isinpipe)
+static int		ft_get_fdfiles(t_btree *node, t_btree *father)
+{
+	t_btree		*tmp;
+	char		*files;
+	int			fd;
+	mode_t		mode;
+
+	if (!father)
+		return (-1);
+	tmp = ft_goto_nxt_operand(node, father);
+	files = ft_node_nameis(tmp);
+	mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+	if ((fd = open(files, O_CREAT | O_RDWR, mode)) == -1)
+		return (-1);
+	return (fd);
+}
+	
+int				ft_execute_redir_out(char *path, t_btree *node, t_btree *father,
+		char **env)
 {
 	char	**arg;
 	pid_t	status;
+	int		files;
 
 	arg = ft_node_argis(node);
+	if ((files = ft_get_fdfiles(node, father)) == -1)
+		return (-1);
 	status = fork();
 	if (status == 0)
+	{
+		close(1);
+		dup(files);
 		execve(path, arg, env);
+	}
 	if (status > 0)
 		wait(0);
-	if (isinpipe == 1)
-	{	
-		close(0);
-		open("/dev/stdout", O_WRONLY);
-		isinpipe = 0;
-	}
-	return (1);
-}
-
-int			ft_execute_pipe(char *path, t_btree *node, char **env)
-{
-	char	**arg;
-	pid_t	status;
-	int		fd[2];
-
-	arg = ft_node_argis(node);
-	fd[0] = open("/dev/stdout", O_RDONLY);
-	fd[1] = open("/dev/stdin", O_WRONLY);
-	pipe(fd);
-	status = fork();
-	if (status == 0)
-	{
-		close(fd[0]);
-		dup2(fd[1], 1);
-		execve(path, arg, env);
-	}
-	if (status > 0)
-	{
-		close(fd[1]);
-		dup2(fd[0], 0);
-		wait(0);	
-	}
 	return (1);
 }

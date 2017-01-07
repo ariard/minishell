@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 18:10:26 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/07 18:53:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/07 22:23:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,18 @@ int			ft_ispipe(t_btree *father)
 		return (-1);
 	token = father->data;
 	if (ft_strcmp(token->name, "|") == 0)
+		return (1);
+	return (0);
+}
+
+int			ft_isredir_out(t_btree *father)
+{
+	t_token		*token;
+
+	if (!father)
+		return (-1);
+	token = father->data;
+	if (ft_strcmp(token->name, ">") == 0)
 		return (1);
 	return (0);
 }
