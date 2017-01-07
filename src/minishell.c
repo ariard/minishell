@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/07 18:56:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/07 21:20:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int					main(int __unused ac, char __unused **av, char **ev)
 	char	c;
 	char	**env;
 	t_cht	*sym_tab;
-	
+
 	stream = ft_strnew(1024);
 	c = '\0';
 	env = ft_array_strdup(ev);
