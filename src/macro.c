@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 21:17:20 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/06 15:33:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/07 18:04:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,19 @@ int			ft_nodeis(t_btree *node)
 	return (-1);
 }
 
-char	**ft_node_argis(t_btree *node)
+char		*ft_node_nameis(t_btree *node)
+{
+	t_token		*token;
+
+	if (!node)
+		return (NULL);
+	if (ft_nodeis(node) == 0)
+		return (NULL);
+	token = node->data;
+	return (token->name);
+}
+
+char		**ft_node_argis(t_btree *node)
 {
 	t_token		*token;
 	char		**arg;

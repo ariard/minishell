@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 22:09:47 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/06 15:48:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/07 17:48:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ int				ft_syntax_error(t_dlist *list_token)
 	return (-1);
 }
 
-void		ft_semantic_error(char *s)
+int			ft_semantic_error(char *s)
 {
 	ft_putstr_fd("ariard: ", 2);
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd(": commmand not found\n", 2);
+	return (-1);
 }
 
-void		ft_permission_error(char *s, char **env)
+int			ft_permission_error(char *s, char **env)
 {
 	char	*log;
 
@@ -46,5 +47,6 @@ void		ft_permission_error(char *s, char **env)
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd(": you (", 2);
 	ft_putstr_fd(log, 2);
-	ft_putstr_fd(") are not allowed to use this program\n", 2);	
+	ft_putstr_fd(") are not allowed to use this program\n", 2);
+	return (-1);
 }

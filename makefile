@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/07 16:45:35 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/07 17:56:42 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,9 @@ SRC = src/minishell.c \
 	  src/lexer.c \
 	  src/lexicon.c \
 	  src/sym_tab.c \
-	  src/syntax_analyze.c \
+	  src/syntax_analyzer.c \
 	  src/gen_ast.c \
-	  src/sem_executer.c \
+	  src/semantic_analyzer.c \
 	  src/execution.c \
 	  src/error.c \
 	  src/macro.c \
