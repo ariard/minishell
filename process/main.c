@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 22:37:30 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/02 23:10:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/06 19:00:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,25 @@
 #include <stdio.h>
 #include <sys/wait.h>
 
-int			main(int ac, char **av)
+
+int			test(char **av)
 {
 	pid_t	father;
-	int		qdeux;
-
-	(void)ac;
-	(void)av;
+	
 	father = fork();
-	qdeux = 5;
-	if (father > 0)
-	{
-		while (42)
-		{
-			wait(0);
-			printf("hello world !\n");
-		}
-	}
 	if (father == 0)
+		execve("/bin/pwd", av, NULL);
+	wait(0);
+	return (0);
+}
+
+int			main(int ac, char **av)
+{
+	(void)ac;
+	while (42)
 	{
-		while (qdeux--)
-		{
-			sleep(2);
-			printf("coucou\n");
-		}
+		test(av);
+		sleep(2);
 	}
 	return (0);
 }

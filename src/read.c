@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 20:39:19 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/04 21:48:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/05 23:28:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void			ft_read_list(t_dlist **list)
 	t_token		*token;
 	int			i;
 
+	if (!list || !*list)
+		return ;
 	tmp = *list;
 	i = 0;
 	while (tmp)

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/31 14:54:04 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/04 22:48:49 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/06 15:53:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,19 @@ t_dlist				**ft_lexer(char *stream)
 {
 	char	*lexem;
 	t_dlist	**list_token;
+	int		id;
 
 	list_token = ft_memalloc(sizeof(t_dlist));
 	*list_token = NULL;
+	id = 0;
 	while (*stream)
 	{
 		lexem = ft_detect_pattern(stream);
 		if (lexem)
-			ft_list_push_back(list_token, ft_gen_token(lexem), lexem);
+		{
+			ft_list_push_back(list_token, ft_gen_token(lexem), ft_itoa(id));
+			id++;
+		}
 		if (lexem)
 			stream += ft_strlen(lexem);
 		else
