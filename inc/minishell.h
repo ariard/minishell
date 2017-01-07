@@ -72,10 +72,13 @@ int			ft_execute_regular(char *path, t_btree *node, char **env,
 
 int			ft_execute_pipe(char *path, t_btree *node, char **env);
 
-int			ft_execute_redir_out(char *path, t_btree *node, t_btree *father,
+int			ft_redir_out(char *path, t_btree *node, t_btree *father,
 		char **env);
 
-int			ft_execute_redir_in(char *path, t_btree *node, t_btree *father,
+int			ft_redir_in(char *path, t_btree *node, t_btree *father,
+		char **env);
+
+int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 		char **env);
 
 /*
@@ -101,6 +104,8 @@ int			ft_isregular(t_btree *father);
 int			ft_isredir_out(t_btree *father);
 
 int			ft_isredir_in(t_btree *father);
+
+int			ft_isappredir_out(t_btree *father);
 
 /*
 ** Read functions to verify struct generation
