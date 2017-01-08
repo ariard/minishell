@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 22:09:47 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/07 18:45:41 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/08 15:50:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,10 @@ int			ft_permission_error(char *s, char **env)
 	ft_putstr_fd(log, 2);
 	ft_putstr_fd(") are not allowed to use this program\n", 2);
 	return (-1);
+}
+
+int			ft_home_error(void)
+{
+	ft_putstr_fd("ariard: cd: HOME not set\n", 2);
+	return (1);
 }
