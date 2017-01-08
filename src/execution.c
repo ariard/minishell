@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 22:23:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/07 23:09:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/08 12:44:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int			ft_execute_regular(char *path, t_btree *node, char **env,
 {
 	char	**arg;
 	pid_t	status;
+	int		nb;
 
 	arg = ft_node_argis(node);
 	status = fork();
@@ -27,7 +28,7 @@ int			ft_execute_regular(char *path, t_btree *node, char **env,
 	if (isinpipe == 1)
 	{	
 		close(0);
-		open("/dev/stdout", O_WRONLY);
+		nb = open("/dev/stdout", O_WRONLY);	
 		isinpipe = 0;
 	}
 	return (1);
