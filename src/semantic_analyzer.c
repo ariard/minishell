@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/08 00:20:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/08 13:14:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ int				ft_execute_operand(t_btree *node, t_btree *father, char **env,
 
 	if (!(operand = ft_node_nameis(node))) 
 		return (-1);
-	if (ft_builtin(operand, node, father, env) == 1)
-		return (1);
 	entry = ft_cht_lookup(sym_tab, ft_strduptr(operand, &ft_isspace), &ft_strcmp);
 	if (!entry)
 		return (ft_semantic_error(ft_strduptr(operand, &ft_isspace)));
 	else
 	{
+		if (ft_builtin(operand, node, father, env) == 1)
+			return (1);
 		if (entry->perm == -1)
 			return (ft_permission_error(operand, env));
 		else if (entry->perm == 0)
