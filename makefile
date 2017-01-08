@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/08 13:07:08 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/08 16:49:00 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,11 @@ SRC = src/minishell.c \
 	  src/execution.c \
 	  src/execution_redir.c \
 	  src/builtin.c \
-	  src/echo.c \
+	  src/utility.c \
 	  src/error.c \
 	  src/macro_node.c \
 	  src/macro_operator.c \
+	  src/macro_env.c \
 	  src/read.c
 
 OBJS = $(SRC:.c=.o)

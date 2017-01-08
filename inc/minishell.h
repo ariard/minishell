@@ -50,12 +50,6 @@ int			ft_isoperator(char *stream);
 
 t_cht		*ft_gen_symtab(char **env);
 
-int			ft_syntax_error(t_dlist *list_token);
-
-int			ft_semantic_error(char *s);
-
-int			ft_permission_error(char *s, char **env);
-
 t_btree		*ft_ast_insert_sequence(t_root *tree, t_btree *father, t_dlist *operand,
 		t_dlist *operator);
 
@@ -85,10 +79,25 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 ** Functions to execute builtin utility
 */
 
-int			ft_builtin(char *operand, t_btree *node, t_btree *father,
-		char **env);
+int			ft_builtin(t_btree *node, t_btree *father, char **env);
 
-int			ft_echo(char *arg, char **env);
+int			ft_echo(char **arg, char **env);
+
+int			ft_cd(char **arg, char **env);
+
+char		*ft_builtin_option(char **arg);
+
+/*
+** Functions to print errors
+*/
+
+int			ft_home_error(void);
+
+int			ft_syntax_error(t_dlist *list_token);
+
+int			ft_semantic_error(char *s);
+
+int			ft_permission_error(char *s, char **env);
 
 /*
 ** Macros to extract data from node
@@ -115,6 +124,12 @@ int			ft_isredir_out(t_btree *father);
 int			ft_isredir_in(t_btree *father);
 
 int			ft_isappredir_out(t_btree *father);
+
+/*
+** Macros to operate on environnement
+*/
+
+char		*ft_grep_env(char **env, char *value);
 
 /*
 ** Read functions to verify struct generation

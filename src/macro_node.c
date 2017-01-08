@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 21:17:20 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/08 13:01:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/08 15:37:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char		*ft_node_nameis(t_btree *node)
 	if (ft_node_typeis(node) == 0)
 		return (NULL);
 	token = node->data;
-	return (token->name);
+	return (ft_strduptr(token->name, &ft_isspace));
 }
 
 char		**ft_node_argis(t_btree *node)
