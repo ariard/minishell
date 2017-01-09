@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/09 16:37:46 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/09 21:53:26 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC = src/minishell.c \
 	  src/builtin.c \
 	  src/echo.c \
 	  src/cd.c \
+	  src/env.c \
 	  src/error.c \
 	  src/macro_node.c \
 	  src/macro_operator.c \
@@ -40,13 +41,14 @@ OBJS = $(SRC:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	  $(CC) $(CFLAGS) -c $< -o $@
+	@  $(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS) 
-	  make -C ./libft fclean
-	  make -C ./libft	
-	  $(CC) $(OBJS) $(LIB) -o $(NAME)
-
+	@  make -C ./libft fclean
+	@  make -C ./libft	
+	@  $(CC) $(OBJS) $(LIB) -o $(NAME)
+	@ rm -rf $(OBJS) $(LIB)
+  
 clean :
 	@ rm -rf $(OBJS) $(LIB)
 
