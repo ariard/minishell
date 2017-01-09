@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 00:02:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/08 17:59:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/09 16:49:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,15 @@ char		*ft_builtin_option(char **arg)
 		arg++;
 	}
 	return (option);
+}
+
+int			ft_check_dir(char *path)
+{
+	DIR		*ds;
+
+	ds = opendir(path);
+	if (!ds)
+		return (ft_existence_error("cd", path));
+	closedir(ds);
+	return (1);
 }
