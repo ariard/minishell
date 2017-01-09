@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:27:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/09 13:34:51 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/09 20:20:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int			ft_echo(char **arg, char **env)
 {
 	(void)env;
+	ft_putstr("builtin :\n");
 	if (!arg)
 		return (1);
 	arg++;

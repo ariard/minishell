@@ -1,4 +1,3 @@
-	int				taken_buckets;
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2016/12/31 17:11:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/09 22:09:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +84,13 @@ int			ft_echo(char **arg, char **env);
 
 int			ft_cd(char **arg, char **env);
 
-char		*ft_builtin_option(char **arg);
+int			ft_env(char **arg, char **env);
+
+char		**ft_setenv(char *arg, char **env);
+
+int			ft_unsetenv(char **arg, char **env);
+
+char		*ft_builtin_option(char **arg, char *builtin);
 
 int			ft_check_dir(char *path);
 

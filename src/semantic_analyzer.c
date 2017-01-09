@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/09 13:19:03 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/09 20:35:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int				ft_execute_operand(t_btree *node, t_btree *father, char **env,
 	if (!(operand = ft_node_nameis(node))) 
 		return (-1);
 	entry = ft_cht_lookup(sym_tab, operand, &ft_strcmp);
-	if (!entry)
+	if (!entry && ft_strcmp(operand, "setenv") && ft_strcmp(operand, "unsetenv"))
 		return (ft_semantic_error(operand));
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:27:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/09 18:26:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/09 22:06:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int			ft_cd(char **arg, char **env)
 {
 	char	*path;
 
+	ft_putstr("builtin\n");
 	if (!arg)
 		return (1);
 	arg++;
@@ -109,16 +110,16 @@ int			ft_cd(char **arg, char **env)
 	if (ft_grep_envdata(env, "HOME") != NULL && *arg == NULL)
 		*arg = ft_grep_envdata(env, "HOME");
 	if (*arg)
-	{
+	{	
 		if (ft_strncmp(*arg, "/", 1) == 0)
-			return (ft_process_cd(*arg, ft_builtin_option(arg), env));
+			return (ft_process_cd(*arg, ft_builtin_option(arg, "cd"), env));
 		if (ft_strncmp(*arg, ".", 1) != 0 || ft_strncmp(*arg, "..", 2) != 0)
 			if ((path = ft_read_cdpath(*arg, env)) != NULL)
-				return (ft_process_cd(path, ft_builtin_option(arg), env));
+				return (ft_process_cd(path, ft_builtin_option(arg, "cd"), env));
 		path = ft_strnew(256);	
 		ft_strcpy(path, ft_grep_envdata(env, "PWD"));
 		ft_strcat(path, "/");
-		ft_process_cd(ft_strcat(path, *arg), ft_builtin_option(arg), env);
+		ft_process_cd(ft_strcat(path, *arg), ft_builtin_option(arg, "cd"), env);
 	}
 	return (1);
 }
