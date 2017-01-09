@@ -87,6 +87,8 @@ int			ft_cd(char **arg, char **env);
 
 char		*ft_builtin_option(char **arg);
 
+int			ft_check_dir(char *path);
+
 /*
 ** Functions to print errors
 */
@@ -98,6 +100,8 @@ int			ft_syntax_error(t_dlist *list_token);
 int			ft_semantic_error(char *s);
 
 int			ft_permission_error(char *s, char **env);
+
+int			ft_existence_error(char *cmd, char *path);
 
 /*
 ** Macros to extract data from node
@@ -129,7 +133,9 @@ int			ft_isappredir_out(t_btree *father);
 ** Macros to operate on environnement
 */
 
-char		*ft_grep_env(char **env, char *value);
+char		**ft_grep_env(char **env, char *value);
+
+char		*ft_grep_envdata(char **env, char *value);
 
 /*
 ** Read functions to verify struct generation
