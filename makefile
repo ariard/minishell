@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/09 21:53:26 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/10 23:10:24 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC = src/minishell.c \
 	  src/echo.c \
 	  src/cd.c \
 	  src/env.c \
+	  src/tty.c \
 	  src/error.c \
 	  src/macro_node.c \
 	  src/macro_operator.c \
@@ -46,7 +47,7 @@ all: $(NAME)
 $(NAME): $(OBJS) 
 	@  make -C ./libft fclean
 	@  make -C ./libft	
-	@  $(CC) $(OBJS) $(LIB) -o $(NAME)
+	@  $(CC) $(OBJS) $(LIB) -ltermcap -o $(NAME)
 	@ rm -rf $(OBJS) $(LIB)
   
 clean :

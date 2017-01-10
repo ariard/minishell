@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/09 20:53:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/10 23:28:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void			ft_process_stream(char *stream, char **env, t_cht *sym_tab)
+/*static void			ft_process_stream(char *stream, char **env, t_cht *sym_tab)
 {
 	t_dlist			**list_token;
 	t_root			*tree;
@@ -28,35 +28,33 @@ static void			ft_process_stream(char *stream, char **env, t_cht *sym_tab)
 	}
 	if (tree)
 		ft_execute_ast(tree, env, sym_tab);
-}
+}*/
 
-int					main(int __unused ac, char __unused **av, char **ev)
+int					main(int __unused ac, char __unused **av, char __unused **ev)
 {
-	char	*stream;
-	char	c;
-	char	**env;
-	t_cht	*sym_tab;
+	char			*stream;
+	char			c;
+	struct termios	*old_termios;
 
+	ft_init_term_data();
+	old_termios = ft_tty_raw(0);
 	stream = ft_strnew(1024);
 	c = '\0';
-	env = ft_array_strdup(ev);
-//	ft_read_env(env);
-	sym_tab = ft_gen_symtab(env);
-//	ft_read_entry(sym_tab);
 	while (42)
 	{
-		ft_putstr("ariard-0.1$ ");
-		while (c != '\n')
+		tputs("ariard-1.0$> ", 1, &ft_puterm);
+		read(0, &c, 1);
+		if (c == '\033')
 		{
-			ft_strncat(stream, &c, 1);
-			ft_getchar(0, &c);
+			read(0, &c, 1);
+			if (c == '[')
+				read(0, &c, 1);
 		}
-		if (ft_strcmp(stream, "exit") == 0)
+		ft_putchar(c);
+		ft_putchar(10);
+		if (c == 'e')
 			break;
-		ft_process_stream(stream, env, sym_tab);
-		c = '\0';
-		ft_bzero(stream, 1024);
 	}
-	ft_putstr("exit");
+	ft_tty_reset(0, old_termios);
 	return (0);
 }

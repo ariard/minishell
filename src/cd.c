@@ -12,50 +12,50 @@
 
 #include "minishell.h"
 
-char		*ft_construct_path(char **tab_dir)
+char		*ft_construct_path(char **new_tab_dir)
 {
 	char	*path;
 
-	if (!tab_dir)
+	if (!new_tab_dir)
 		return (NULL);
 	path = ft_strnew(256);
 	ft_strcat(path, "/");
-	while (*tab_dir)
+	while (*new_tab_dir)
 	{
-		if (ft_strcmp(".", *tab_dir) != 0)
+		if (ft_strcmp(".", *new_tab_dir) != 0)
 		{
-			if (*(tab_dir + 1))
+			if (*(new_tab_dir + 1))
 			{
-				if (ft_strcmp(*(tab_dir + 1), "..") != 0)
+				if (ft_strcmp(*(new_tab_dir + 1), "..") != 0)
 				{
-					ft_strcat(path, *tab_dir);
+					ft_strcat(path, *new_tab_dir);
 					ft_strcat(path, "/");
 				}
 			}
 			else
 			{
-				ft_strcat(path, *tab_dir);
+				ft_strcat(path, *new_tab_dir);
 				ft_strcat(path, "/");
 			}
 		}
 		if (ft_check_dir(path) == -1)
 			return (NULL);
-		tab_dir++;
+		new_tab_dir++;
 	}
 	return (path);
 }
 
 int			ft_process_cd(char *curpath, char *option, char **env)
 {
-	char	**tab_dir;
+	char	**new_tab_dir;
 	char	*path;
 	char	**tmp;
 
 	(void)option;
 	if (*curpath == '/')	
 		curpath++;
-	tab_dir = ft_strsplit(curpath, '/'); 
-	if ((path = ft_construct_path(tab_dir)) == NULL)
+	new_tab_dir = ft_strsplit(curpath, '/'); 
+	if ((path = ft_construct_path(new_tab_dir)) == NULL)
 		return (1);
 	if (chdir(path) == 0)
 	{
@@ -72,22 +72,22 @@ int			ft_process_cd(char *curpath, char *option, char **env)
 
 char		*ft_read_cdpath(char *arg, char **env)
 {
-	char	**tab;
+	char	**new_tab;
 	char	*path;
 	char	*data;
 
 	data = ft_grep_envdata(env, "CDPATH");
-	tab = ft_strsplit(data, ';');
-	if (!tab)
+	new_tab = ft_strsplit(data, ';');
+	if (!new_tab)
 		return (NULL);
 	path = ft_strnew(256);
-	while (*tab)
+	while (*new_tab)
 	{	
-		ft_strcpy(path, *tab);
+		ft_strcpy(path, *new_tab);
 		ft_strcat(path, "/");
 	   	ft_strcat(path, arg);
 		ft_bzero(path, 256);
-		tab++;
+		new_tab++;
 	}
 	ft_strcat(path, "./");
 	ft_strcat(path, arg);

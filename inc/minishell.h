@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/09 22:59:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/10 23:23:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include "./../libft/inc/free.h"
 # include <sys/wait.h>
 # include <dirent.h>
+# include <termios.h>
+# include <sys/types.h>
+# include <unistd.h>
+# include <term.h>
+# include <sys/ioctl.h>
 
 typedef struct		s_entry
 {
@@ -37,11 +42,11 @@ typedef struct		s_expr
 	char			*id3;
 }					t_expr;
 
-t_dlist		**ft_lex_analyze(char *tab);
+t_dlist		**ft_lex_analyze(char *stream);
 
 t_root		*ft_syntax_analyze(t_dlist **list_token);
 
-t_dlist		**ft_lexer(char *tab);
+t_dlist		**ft_lexer(char *stream);
 
 int			ft_isoperand(char *stream);
 
@@ -109,16 +114,40 @@ int			ft_permission_error(char *s, char **env);
 int			ft_existence_error(char *cmd, char *path);
 
 /*
+** Library functions of termcaps
+*/
+
+extern NCURSES_EXPORT(char *) tgoto(const char *cstring, int hpos, int vpos);
+
+extern NCURSES_EXPORT(int) tputs(const char *str, int affcnt, int (*putc)(int));
+
+extern int tgetent(char *bp, const char *name);
+
+extern char *tgetstr(char *name, char **area);
+
+/*
+** Functions to mainpulate the terminal device driver
+*/
+
+struct termios 			*ft_tty_raw(int fd);
+
+int						ft_tty_reset(int fd, struct termios *old_termios);
+
+int						ft_puterm(int c);
+
+int						ft_init_term_data(void);
+
+/*
 ** Macros to extract data from node
 */
 
-int			ft_node_typeis(t_btree *node);
+int						ft_node_typeis(t_btree *node);
 
-int			ft_node_islast(int size, char *s);
+int						ft_node_islast(int size, char *s);
 
-char		*ft_node_nameis(t_btree *node);
+char					*ft_node_nameis(t_btree *node);
 
-char		**ft_node_argis(t_btree *node);
+char					**ft_node_argis(t_btree *node);
 
 /*
 ** Macros to detect operator type
@@ -153,4 +182,3 @@ void		ft_read_env(char **str);
 void		ft_read_list(t_dlist **list);
 
 #endif
-
