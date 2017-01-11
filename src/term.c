@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 00:51:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 21:19:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 23:35:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int			ft_cursor(int c, char *stream, t_screen *screen)
 			if (d == 'D')
 				return (ft_move_left(tgetstr("le", NULL), screen));
 			if (d == 'C')
-				return (ft_move_right(tgetstr("nd", NULL), screen));
+				return (ft_move_right(tgetstr("nd", NULL), screen, stream));
 //			if (d == 'B')
 //				return (ft_move_cursor(tgetstr("do"), min, max));
 //			else
@@ -52,7 +52,7 @@ int			ft_process_input(int c, char *stream, t_screen *screen)
 	if (c == 1)
 		return (ft_go_home(screen));
 	if (c == 19)
-		return (ft_go_end(screen));
+		return (ft_go_end(screen, stream));
 	if (c == 17)
 		return (ft_go_left(stream, screen));
 	if (c == 23)
@@ -61,7 +61,7 @@ int			ft_process_input(int c, char *stream, t_screen *screen)
 		return (ft_isedit(c, screen));
 	if (c == 25 && screen->edit == 1)
 		screen->save = ft_crop(stream, screen);
-	if (c == 16)
+	if (c == 16 && screen->edit == 0)
 		return (ft_insert_substring(stream, screen->save, screen));
 	if (c == 4 && screen->edit == 1)
 		return (ft_delete_substring(stream, screen));

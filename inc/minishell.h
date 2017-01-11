@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 21:18:41 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 23:10:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ extern int tgetent(char *bp, const char *name);
 
 extern char *tgetstr(char *name, char **area);
 
+extern int tgetnum(char *name);
+
 /*
 ** Functions to mainpulate the terminal device driver
 */
@@ -170,7 +172,7 @@ int						ft_init_term_data(void);
 
 int						ft_move_left(char *cmd, t_screen *screen);
 
-int						ft_move_right(char *cmd, t_screen *screen);
+int						ft_move_right(char *cmd, t_screen *screen, char *stream);
 
 int						ft_insert_char(char *stream, char c, t_screen *screen); 
 
@@ -182,7 +184,7 @@ int						ft_go_right(char *stream, t_screen *screen);
 
 int						ft_go_home(t_screen *screen);
 
-int						ft_go_end(t_screen *screen);
+int						ft_go_end(t_screen *screen, char *stream);
 
 int						ft_insert_substring(char *stream, char *insert,
 		t_screen *screen);

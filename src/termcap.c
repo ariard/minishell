@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:38:29 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 21:10:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 23:32:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ int		ft_delete_char(char	*stream, t_screen *screen)
 
 int		ft_go_left(char *stream, t_screen *screen)
 {
+	tputs(tgetstr("se", NULL), 0, &ft_puterm);
 	ft_move_left(tgetstr("le", NULL), screen);
 	while (screen->left != screen->cursor)
 	{
 		ft_move_left(tgetstr("le", NULL), screen);
 		if (stream[screen->cursor - screen->left] == ' ')
 		{
-			ft_move_right(tgetstr("nd", NULL), screen);
+			ft_move_right(tgetstr("nd", NULL), screen, stream);
 			break;
 		}
 
@@ -65,10 +66,10 @@ int		ft_go_right(char *stream, t_screen *screen)
 {
 	while (screen->right != screen->cursor)
 	{
-		ft_move_right(tgetstr("nd", NULL), screen);
+		ft_move_right(tgetstr("nd", NULL), screen, stream);
 		if (stream[screen->cursor - screen->left] == ' ')
 		{
-			ft_move_right(tgetstr("nd", NULL), screen);
+			ft_move_right(tgetstr("nd", NULL), screen, stream);
 			break;
 		}
 	}

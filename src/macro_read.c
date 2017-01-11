@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 23:53:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 21:20:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 23:43:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,4 @@ int			ft_isquote(int c, int quote)
 	if (c == 39 && quote == 1)
 		return (0);
 	return (quote);
-}
-
-int			ft_isedit(int c, t_screen *screen)
-{
-	if (c == 22 && screen->edit == 0)
-	{
-		screen->start = screen->cursor - screen->left;
-		screen->edit = 1;
-	}
-	if (c == 22 && screen->edit == 1)
-		screen->edit = 0;
-	return (1);
 }
