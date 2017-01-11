@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 00:51:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 16:48:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 19:01:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,17 @@ int			ft_process_input(int c, char *stream, t_screen *screen)
 {
 	if (ft_cursor(c, stream, screen) == 1)
 		return (1);
-	if (c != 13 && c != '\033')
+	if (c == 127 && screen->cursor != screen->left)
+	{
+		ft_move_left(tgetstr("le", NULL), screen);
+		ft_delete_char(screen);
+		ft_str_delchr(stream, screen->cursor - screen->left);
+	}
+	if (c != 13 && c != 127 && c != '\033')
 	{
 		ft_insert_char((char *)&c);
 		screen->cursor += 1;
-		ft_strncat(stream, (char *)&c, 1);
+		ft_str_inschr(stream, c, screen->cursor - screen->left);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 16:42:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 18:05:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,8 @@ int						ft_move_left(char *cmd, t_screen *screen);
 int						ft_move_right(char *cmd, t_screen *screen);
 
 int						ft_insert_char(char *str);
+
+int						ft_delete_char(t_screen *screen);
 
 /*
 ** Macros to extract data from node

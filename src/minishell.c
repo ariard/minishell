@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 16:50:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 18:28:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static char			*ft_read_input(t_screen *screen)
 		if (ft_isend(c, quote, screen) == 1 || ft_strcmp(stream, "exit") == 0)
 			break;
 	}
+	ft_putchar(10);
+	ft_putstr(stream);
 	return (stream);
 }
 
