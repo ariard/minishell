@@ -6,14 +6,15 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 23:53:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 00:59:52 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 16:38:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_isend(int c, int quote)
+int			ft_isend(int c, int quote, t_screen *screen)
 {
+	(void)screen;
 	if (c == 13 && quote == 0)
 		return (1);
 	if (c == 13 && quote != 0)
@@ -33,5 +34,3 @@ int			ft_isquote(int c, int quote)
 		return (0);
 	return (quote);
 }
-
-//struct screen		*ft_screen_size();

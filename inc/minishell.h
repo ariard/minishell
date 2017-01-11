@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 00:39:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 16:42:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,23 @@ typedef struct		s_expr
 	char			*id3;
 }					t_expr;
 
+
+typedef struct		s_screen
+{
+	int				cursor;
+	int				left;
+	int				right;
+	int				up;
+	int				down;
+}					t_screen;
+
+typedef struct		s_info
+{
+	t_cht			*sym_tab;
+	char			**env;
+}					t_info;
+
+
 t_dlist		**ft_lex_analyze(char *stream);
 
 t_root		*ft_syntax_analyze(t_dlist **list_token);
@@ -60,6 +77,13 @@ t_btree		*ft_ast_insert_sequence(t_root *tree, t_btree *father, t_dlist *operand
 t_btree		*ft_ast_insert_cmd(t_root *tree, t_btree *father, t_dlist *operand);
 
 t_btree		*ft_goto_nxt_operand(t_btree *node, t_btree *father);
+
+
+/*
+** Function to process input control 
+*/
+
+int			ft_process_input(int c, char *stream, t_screen *screen);
 
 /*
 ** Functions to execute command according to its operator
@@ -138,6 +162,16 @@ int						ft_puterm(int c);
 int						ft_init_term_data(void);
 
 /*
+** Functions to manipulate termcaps library
+*/
+
+int						ft_move_left(char *cmd, t_screen *screen);
+
+int						ft_move_right(char *cmd, t_screen *screen);
+
+int						ft_insert_char(char *str);
+
+/*
 ** Macros to extract data from node
 */
 
@@ -153,29 +187,29 @@ char					**ft_node_argis(t_btree *node);
 ** Macros to detect operator type
 */
 
-int			ft_ispipe(t_btree *father);
+int						ft_ispipe(t_btree *father);
 
-int			ft_isregular(t_btree *father);
+int						ft_isregular(t_btree *father);
 
-int			ft_isredir_out(t_btree *father);
+int						ft_isredir_out(t_btree *father);
 
-int			ft_isredir_in(t_btree *father);
+int						ft_isredir_in(t_btree *father);
 
-int			ft_isappredir_out(t_btree *father);
+int						ft_isappredir_out(t_btree *father);
 
 /*
 ** Macros to operate on environnement
 */
 
-char		**ft_grep_env(char **env, char *value);
+char					**ft_grep_env(char **env, char *value);
 
-char		*ft_grep_envdata(char **env, char *value);
+char					*ft_grep_envdata(char **env, char *value);
 
 /*
 **	Macro to control input processing
 */
 
-int						ft_isend(int c, int quote);
+int						ft_isend(int c, int quote, t_screen *screen);
 
 int						ft_isquote(int c, int quote);
 
@@ -183,10 +217,10 @@ int						ft_isquote(int c, int quote);
 ** Read functions to verify struct generation
 */
 
-void		ft_read_entry(t_cht *htb);
+void					ft_read_entry(t_cht *htb);
 
-void		ft_read_env(char **str);
+void					ft_read_env(char **str);
 
-void		ft_read_list(t_dlist **list);
+void					ft_read_list(t_dlist **list);
 
 #endif
