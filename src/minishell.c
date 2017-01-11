@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/10 23:28:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 00:44:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,39 @@
 int					main(int __unused ac, char __unused **av, char __unused **ev)
 {
 	char			*stream;
-	char			c;
+	int				c;
 	struct termios	*old_termios;
+	int				quote;
 
 	ft_init_term_data();
-	old_termios = ft_tty_raw(0);
 	stream = ft_strnew(1024);
 	c = '\0';
 	while (42)
 	{
+		old_termios = ft_tty_raw(0);
+		quote = 0;
 		tputs("ariard-1.0$> ", 1, &ft_puterm);
-		read(0, &c, 1);
-		if (c == '\033')
+		while (42)
 		{
+			ft_strncat(stream, (char *)&c, 1);
 			read(0, &c, 1);
-			if (c == '[')
+			if (c == '\033')
+			{
 				read(0, &c, 1);
+				if (c == '[')
+					read(0, &c, 1);
+			}
+			if (c != 13)
+				tputs((char *)&c, 1, &ft_puterm);
+			quote = ft_isquote(c, quote);
+			if (ft_isend(c, quote) == 1 || c == 'e')
+				break;
 		}
-		ft_putchar(c);
-		ft_putchar(10);
+//		tputs(stream, 1, &ft_puterm);
+		tputs("\n", 1, &ft_puterm);
+		ft_tty_reset(0, old_termios);
 		if (c == 'e')
 			break;
 	}
-	ft_tty_reset(0, old_termios);
 	return (0);
 }

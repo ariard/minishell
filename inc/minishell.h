@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/10 23:23:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 00:39:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,14 @@ int			ft_isappredir_out(t_btree *father);
 char		**ft_grep_env(char **env, char *value);
 
 char		*ft_grep_envdata(char **env, char *value);
+
+/*
+**	Macro to control input processing
+*/
+
+int						ft_isend(int c, int quote);
+
+int						ft_isquote(int c, int quote);
 
 /*
 ** Read functions to verify struct generation

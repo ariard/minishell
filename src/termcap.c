@@ -6,17 +6,11 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:38:29 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/10 18:07:02 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 01:00:07 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int		ft_puterm(int c)
-{
-	write(1, &c, 1);
-	return (1);
-}
 
 int		ft_clear_screen(void)
 {
