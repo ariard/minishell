@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 23:10:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 23:52:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,10 @@ int						ft_init_term_data(void);
 int						ft_move_left(char *cmd, t_screen *screen);
 
 int						ft_move_right(char *cmd, t_screen *screen, char *stream);
+
+int						ft_move_up(char *cmd, t_screen *screen);
+
+int						ft_move_down(char *cmd, t_screen *screen);
 
 int						ft_insert_char(char *stream, char c, t_screen *screen); 
 
