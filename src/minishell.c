@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 18:28:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 20:54:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static char			*ft_read_input(t_screen *screen)
 	int				quote;
 
 	screen->cursor = screen->left;
+	screen->edit = 0;
 	stream = ft_strnew(1024);
 	quote = 0;
 	while (42)

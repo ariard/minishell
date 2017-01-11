@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 18:05:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 21:18:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ typedef struct		s_screen
 	int				cursor;
 	int				left;
 	int				right;
+	int				start;
+	int				edit;
 	int				up;
 	int				down;
+	char			*save;
 }					t_screen;
 
 typedef struct		s_info
@@ -169,9 +172,24 @@ int						ft_move_left(char *cmd, t_screen *screen);
 
 int						ft_move_right(char *cmd, t_screen *screen);
 
-int						ft_insert_char(char *str);
+int						ft_insert_char(char *stream, char c, t_screen *screen); 
 
-int						ft_delete_char(t_screen *screen);
+int						ft_delete_char(char *stream, t_screen *screen);
+
+int						ft_go_left(char *stream, t_screen *screen);
+
+int						ft_go_right(char *stream, t_screen *screen);
+
+int						ft_go_home(t_screen *screen);
+
+int						ft_go_end(t_screen *screen);
+
+int						ft_insert_substring(char *stream, char *insert,
+		t_screen *screen);
+
+int						ft_delete_substring(char *stream, t_screen *screen);
+
+char					*ft_crop(char *stream, t_screen *screen);
 
 /*
 ** Macros to extract data from node
@@ -214,6 +232,8 @@ char					*ft_grep_envdata(char **env, char *value);
 int						ft_isend(int c, int quote, t_screen *screen);
 
 int						ft_isquote(int c, int quote);
+
+int						ft_isedit(int c, t_screen *screen);
 
 /*
 ** Read functions to verify struct generation

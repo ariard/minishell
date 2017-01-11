@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:38:29 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 18:07:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/11 21:10:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,54 @@
 	return (1);
 }*/
 
-int		ft_insert_char(char *str)
+int		ft_insert_char(char *stream, char c, t_screen *screen)
 {
 	tputs(tgetstr("im", NULL), 0, &ft_puterm);
 	tputs(tgetstr("ic", NULL), 0, &ft_puterm);
-	tputs(str, 0, &ft_puterm);
+	tputs(&c, 0, &ft_puterm);
 	tputs(tgetstr("ip", NULL), 0, &ft_puterm);
 	tputs(tgetstr("ei", NULL), 0, &ft_puterm);
+	screen->cursor += 1;
+	ft_str_inschr(stream, (int)c, screen->cursor - screen->left);
 	return (1);
 }
 
-int		ft_delete_char(t_screen *screen)
+int		ft_delete_char(char	*stream, t_screen *screen)
 {
-	(void)screen;
-//	if (screen->right <= screen->cursor) 
-//		return (1);
+	ft_move_left(tgetstr("le", NULL), screen);
 	tputs(tgetstr("dm", NULL), 0, &ft_puterm);
 	tputs(tgetstr("dc", NULL), 0, &ft_puterm);
 	tputs(tgetstr("ed", NULL), 0, &ft_puterm);
+	ft_str_delchr(stream, screen->cursor - screen->left);
+	return (1);
+}
+
+int		ft_go_left(char *stream, t_screen *screen)
+{
+	ft_move_left(tgetstr("le", NULL), screen);
+	while (screen->left != screen->cursor)
+	{
+		ft_move_left(tgetstr("le", NULL), screen);
+		if (stream[screen->cursor - screen->left] == ' ')
+		{
+			ft_move_right(tgetstr("nd", NULL), screen);
+			break;
+		}
+
+	}
+	return (1);
+}
+
+int		ft_go_right(char *stream, t_screen *screen)
+{
+	while (screen->right != screen->cursor)
+	{
+		ft_move_right(tgetstr("nd", NULL), screen);
+		if (stream[screen->cursor - screen->left] == ' ')
+		{
+			ft_move_right(tgetstr("nd", NULL), screen);
+			break;
+		}
+	}
 	return (1);
 }
