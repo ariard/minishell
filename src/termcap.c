@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:38:29 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/13 17:41:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 21:51:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,25 @@
 
 int		ft_insert_char(char *stream, char c, t_screen *screen)
 {
-	int		pos;
+	char	buf[2];
 
-	pos = screen->cursor;
+	buf[0] = c;
 	screen->cursor += 1;
 	ft_str_inschr(stream, c, screen->cursor);
-	ft_erase_all(stream, screen);
+	if (ft_overflow(stream, screen->vertical, screen) == 1)
+		ft_agence_down(stream, screen);
 	tputs(tgetstr("im", NULL), 0, &ft_puterm);
 	tputs(tgetstr("ic", NULL), 0, &ft_puterm);
-	tputs(stream, 0, &ft_puterm);
+	tputs(buf, 0, &ft_puterm);
 	tputs(tgetstr("ip", NULL), 0, &ft_puterm);
 	tputs(tgetstr("ei", NULL), 0, &ft_puterm);
-	ft_go_cursor(pos, screen);
+	ft_move_right(tgetstr("nd", NULL), screen, stream);
 	return (1);
 }
 
 int		ft_delete_char(char	*stream, t_screen *screen)
 {
-	ft_move_left(tgetstr("le", NULL), screen);
+	ft_move_left(tgetstr("le", NULL), screen, stream);
 	tputs(tgetstr("dm", NULL), 0, &ft_puterm);
 	tputs(tgetstr("dc", NULL), 0, &ft_puterm);
 	tputs(tgetstr("ed", NULL), 0, &ft_puterm);

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 23:53:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/13 18:09:58 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 21:48:43 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int			ft_isbeginline(t_screen *screen, int n, int line)
 {
 	n += (screen->left + screen->col);
 	if (n == screen->col * line)
-		return (1);
+		return (2);
 	return (0);
 }
 
 int			ft_isendline(t_screen *screen, int n, int line)
 {
-	n += (screen->left + 1);
+	n += (screen->left);
 	if (n == screen->col * line)
 		return (1);
 	return (0);

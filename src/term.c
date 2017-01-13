@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 00:51:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/13 18:08:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 21:49:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int			ft_cursor(int c, char *stream, t_screen *screen)
 //			if (d == 'A')
 ///				return (ft_move_up(tgetstr("up", NULL), screen));
 			if (d == 'D')
-				return (ft_move_left(tgetstr("le", NULL), screen));
+				return (ft_move_left(tgetstr("le", NULL), screen, stream));
 			if (d == 'C')
-				return (ft_move_right(tgetstr("nd", NULL), screen));
+				return (ft_move_right(tgetstr("nd", NULL), screen, stream));
 //			if (d == 'B')
 //				return (ft_move_down(tgetstr("do", NULL), screen));
 		}
@@ -45,7 +45,11 @@ int			ft_process_input(char c, char *stream, t_screen *screen)
 	if (ft_cursor(c, stream, screen) == 1)
 		return (1);
 	if (c == 26)
+		ft_putnbr(screen->cursor);
+	if (c == 25)
 		ft_putnbr(screen->vertical);
+	if (c == 24)
+		ft_putnbr(screen->left);
 	if (c == 2)
 	{
 		ft_return_home();

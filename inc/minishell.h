@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/13 17:42:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 21:29:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ typedef struct		s_expr
 typedef struct		s_screen
 {
 	int				cursor;
-	int				vertical;	
+	int				vertical;
 	int				left;
-	int				right;
+	int				amplitude;
 	int				start;
 	int				edit;
 	int				down;
@@ -171,9 +171,9 @@ int						ft_init_term_data(void);
 ** Functions to manipulate termcaps library
 */
 
-int						ft_move_left(char *cmd, t_screen *screen);
+int						ft_move_left(char *cmd, t_screen *screen, char *stream);
 
-int						ft_move_right(char *cmd, t_screen *screen);
+int						ft_move_right(char *cmd, t_screen *screen, char *stream);
 
 int						ft_move_up(char *cmd, t_screen *screen);
 
@@ -217,6 +217,8 @@ void					ft_go_next_line(void);
 void					ft_go_prev_line(t_screen *screen);
 
 void					ft_go_cursor(int pos, t_screen *screen);
+
+void					ft_agence_down(char *stream, t_screen *screen);
 
 /*
 ** Macros to extract data from node
@@ -268,7 +270,9 @@ int						ft_isendline(t_screen *screen, int n, int line);
 
 int						ft_isbeginline(t_screen *screen, int n, int line);
 
-int						ft_set_info_screen(char *stream, t_screen *screen);;
+int						ft_set_info_screen(char *stream, t_screen *screen);
+
+int						ft_overflow(char *stream, int line , t_screen *screen);
 
 /*
 ** Read functions to verify struct generation
