@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/12 00:00:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 16:57:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,16 @@ ft_execute_ast(tree, env, sym_tab);
 static char			*ft_read_input(t_screen *screen)
 {
 	char			*stream;
-	int				c;
+	char			c;
 	int				quote;
 
-	screen->cursor = screen->left;
+	screen->cursor = 0; 
 	screen->edit = 0;
-	stream = ft_strnew(1024);
+	stream = ft_strnew(516);
 	quote = 0;
 	while (42)
 	{
+		c = '\0';
 		read(0, &c, 1);
 		screen->right = screen->left + ft_strlen(stream);
 		ft_process_input(c, stream, screen);
@@ -63,10 +64,12 @@ static int			ft_shell(t_info *info)
 	(void)info;	
 	screen = ft_memalloc(sizeof(t_screen));
 	screen->left = ft_strlen("ariard-1.0$> ");
+	screen->vertical = 0;
 	while (42)
 	{
 		old_termios = ft_tty_raw(0);
 		tputs("ariard-1.0$> ", 1, &ft_puterm);
+		ft_save_home();
 		stream = ft_read_input(screen);	
 		tputs("\n", 1, &ft_puterm);
 		ft_tty_reset(0, old_termios);

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 23:52:51 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 17:42:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ typedef struct		s_expr
 typedef struct		s_screen
 {
 	int				cursor;
+	int				vertical;	
 	int				left;
 	int				right;
 	int				start;
 	int				edit;
-	int				up;
 	int				down;
+	int				col;
 	char			*save;
 }					t_screen;
 
@@ -86,7 +87,7 @@ t_btree		*ft_goto_nxt_operand(t_btree *node, t_btree *father);
 ** Function to process input control 
 */
 
-int			ft_process_input(int c, char *stream, t_screen *screen);
+int			ft_process_input(char c, char *stream, t_screen *screen);
 
 /*
 ** Functions to execute command according to its operator
@@ -172,7 +173,7 @@ int						ft_init_term_data(void);
 
 int						ft_move_left(char *cmd, t_screen *screen);
 
-int						ft_move_right(char *cmd, t_screen *screen, char *stream);
+int						ft_move_right(char *cmd, t_screen *screen);
 
 int						ft_move_up(char *cmd, t_screen *screen);
 
@@ -196,6 +197,26 @@ int						ft_insert_substring(char *stream, char *insert,
 int						ft_delete_substring(char *stream, t_screen *screen);
 
 char					*ft_crop(char *stream, t_screen *screen);
+
+int						ft_put_again(char *stream, t_screen *screen);
+
+void					ft_erase_all(char *stream, t_screen *screen);
+
+void					ft_save_home(void);
+
+void					ft_return_home(void);
+
+void					ft_erase(void);
+
+void					ft_cursor_left(void);
+
+void					ft_cursor_right(void);
+
+void					ft_go_next_line(void);
+
+void					ft_go_prev_line(t_screen *screen);
+
+void					ft_go_cursor(int pos, t_screen *screen);
 
 /*
 ** Macros to extract data from node
@@ -240,6 +261,14 @@ int						ft_isend(int c, int quote, t_screen *screen);
 int						ft_isquote(int c, int quote);
 
 int						ft_isedit(int c, t_screen *screen);
+
+int						ft_iscol(void);
+
+int						ft_isendline(t_screen *screen, int n, int line);
+
+int						ft_isbeginline(t_screen *screen, int n, int line);
+
+int						ft_set_info_screen(char *stream, t_screen *screen);;
 
 /*
 ** Read functions to verify struct generation

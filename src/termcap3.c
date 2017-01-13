@@ -6,20 +6,47 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 20:13:11 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 23:42:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 17:46:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_go_home(t_screen *screen)
+void			ft_save_home(void)
 {
-	tputs(tgetstr("se", NULL), 0, &ft_puterm);
-	while (screen->left != screen->cursor)
-		ft_move_left(tgetstr("le", NULL), screen);
-	return (1);
+	tputs(tgetstr("sc", NULL), 0, &ft_puterm);
 }
 
+void			ft_return_home(void)
+{
+	tputs(tgetstr("rc", NULL), 0, &ft_puterm);
+	tputs(tgetstr("sc", NULL), 0, &ft_puterm);
+}
+
+void			ft_erase(void)
+{
+	tputs(tgetstr("dm", NULL), 0, &ft_puterm);
+	tputs(tgetstr("dc", NULL), 0, &ft_puterm);
+	tputs(tgetstr("ed", NULL), 0, &ft_puterm);
+}
+
+void			ft_go_next_line(void)
+{
+	tputs(tgetstr("do", NULL), 0, &ft_puterm);
+	tputs(tgetstr("cr", NULL), 0, &ft_puterm);
+}
+
+void			ft_go_prev_line(t_screen *screen)
+{
+	int			i;
+
+	i = 0;
+	tputs(tgetstr("up", NULL), 0, &ft_puterm);
+	tputs(tgetstr("cr", NULL), 0, &ft_puterm);
+	while (i++ != screen->col)
+		ft_cursor_right();
+}
+/*
 int			ft_go_end(t_screen *screen, char *stream)
 {
 	while (screen->right != screen->cursor)
@@ -53,4 +80,4 @@ int			ft_delete_substring(char *stream, t_screen *screen)
 		ft_delete_char(stream, screen);
 	screen->edit = 0;
 	return (1);
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 23:53:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 23:43:51 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 18:09:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,28 @@ int			ft_isquote(int c, int quote)
 	if (c == 39 && quote == 1)
 		return (0);
 	return (quote);
+}
+
+int			ft_iscol(void)
+{
+	struct	winsize w;
+	
+	ioctl(0, TIOCGWINSZ, &w);
+	return (w.ws_col);
+}
+
+int			ft_isbeginline(t_screen *screen, int n, int line)
+{
+	n += (screen->left + screen->col);
+	if (n == screen->col * line)
+		return (1);
+	return (0);
+}
+
+int			ft_isendline(t_screen *screen, int n, int line)
+{
+	n += (screen->left + 1);
+	if (n == screen->col * line)
+		return (1);
+	return (0);
 }

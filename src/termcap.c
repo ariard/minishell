@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:38:29 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/11 23:50:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 17:41:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,18 @@
 
 int		ft_insert_char(char *stream, char c, t_screen *screen)
 {
+	int		pos;
+
+	pos = screen->cursor;
+	screen->cursor += 1;
+	ft_str_inschr(stream, c, screen->cursor);
+	ft_erase_all(stream, screen);
 	tputs(tgetstr("im", NULL), 0, &ft_puterm);
 	tputs(tgetstr("ic", NULL), 0, &ft_puterm);
-	tputs(&c, 0, &ft_puterm);
+	tputs(stream, 0, &ft_puterm);
 	tputs(tgetstr("ip", NULL), 0, &ft_puterm);
 	tputs(tgetstr("ei", NULL), 0, &ft_puterm);
-	screen->cursor += 1;
-	ft_str_inschr(stream, (int)c, screen->cursor - screen->left);
+	ft_go_cursor(pos, screen);
 	return (1);
 }
 
@@ -41,10 +46,11 @@ int		ft_delete_char(char	*stream, t_screen *screen)
 	tputs(tgetstr("dm", NULL), 0, &ft_puterm);
 	tputs(tgetstr("dc", NULL), 0, &ft_puterm);
 	tputs(tgetstr("ed", NULL), 0, &ft_puterm);
-	ft_str_delchr(stream, screen->cursor - screen->left);
+	ft_str_delchr(stream, screen->cursor);
 	return (1);
 }
 
+/*
 int		ft_go_left(char *stream, t_screen *screen)
 {
 	tputs(tgetstr("se", NULL), 0, &ft_puterm);
@@ -74,4 +80,4 @@ int		ft_go_right(char *stream, t_screen *screen)
 		}
 	}
 	return (1);
-}
+}*/

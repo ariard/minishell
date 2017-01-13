@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/11 21:54:42 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/13 16:22:22 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,11 +36,13 @@ SRC = src/minishell.c \
 	  src/termcap2.c \
 	  src/termcap3.c \
 	  src/termcap4.c \
+	  src/termcap5.c \
 	  src/error.c \
 	  src/macro_node.c \
 	  src/macro_operator.c \
 	  src/macro_env.c \
 	  src/macro_read.c \
+	  src/macro_read2.c \
 	  src/read.c
 
 OBJS = $(SRC:.c=.o)
