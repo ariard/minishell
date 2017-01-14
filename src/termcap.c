@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 14:24:02 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 18:38:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 19:16:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void		ft_delete_char(char *buffer, t_screen *screen)
 		ft_insert(' ');
 		ft_cursor_right();
 	}
+	if (ft_underflow(screen))
+		ft_push_up(buffer, screen);
 }
 
 void		ft_insert_char(char c, char *buffer, t_screen *screen)

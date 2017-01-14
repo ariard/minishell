@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 17:23:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 19:51:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,8 @@ void					ft_prev_line(t_screen *screen);
 
 void					ft_push_down(char *buffer, t_screen *screen);
 
+void					ft_push_up(char *buffer, t_screen *screen);
+
 /*
 ** Functions to manipulate termcaps library
 */
@@ -209,6 +211,8 @@ void					ft_go_prev_line(t_screen *screen);
 void					ft_go_last_line(t_screen *screen);	
 
 void					ft_go_prev_line_first(void);
+
+void					ft_go_last_char(t_screen *screen);
 
 /*
 ** Macros to extract data from node
@@ -264,7 +268,11 @@ int						ft_set_info_screen(char *stream, t_screen *screen);
 
 int						ft_overflow(t_screen *screen);
 
+int						ft_underflow(t_screen *screen);
+
 char					ft_lastchar(char *buffer, int line, t_screen *screen);
+
+char					ft_firstchar(char *buffer, int line, t_screen *screen);
 
 /*
 ** Read functions to verify struct generation

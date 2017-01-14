@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 20:13:11 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 19:00:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 19:52:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,22 @@ void		ft_push_down(char *buffer, t_screen *screen)
 	ft_return_cursor();
 }
 
-//void		ft_push_up(char *buffer, t_screen *screen)
-//{
-//	int		level;
-//
-//	ft_save_cursor();
-//
-//}
+void		ft_push_up(char *buffer, t_screen *screen)
+{
+	int		level;
+
+	ft_save_cursor();
+	level = screen->vertical;
+	while (level != screen->down)
+	{
+		ft_go_last_char(screen);
+		ft_insert(ft_firstchar(buffer, level - 1, screen));
+		level++;
+		ft_go_next_line();
+		ft_delete();
+	}
+	ft_return_cursor();
+}
 
 
 

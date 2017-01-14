@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 14:56:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 18:37:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 19:48:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ int			ft_overflow(t_screen *screen)
 	return (0);
 }
 
+int			ft_underflow(t_screen *screen)
+{
+	if (screen->amplitude + screen->left > screen->col * 
+			screen->vertical && screen->cursor < screen->amplitude)
+		return (1);
+	return (0);
+}
+
 char		ft_lastchar(char *buffer, int line, t_screen *screen)
 {
 	int		pos;
@@ -39,10 +47,10 @@ char		ft_lastchar(char *buffer, int line, t_screen *screen)
 	return (buffer[pos]);
 }
 
-/*char		ft_firstchar(char *buffer, int line, t_screen *screen)
+char		ft_firstchar(char *buffer, int line, t_screen *screen)
 {
 	int		pos;
 
-	pos = (screen->col - screen->left) + (screen->col * line);
+	pos = (screen->col - screen->left - 1) + (screen->col * line);
 	return (buffer[pos]);
-}*/
+}
