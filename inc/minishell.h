@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 19:51:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 20:40:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,10 @@ void					ft_insert_char(char c, char *buffer, t_screen *screen);
 
 void					ft_delete_char(char *buffer, t_screen *screen);
 
+void					ft_home(t_screen *screen);
+
+void					ft_end(t_screen *screen);
+
 void					ft_next_line(t_screen *screen);
 
 void					ft_prev_line(t_screen *screen);
@@ -213,6 +217,10 @@ void					ft_go_last_line(t_screen *screen);
 void					ft_go_prev_line_first(void);
 
 void					ft_go_last_char(t_screen *screen);
+
+void					ft_go_prev_line_first(void);
+
+void					ft_go_line_first(void);
 
 /*
 ** Macros to extract data from node

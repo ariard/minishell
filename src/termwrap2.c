@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 14:08:04 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 17:03:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 20:29:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,10 @@ void		ft_insert(char c)
 void		ft_go_prev_line_first(void)
 {
 	tputs(tgetstr("up", NULL), 0, &ft_puterm);
+	tputs(tgetstr("cr", NULL), 0, &ft_puterm);
+}
+
+void		ft_go_line_first(void)
+{
 	tputs(tgetstr("cr", NULL), 0, &ft_puterm);
 }
