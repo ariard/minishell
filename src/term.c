@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 00:51:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 15:30:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 17:03:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ static int			ft_cursor(int c, t_screen *screen)
 	return (0);
 }
 
-int			ft_process_input(char c, char *stream, t_screen *screen)
+int			ft_process_input(char c, char *buffer, t_screen *screen)
 {
-	screen->col = ft_iscol();
-	screen->down = ((int)ft_strlen(stream) + screen->left) / screen->col;
-	ft_set_info_screen(stream, screen);
+	ft_set_info_screen(buffer, screen);
 	if (ft_cursor(c, screen) == 1)
 		return (1);
 	if (c == 26)
@@ -46,10 +44,16 @@ int			ft_process_input(char c, char *stream, t_screen *screen)
 		ft_putnbr(screen->vertical);
 	if (c == 24)
 		ft_putnbr(screen->left);
+	if (c == 23)
+		ft_putnbr(screen->amplitude);
+	if (c == 22)
+		ft_putnbr(screen->col);
+	if (c == 21)
+		ft_putnbr(screen->down);
 	if (c == 127 && screen->cursor != 0)
-		ft_delete_char(screen);
+		ft_delete_char(buffer, screen);
 	if (c != 13 && c != 127 && c != '\033')
-		ft_insert_char(c, screen);
+		ft_insert_char(c, buffer, screen);
 	return (0);
 }
 

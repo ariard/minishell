@@ -6,46 +6,57 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 20:13:11 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 14:07:09 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 17:10:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			ft_save_home(void)
+void		ft_push_down_all(char *buffer, t_screen *screen)
 {
-	tputs(tgetstr("sc", NULL), 0, &ft_puterm);
+	int		level;
+
+	(void)buffer;
+	ft_save_cursor();
+	ft_go_last_line(screen);
+	if (screen->amplitude + screen->left + 1 >= screen->col * screen->down)
+	{
+		ft_go_next_line();
+		screen->down++;
+	}
+	level = screen->down;
+	while (level != 1)
+	{
+		ft_insert(ft_lastchar(buffer, level - 1, screen));
+		level--;
+		ft_go_prev_line_first();
+	}
+	ft_return_cursor();
 }
 
-void			ft_return_home(void)
-{
-	tputs(tgetstr("rc", NULL), 0, &ft_puterm);
-	tputs(tgetstr("sc", NULL), 0, &ft_puterm);
-}
 
-void			ft_erase(void)
-{
-	tputs(tgetstr("dm", NULL), 0, &ft_puterm);
-	tputs(tgetstr("dc", NULL), 0, &ft_puterm);
-	tputs(tgetstr("ed", NULL), 0, &ft_puterm);
-}
 
-void			ft_go_next_line(void)
-{
-	tputs(tgetstr("do", NULL), 0, &ft_puterm);
-	tputs(tgetstr("cr", NULL), 0, &ft_puterm);
-}
 
-void			ft_go_prev_line(t_screen *screen)
-{
-	int			i;
 
-	i = 0;
-	tputs(tgetstr("up", NULL), 0, &ft_puterm);
-	tputs(tgetstr("cr", NULL), 0, &ft_puterm);
-	while (i++ != screen->col)
-		ft_cursor_right();
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 int			ft_go_end(t_screen *screen, char *stream)
 {

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 14:08:04 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 14:37:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 17:03:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,10 @@ void		ft_insert(char c)
 	tputs(tgetstr("ip", NULL), 0, &ft_puterm);
 	tputs(tgetstr("ei", NULL), 0, &ft_puterm);
 	ft_cursor_left();
+}
+
+void		ft_go_prev_line_first(void)
+{
+	tputs(tgetstr("up", NULL), 0, &ft_puterm);
+	tputs(tgetstr("cr", NULL), 0, &ft_puterm);
 }

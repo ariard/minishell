@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 14:45:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 17:01:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,21 +176,23 @@ void					ft_move_left(t_screen *screen);
 
 void					ft_move_right(t_screen *screen);
 
-void					ft_insert_char(char c, t_screen *screen);
+void					ft_insert_char(char c, char *buffer, t_screen *screen);
 
-void					ft_delete_char(t_screen *screen);
+void					ft_delete_char(char *buffer, t_screen *screen);
 
 void					ft_next_line(t_screen *screen);
 
 void					ft_prev_line(t_screen *screen);
 
+void					ft_push_down_all(char *buffer, t_screen *screen);
+
 /*
 ** Functions to manipulate termcaps library
 */
 
-void					ft_save_home(void);
+void					ft_save_cursor(void);
 
-void					ft_return_home(void);
+void					ft_return_cursor(void);
 
 void					ft_insert(char c);
 
@@ -204,7 +206,9 @@ void					ft_go_next_line(void);
 
 void					ft_go_prev_line(t_screen *screen);
 
-void					ft_go_cursor(int pos, t_screen *screen);
+void					ft_go_last_line(t_screen *screen);	
+
+void					ft_go_prev_line_first(void);
 
 /*
 ** Macros to extract data from node
@@ -258,7 +262,9 @@ int						ft_isbeginline(int n, t_screen *screen);
 
 int						ft_set_info_screen(char *stream, t_screen *screen);
 
-int						ft_overflow(char *stream, int line , t_screen *screen);
+int						ft_overflow(t_screen *screen);
+
+char					ft_lastchar(char *buffer, int line, t_screen *screen);
 
 /*
 ** Read functions to verify struct generation

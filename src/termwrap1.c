@@ -6,21 +6,20 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 14:06:24 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 15:37:36 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 17:04:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			ft_save_home(void)
+void			ft_save_cursor(void)
 {
 	tputs(tgetstr("sc", NULL), 0, &ft_puterm);
 }
 
-void			ft_return_home(void)
+void			ft_return_cursor(void)
 {
 	tputs(tgetstr("rc", NULL), 0, &ft_puterm);
-	tputs(tgetstr("sc", NULL), 0, &ft_puterm);
 }
 
 void			ft_delete(void)
