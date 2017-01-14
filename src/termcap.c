@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 14:24:02 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 16:59:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 18:38:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		ft_delete_char(char *buffer, t_screen *screen)
 void		ft_insert_char(char c, char *buffer, t_screen *screen)
 {
 	if (ft_overflow(screen))
-		ft_push_down_all(buffer, screen);	
+		ft_push_down(buffer, screen);	
 	ft_insert(c);
 	ft_cursor_right();
 	screen->cursor++;

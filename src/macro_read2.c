@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 14:56:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 17:19:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 18:37:18 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,11 @@ char		ft_lastchar(char *buffer, int line, t_screen *screen)
 	pos = (screen->col - screen->left - 1) + (screen->col * (line - 1));
 	return (buffer[pos]);
 }
+
+/*char		ft_firstchar(char *buffer, int line, t_screen *screen)
+{
+	int		pos;
+
+	pos = (screen->col - screen->left) + (screen->col * line);
+	return (buffer[pos]);
+}*/

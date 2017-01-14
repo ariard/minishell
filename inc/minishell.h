@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 17:01:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 17:23:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void					ft_next_line(t_screen *screen);
 
 void					ft_prev_line(t_screen *screen);
 
-void					ft_push_down_all(char *buffer, t_screen *screen);
+void					ft_push_down(char *buffer, t_screen *screen);
 
 /*
 ** Functions to manipulate termcaps library

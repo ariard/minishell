@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 14:41:02 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 16:58:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 18:56:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		ft_go_last_line(t_screen *screen)
 {
 	int		level;
 
-	level = 1; 
+	level = screen->vertical; 
 	while (level++ != screen->down)
 		ft_go_next_line();
 }
