@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 14:24:02 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 21:26:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 23:09:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,17 @@ void		ft_move_left(t_screen *screen)
 	else
 		ft_cursor_left();
 	screen->cursor--;
+}
+
+void		ft_next(char *buffer, t_screen *screen)
+{
+	ft_move_right(screen);
+	while (buffer[screen->cursor] != ' ' && screen->cursor != screen->amplitude)
+		ft_move_right(screen);
+	while (buffer[screen->cursor] == ' ' && screen->cursor != screen->amplitude)
+		ft_move_right(screen);
+	if (screen->cursor != screen->amplitude)
+		ft_move_left(screen);
 }
 
 
