@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 20:13:11 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 22:33:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 23:44:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,29 +74,7 @@ void		ft_move_down(t_screen *screen)
 }
 	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
-int			ft_go_end(t_screen *screen, char *stream)
-{
-	while (screen->right != screen->cursor)
-		ft_move_right(tgetstr("nd", NULL), screen, stream);
-	return (1);
-}
-
 int			ft_insert_substring(char *stream, char *insert, t_screen *screen)
 {
 	int		i;

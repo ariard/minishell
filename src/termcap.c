@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 14:24:02 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 23:09:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 23:45:00 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,36 +80,6 @@ void		ft_next(char *buffer, t_screen *screen)
 		ft_move_left(screen);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*int		ft_clear_screen(void)
 {
 	char	*res;
@@ -118,38 +88,5 @@ void		ft_next(char *buffer, t_screen *screen)
 	if (res == NULL)
 		return (-1);
 	tputs(res, 0, &ft_puterm);
-	return (1);
-}*/
-
-
-/*
-int		ft_go_left(char *stream, t_screen *screen)
-{
-	tputs(tgetstr("se", NULL), 0, &ft_puterm);
-	ft_move_left(tgetstr("le", NULL), screen);
-	while (screen->left != screen->cursor)
-	{
-		ft_move_left(tgetstr("le", NULL), screen);
-		if (stream[screen->cursor - screen->left] == ' ')
-		{
-			ft_move_right(tgetstr("nd", NULL), screen, stream);
-			break;
-		}
-
-	}
-	return (1);
-}
-
-int		ft_go_right(char *stream, t_screen *screen)
-{
-	while (screen->right != screen->cursor)
-	{
-		ft_move_right(tgetstr("nd", NULL), screen, stream);
-		if (stream[screen->cursor - screen->left] == ' ')
-		{
-			ft_move_right(tgetstr("nd", NULL), screen, stream);
-			break;
-		}
-	}
 	return (1);
 }*/

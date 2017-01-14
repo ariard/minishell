@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 22:53:09 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 23:50:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ typedef struct		s_screen
 	int				edit;
 	int				down;
 	int				col;
-	int				insert;
-	char			*save;
+	char			*saved;
 }					t_screen;
 
 typedef struct		s_info
@@ -200,6 +199,12 @@ void					ft_previous(char *buffer, t_screen *screen);
 
 void					ft_next(char *buffer, t_screen *screen);
 
+void					ft_crop(char *buffer, t_screen *screen);
+
+void					ft_insert_string(char *buffer, t_screen *screen);
+
+void					ft_delete_string(char *buffer, t_screen *screen);
+
 /*
 ** Functions to manipulate termcaps library
 */
@@ -276,8 +281,6 @@ int						ft_isend(int c, int quote, t_screen *screen);
 
 int						ft_isquote(int c, int quote);
 
-int						ft_isedit(int c, t_screen *screen);
-
 int						ft_iscol(void);
 
 int						ft_isendline(int n, t_screen *screen);
@@ -297,6 +300,8 @@ char					ft_firstchar(char *buffer, int line, t_screen *screen);
 int						ft_iscolumn(t_screen *screen);
 
 int						ft_lastcolumn(t_screen *screen);
+
+int						ft_isedit(t_screen *screen);
 
 /*
 ** Read functions to verify struct generation

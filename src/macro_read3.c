@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 21:27:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 22:45:48 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 23:49:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,16 @@ int			ft_lastcolumn(t_screen *screen)
 
 	col = (screen->amplitude + screen->left) - ((screen->down - 1) * screen->col);
 	return (col);
+}
+
+int			ft_isedit(t_screen *screen)
+{
+	if (screen->edit == 1)
+		screen->edit = 0;
+	else if (screen->edit == 0)
+	{
+		screen->edit = 1;
+		screen->start = screen->cursor;
+	}
+	return (1);
 }

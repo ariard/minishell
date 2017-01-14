@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 00:51:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 22:57:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 23:51:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@ int			ft_process_input(char c, char *buffer, t_screen *screen)
 		ft_previous(buffer, screen);
 	if (c == 19)
 		ft_next(buffer, screen);
+	if (c == 22)
+		ft_isedit(screen);
+	if (c == 25)
+		ft_crop(buffer, screen);
+	if (c == 16)
+		ft_insert_string(buffer, screen);
+	if (c == 4)
+		ft_delete_string(buffer, screen);
 	if (c == 127 && screen->cursor != 0)
 		ft_delete_char(buffer, screen);
 	if (c >= 32 && c < 127 && c != '\033')
