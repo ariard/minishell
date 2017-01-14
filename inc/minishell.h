@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 20:40:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 21:35:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,10 @@ void					ft_move_left(t_screen *screen);
 
 void					ft_move_right(t_screen *screen);
 
+void					ft_move_up(t_screen *screen);
+
+void					ft_move_down(t_screen *screen);
+
 void					ft_insert_char(char c, char *buffer, t_screen *screen);
 
 void					ft_delete_char(char *buffer, t_screen *screen);
@@ -207,6 +211,10 @@ void					ft_delete(void);
 void					ft_cursor_left(void);
 
 void					ft_cursor_right(void);
+
+void					ft_cursor_up(void);
+
+void					ft_cursor_down(int column, t_screen *screen);
 
 void					ft_go_next_line(void);
 
@@ -281,6 +289,10 @@ int						ft_underflow(t_screen *screen);
 char					ft_lastchar(char *buffer, int line, t_screen *screen);
 
 char					ft_firstchar(char *buffer, int line, t_screen *screen);
+
+int						ft_iscolumn(t_screen *screen);
+
+int						ft_lastcolumn(t_screen *screen);
 
 /*
 ** Read functions to verify struct generation

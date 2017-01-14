@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/14 19:29:53 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/14 21:34:59 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC = src/minishell.c \
 	  src/macro_env.c \
 	  src/macro_read.c \
 	  src/macro_read2.c \
+	  src/macro_read3.c \
 	  src/read.c
 
 OBJS = $(SRC:.c=.o)

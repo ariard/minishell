@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 00:51:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 20:43:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 21:50:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,14 @@ static int			ft_cursor(int c, t_screen *screen)
 		if (c == '[')
 		{
 			read(0, &d, 1);
-			if (d == 'D')
-				ft_move_left(screen);
+			if (d == 'A')
+				ft_move_up(screen);
+			if (d == 'B')
+				ft_move_down(screen);
 			if (d == 'C')
 				ft_move_right(screen);
+			if (d == 'D')
+				ft_move_left(screen);
 			return (1);
 		}
 	}
@@ -38,12 +42,12 @@ int			ft_process_input(char c, char *buffer, t_screen *screen)
 	ft_set_info_screen(buffer, screen);
 	if (ft_cursor(c, screen) == 1)
 		return (1);
+	if (c == 26)
+		ft_putnbr(screen->cursor);
 	if (c == 17)
 		ft_home(screen);
 	if (c == 23)
 		ft_end(screen);
-	if (c == 26)
-		ft_putnbr(screen->cursor);
 	if (c == 127 && screen->cursor != 0)
 		ft_delete_char(buffer, screen);
 	if (c >= 32 && c < 127 && c != '\033')

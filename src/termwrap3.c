@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 19:26:32 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 20:09:49 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 21:47:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,25 @@ void		ft_go_last_line(t_screen *screen)
 	level = screen->vertical;
 	while (level++ != screen->down)
 		ft_go_next_line();
+}
+
+void		ft_cursor_up(void)
+{
+	tputs(tgetstr("up", NULL), 0, &ft_puterm);
+}
+
+void		ft_cursor_down(int column, t_screen *screen)
+{
+	int		i;
+	int		last;
+
+	(void)screen;
+	i = 0;
+	last = ft_lastcolumn(screen);
+	tputs(tgetstr("do", NULL), 0, &ft_puterm);
+	if (screen->vertical + 1 == screen->down)
+		if (column > last)
+			column = last;
+	while (i++ != column)
+		ft_cursor_right();
 }
