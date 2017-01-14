@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/13 21:29:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 23:14:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct		s_screen
 	int				edit;
 	int				down;
 	int				col;
+	int				insert;
 	char			*save;
 }					t_screen;
 

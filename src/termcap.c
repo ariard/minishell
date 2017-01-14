@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:38:29 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/13 21:51:48 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 23:20:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 	return (1);
 }*/
 
+
+
 int		ft_insert_char(char *stream, char c, t_screen *screen)
 {
 	char	buf[2];
@@ -37,7 +39,13 @@ int		ft_insert_char(char *stream, char c, t_screen *screen)
 	tputs(buf, 0, &ft_puterm);
 	tputs(tgetstr("ip", NULL), 0, &ft_puterm);
 	tputs(tgetstr("ei", NULL), 0, &ft_puterm);
-	ft_move_right(tgetstr("nd", NULL), screen, stream);
+	if (screen->insert < 0)
+		screen->cursor--;
+	if (ft_isendline(screen, screen->cursor, screen->vertical) == 1)
+	{
+		ft_go_next_line();
+		screen->vertical++;
+	}
 	return (1);
 }
 

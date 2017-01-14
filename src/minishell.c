@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/13 21:52:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 23:22:07 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static int			ft_shell(t_info *info)
 	while (42)
 	{
 		old_termios = ft_tty_raw(0);
+		screen->insert = 0;
 		tputs("ariard-1.0$> ", 1, &ft_puterm);
 		ft_save_home();
 		stream = ft_read_input(screen);	

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 14:41:02 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/13 21:49:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/13 23:42:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ int			ft_move_left(char *cmd, t_screen *screen, char *stream)
 	if (ft_isbeginline(screen, screen->cursor, screen->vertical) == 2)
 	{
 		screen->vertical--;
+		screen->insert--;
 		ft_go_prev_line(screen);
 	}
 	else
 	{
 		tputs(cmd, 0, &ft_puterm);
+		screen->insert--;
 		screen->cursor--;
 	}
 	return (1);
@@ -34,10 +36,11 @@ int			ft_move_left(char *cmd, t_screen *screen, char *stream)
 
 int			ft_move_right(char *cmd, t_screen *screen, char *stream)
 {
-	if (ft_isendline(screen, screen->cursor, screen->vertical))
+	if (ft_isendline(screen, screen->cursor, screen->vertical) == 1)
 	{
 		ft_go_next_line();
 		screen->vertical++;
+		screen->insert++;
 	}
 	else
 	{
@@ -45,6 +48,7 @@ int			ft_move_right(char *cmd, t_screen *screen, char *stream)
 			return (1);
 		tputs(cmd, 0, &ft_puterm);
 		screen->cursor += 1;
+		screen->insert++;
 	}
 	return (1);
 }
