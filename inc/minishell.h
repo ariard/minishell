@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/13 23:14:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 14:45:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,42 +172,29 @@ int						ft_init_term_data(void);
 ** Functions to manipulate termcaps library
 */
 
-int						ft_move_left(char *cmd, t_screen *screen, char *stream);
+void					ft_move_left(t_screen *screen);
 
-int						ft_move_right(char *cmd, t_screen *screen, char *stream);
+void					ft_move_right(t_screen *screen);
 
-int						ft_move_up(char *cmd, t_screen *screen);
+void					ft_insert_char(char c, t_screen *screen);
 
-int						ft_move_down(char *cmd, t_screen *screen);
+void					ft_delete_char(t_screen *screen);
 
-int						ft_insert_char(char *stream, char c, t_screen *screen); 
+void					ft_next_line(t_screen *screen);
 
-int						ft_delete_char(char *stream, t_screen *screen);
+void					ft_prev_line(t_screen *screen);
 
-int						ft_go_left(char *stream, t_screen *screen);
-
-int						ft_go_right(char *stream, t_screen *screen);
-
-int						ft_go_home(t_screen *screen);
-
-int						ft_go_end(t_screen *screen, char *stream);
-
-int						ft_insert_substring(char *stream, char *insert,
-		t_screen *screen);
-
-int						ft_delete_substring(char *stream, t_screen *screen);
-
-char					*ft_crop(char *stream, t_screen *screen);
-
-int						ft_put_again(char *stream, t_screen *screen);
-
-void					ft_erase_all(char *stream, t_screen *screen);
+/*
+** Functions to manipulate termcaps library
+*/
 
 void					ft_save_home(void);
 
 void					ft_return_home(void);
 
-void					ft_erase(void);
+void					ft_insert(char c);
+
+void					ft_delete(void);
 
 void					ft_cursor_left(void);
 
@@ -218,8 +205,6 @@ void					ft_go_next_line(void);
 void					ft_go_prev_line(t_screen *screen);
 
 void					ft_go_cursor(int pos, t_screen *screen);
-
-void					ft_agence_down(char *stream, t_screen *screen);
 
 /*
 ** Macros to extract data from node
@@ -267,9 +252,9 @@ int						ft_isedit(int c, t_screen *screen);
 
 int						ft_iscol(void);
 
-int						ft_isendline(t_screen *screen, int n, int line);
+int						ft_isendline(int n, t_screen *screen);
 
-int						ft_isbeginline(t_screen *screen, int n, int line);
+int						ft_isbeginline(int n, t_screen *screen);
 
 int						ft_set_info_screen(char *stream, t_screen *screen);
 

@@ -6,19 +6,19 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 14:56:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/13 23:15:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 14:40:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_set_info_screen(char *stream, t_screen *screen)
+int			ft_set_info_screen(char *buffer, t_screen *screen)
 {
 	int		n;
 
 	n = 1;
 	screen->col = ft_iscol();
-	screen->amplitude = (int)ft_strlen(stream);
+	screen->amplitude = (int)ft_strlen(buffer);
 	screen->down = screen->amplitude + screen->left / screen->col;
 	return (1);
 }

@@ -6,67 +6,20 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 14:41:02 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/13 23:42:52 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/14 15:24:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_move_left(char *cmd, t_screen *screen, char *stream)
+void		ft_next_line(t_screen *screen)
 {
-	if (ft_overflow(stream, screen->vertical, screen))
-		if (1 >= screen->cursor)
-			return (1);
-	if (0 >= screen->cursor)
-		return (1);
-	if (ft_isbeginline(screen, screen->cursor, screen->vertical) == 2)
-	{
-		screen->vertical--;
-		screen->insert--;
-		ft_go_prev_line(screen);
-	}
-	else
-	{
-		tputs(cmd, 0, &ft_puterm);
-		screen->insert--;
-		screen->cursor--;
-	}
-	return (1);
+	ft_go_next_line();
+	screen->vertical++;
 }
 
-int			ft_move_right(char *cmd, t_screen *screen, char *stream)
+void		ft_prev_line(t_screen *screen)
 {
-	if (ft_isendline(screen, screen->cursor, screen->vertical) == 1)
-	{
-		ft_go_next_line();
-		screen->vertical++;
-		screen->insert++;
-	}
-	else
-	{
-		if (screen->cursor >= (int)ft_strlen(stream))
-			return (1);
-		tputs(cmd, 0, &ft_puterm);
-		screen->cursor += 1;
-		screen->insert++;
-	}
-	return (1);
-}
-
-int			ft_move_up(char *cmd, t_screen *screen)
-{
-	if (screen->vertical <= 0)
-		return (1);
-	tputs(cmd, 0, &ft_puterm);
-	screen->cursor -= (screen->col);
-	return (1);
-}
-
-int			ft_move_down(char *cmd, t_screen *screen)
-{
-	return (1);
-	if (screen->vertical >= screen->down) 
-		return (1);
-	tputs(cmd, 0, &ft_puterm);
-	return (1);
+	ft_go_prev_line(screen);
+	screen->vertical--;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   termcap3.c                                         :+:      :+:    :+:   */
+/*   termwrap1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/11 20:13:11 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 14:07:09 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/14 14:06:24 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/14 15:37:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			ft_return_home(void)
 	tputs(tgetstr("sc", NULL), 0, &ft_puterm);
 }
 
-void			ft_erase(void)
+void			ft_delete(void)
 {
 	tputs(tgetstr("dm", NULL), 0, &ft_puterm);
 	tputs(tgetstr("dc", NULL), 0, &ft_puterm);
@@ -46,38 +46,3 @@ void			ft_go_prev_line(t_screen *screen)
 	while (i++ != screen->col)
 		ft_cursor_right();
 }
-/*
-int			ft_go_end(t_screen *screen, char *stream)
-{
-	while (screen->right != screen->cursor)
-		ft_move_right(tgetstr("nd", NULL), screen, stream);
-	return (1);
-}
-
-int			ft_insert_substring(char *stream, char *insert, t_screen *screen)
-{
-	int		i;
-	int		j;
-
-	if (!insert || !stream)
-		return (1);	
-	i = ft_strlen(insert);
-	j = 0;
-	while (i--)
-		ft_insert_char(stream, insert[j++], screen);
-	ft_strdel(&screen->save);
-	return (1);
-}
-
-int			ft_delete_substring(char *stream, t_screen *screen)
-{
-	int		i;
-
-	if (!stream)
-		return (1);
-	i = screen->cursor;
-	while (i-- != screen->start + screen->left)
-		ft_delete_char(stream, screen);
-	screen->edit = 0;
-	return (1);
-}*/
