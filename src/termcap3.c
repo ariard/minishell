@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 20:13:11 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 23:44:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/15 15:14:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,20 @@ void		ft_push_up(char *buffer, t_screen *screen)
 
 void		ft_move_up(t_screen *screen)
 {
+	int		diff;
+
 	if (screen->vertical == 1)
 		return ;
 	ft_cursor_up();
 	screen->vertical--;
 	screen->cursor -= screen->col;
+	diff = screen->cursor;
+	if (diff < 0)
+	{
+		diff *= -1;
+		while (diff--)
+			ft_cursor_right();
+	}
 	if (screen->cursor < 0)
 		screen->cursor = 0;
 }
@@ -72,33 +81,3 @@ void		ft_move_down(t_screen *screen)
 	else
 		screen->cursor += screen->col;
 }
-	
-
-/*
-int			ft_insert_substring(char *stream, char *insert, t_screen *screen)
-{
-	int		i;
-	int		j;
-
-	if (!insert || !stream)
-		return (1);	
-	i = ft_strlen(insert);
-	j = 0;
-	while (i--)
-		ft_insert_char(stream, insert[j++], screen);
-	ft_strdel(&screen->save);
-	return (1);
-}
-
-int			ft_delete_substring(char *stream, t_screen *screen)
-{
-	int		i;
-
-	if (!stream)
-		return (1);
-	i = screen->cursor;
-	while (i-- != screen->start + screen->left)
-		ft_delete_char(stream, screen);
-	screen->edit = 0;
-	return (1);
-}*/

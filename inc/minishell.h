@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 23:50:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/15 15:10:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,14 @@ void					ft_insert_string(char *buffer, t_screen *screen);
 
 void					ft_delete_string(char *buffer, t_screen *screen);
 
+void					ft_highlights_edit(char *buffer, t_screen *screen);
+
+void					ft_clear_screen(char *buffer, t_screen *screen);
+
+void					ft_insert_str(char *str, t_screen *screen);
+
+void					ft_clear(void);
+
 /*
 ** Functions to manipulate termcaps library
 */
@@ -238,6 +246,10 @@ void					ft_go_last_char(t_screen *screen);
 void					ft_go_prev_line_first(void);
 
 void					ft_go_line_first(void);
+
+void					ft_start_edit(void);
+
+void					ft_end_edit(void);
 
 /*
 ** Macros to extract data from node

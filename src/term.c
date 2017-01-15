@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 00:51:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 23:51:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/15 15:14:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,20 @@ static int			ft_cursor(int c, t_screen *screen)
 	return (0);
 }
 
+
+static int	ft_process_input2(char c, char *buffer, t_screen *screen)
+{
+	if (c == 12)
+		ft_clear_screen(buffer, screen);
+	return (1);
+}
+
 int			ft_process_input(char c, char *buffer, t_screen *screen)
 {
 	ft_set_info_screen(buffer, screen);
 	if (ft_cursor(c, screen) == 1)
 		return (1);
+	ft_process_input2(c, buffer, screen);
 	if (c == 17)
 		ft_home(screen);
 	if (c == 23)
@@ -64,60 +73,3 @@ int			ft_process_input(char c, char *buffer, t_screen *screen)
 		ft_insert_char(c, buffer, screen);
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-	if (c == 24)
-		ft_putnbr(screen->left);
-	if (c == 23)
-		ft_putnbr(screen->amplitude);
-	if (c == 22)
-		ft_putnbr(screen->col);
-	if (c == 21)
-		ft_putnbr(screen->down);
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-//	if (c == 1)
-//		return (ft_go_home(screen));
-//	if (c == 19)
-//		return (ft_go_end(screen, stream));
-//	if (c == 17)
-//		return (ft_go_left(stream, screen));
-//	if (c == 23)
-//		return (ft_go_right(stream, screen));
-//	if (c == 22)
-//		return (ft_isedit(c, screen));
-//	if (c == 25 && screen->edit == 1)
-//		screen->save = ft_crop(stream, screen);
-//	if (c == 16 && screen->edit == 0)
-//		return (ft_insert_substring(stream, screen->save, screen));
-//	if (c == 4 && screen->edit == 1)
-//		return (ft_delete_substring(stream, screen));

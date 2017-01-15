@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/14 23:49:12 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/15 13:51:21 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,12 @@ SRC = src/minishell.c \
 	  src/termcap2.c \
 	  src/termcap3.c \
 	  src/termcap4.c \
+	  src/termcap5.c \
+	  src/termcap6.c \
 	  src/termwrap1.c \
 	  src/termwrap2.c \
 	  src/termwrap3.c \
+	  src/termwrap4.c \
 	  src/error.c \
 	  src/macro_node.c \
 	  src/macro_operator.c \

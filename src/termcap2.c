@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 14:41:02 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/14 23:25:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/15 15:12:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,4 @@ void		ft_previous(char *buffer, t_screen *screen)
 		ft_move_left(screen);
 	while (buffer[screen->cursor] != ' ' && screen->cursor != 0)
 		ft_move_left(screen);
-	if (screen->cursor != 0)
-		ft_move_right(screen);
 }
