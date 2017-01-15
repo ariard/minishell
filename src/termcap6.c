@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 19:02:24 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/15 16:06:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/15 18:41:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,29 @@ void		ft_clear_screen(char *buffer, t_screen *screen)
 	screen->vertical = screen->down;
 	ft_goto_pos(screen->cursor, screen);
 	screen->vertical = vertical;
+}
+
+void		ft_delete_all(t_screen *screen)
+{
+	int		i;
+	int		end;
+
+	ft_go_last_line(screen);
+	ft_go_last_char(screen);
+	i = screen->down * screen->col; 
+	screen->vertical = screen->down;
+	while (i != 14)
+	{
+		if ((end = ft_isbeginline(i, screen)))
+			ft_prev_line(screen);
+		else
+			ft_cursor_left();
+		ft_delete();
+		i--;
+		if (end)
+		{
+			ft_insert(' ');
+			ft_cursor_right();
+		}
+	}
 }

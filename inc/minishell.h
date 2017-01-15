@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/15 16:21:49 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/15 18:24:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct		s_expr
 	char			*id3;
 }					t_expr;
 
-
 typedef struct		s_screen
 {
 	int				cursor;
@@ -61,8 +60,8 @@ typedef struct		s_info
 {
 	t_cht			*sym_tab;
 	char			**env;
+	t_dlist			*history;
 }					t_info;
-
 
 t_dlist		**ft_lex_analyze(char *stream);
 
@@ -74,8 +73,6 @@ int			ft_isoperand(char *stream);
 
 int			ft_isoperator(char *stream);
 
-t_cht		*ft_gen_symtab(char **env);
-
 t_btree		*ft_ast_insert_sequence(t_root *tree, t_btree *father, t_dlist *operand,
 		t_dlist *operator);
 
@@ -83,12 +80,19 @@ t_btree		*ft_ast_insert_cmd(t_root *tree, t_btree *father, t_dlist *operand);
 
 t_btree		*ft_goto_nxt_operand(t_btree *node, t_btree *father);
 
+/*
+** Functions to get shell's info
+*/
+
+t_cht		*ft_gen_symtab(char **env);
+
+void		ft_gen_history(t_info *info);
 
 /*
 ** Function to process input control 
 */
 
-int			ft_process_input(char c, char *stream, t_screen *screen);
+int			ft_process_input(char c, char *stream, t_screen *screen, t_info *info);
 
 /*
 ** Functions to execute command according to its operator
@@ -127,6 +131,14 @@ int			ft_unsetenv(char **arg, char **env);
 char		*ft_builtin_option(char **arg, char *builtin);
 
 int			ft_check_dir(char *path);
+
+/*
+** Functions to use history feature
+*/
+
+void		ft_read_history(int n, char *buffer, t_screen *screen, t_info *info);
+
+void		ft_show_history(char *str, char *buffer, t_screen *screen);
 
 /*
 ** Functions to print errors
@@ -211,6 +223,8 @@ void					ft_highlights_edit(char *buffer, t_screen *screen);
 void					ft_clear_screen(char *buffer, t_screen *screen);
 
 void					ft_insert_str(char *str, t_screen *screen);
+
+void					ft_delete_all(t_screen *screen);
 
 void					ft_clear(void);
 
@@ -329,5 +343,7 @@ void					ft_read_entry(t_cht *htb);
 void					ft_read_env(char **str);
 
 void					ft_read_list(t_dlist **list);
+
+void					ft_read_list2(t_dlist *list);
 
 #endif

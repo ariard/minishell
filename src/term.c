@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 00:51:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/15 15:19:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/15 18:41:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,25 @@ static int			ft_cursor(int c, t_screen *screen)
 }
 
 
-static int	ft_process_input2(char c, char *buffer, t_screen *screen)
+static int	ft_process_input2(char c, char *buffer, t_screen *screen, 
+		t_info *info)
 {
 	if (c == 12)
 		ft_clear_screen(buffer, screen);
+	if (c == 24)
+		ft_read_history(0, buffer, screen, info);
+	if (c == 26)
+		ft_read_history(1, buffer, screen, info);
 	return (1);
 }
 
-int			ft_process_input(char c, char *buffer, t_screen *screen)
+int			ft_process_input(char c, char *buffer, t_screen *screen,
+		t_info *info)
 {
 	ft_set_info_screen(buffer, screen);
 	if (ft_cursor(c, screen) == 1)
 		return (1);
-	ft_process_input2(c, buffer, screen);
+	ft_process_input2(c, buffer, screen, info);
 	if (c == 17)
 		ft_home(screen);
 	if (c == 23)

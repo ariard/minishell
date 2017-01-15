@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 20:39:19 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/09 21:32:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/15 18:24:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,18 @@ void			ft_read_env(char **str)
 	{
 		ft_putstr(*str++);
 		ft_putchar(10);
+	}
+}
+
+void			ft_read_list2(t_dlist *begin_list)
+{
+	t_dlist		*tmp;
+
+	tmp = begin_list;
+	while (tmp)
+	{
+		ft_putstr(tmp->data);
+		ft_putchar(10);
+		tmp = tmp->next;
 	}
 }
