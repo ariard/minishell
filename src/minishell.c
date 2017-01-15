@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/15 14:30:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/15 16:15:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,33 @@ ft_execute_ast(tree, env, sym_tab);
 
 static char			*ft_read_input(t_screen *screen)
 {
-	char			*stream;
+	char			*buffer;
+	char			*buffquote;
 	char			c;
-	int				quote;
 
 	screen->cursor = 0; 
 	screen->vertical = 1;
-	stream = ft_strnew(1024);
-	quote = 0;
+	buffer = ft_strnew(1024);
+	buffquote = ft_strnew(1024);
+	screen->quote = 0;
 	while (42)
 	{
 		c = '\0';
 		read(0, &c, 1);
-		ft_process_input(c, stream, screen);
-		quote = ft_isquote(c, quote);
-		if (ft_isend(c, quote, screen) == 1 || ft_strcmp(stream, "exit") == 0)
+		ft_process_input(c, buffer, screen);
+		screen->quote = ft_isquote(c, buffer, buffquote, screen);
+		if (ft_isend(c, buffer, buffquote, screen) == 1 
+			|| ft_strcmp(buffer, "exit") == 0)
 			break;
 	}
 	ft_putstr("\n\n");
-	ft_putstr(stream);
-	return (stream);
+	ft_putstr(buffer);
+	return (buffer);
 }
 
 static int			ft_shell(t_info *info)
 {
-	char			*stream;
+	char			*buffer;
 	struct termios	*old_termios;
 	t_screen		*screen;
 
@@ -66,11 +68,11 @@ static int			ft_shell(t_info *info)
 	while (42)
 	{
 		old_termios = ft_tty_raw(0);
-		tputs("ariard-1.0$> ", 0, &ft_puterm);
-		stream = ft_read_input(screen);	
-		tputs("\n", 1, &ft_puterm);
+		ft_insert_str("ariard-1.0$> ", screen);
+		buffer = ft_read_input(screen);
+		ft_insert(10);
 		ft_tty_reset(0, old_termios);
-		if (ft_strcmp(stream, "exit") == 0)
+		if (ft_strcmp(buffer, "exit") == 0)
 			break;
 	}
 	return (0);

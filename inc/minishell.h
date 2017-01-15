@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/15 15:10:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/15 16:21:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct		s_screen
 	int				edit;
 	int				down;
 	int				col;
+	int				quote;
 	char			*saved;
 }					t_screen;
 
@@ -289,9 +290,11 @@ char					*ft_grep_envdata(char **env, char *value);
 **	Macro to control input processing
 */
 
-int						ft_isend(int c, int quote, t_screen *screen);
+int						ft_isend(int c, char *buffer, char *buffquote, 
+		t_screen *screen);
 
-int						ft_isquote(int c, int quote);
+int						ft_isquote(int c, char *buffer, char *buffquote, 
+		t_screen *screen);
 
 int						ft_iscol(void);
 
@@ -314,6 +317,8 @@ int						ft_iscolumn(t_screen *screen);
 int						ft_lastcolumn(t_screen *screen);
 
 int						ft_isedit(t_screen *screen);
+
+void					ft_return_buffquote(char *buffer, char *buffquote, int n);
 
 /*
 ** Read functions to verify struct generation

@@ -6,33 +6,49 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 23:53:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/15 14:39:48 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/15 16:21:18 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_isend(int c, int quote, t_screen *screen)
+int			ft_isend(int c, char *buffer, char *buffquote, t_screen *screen)
 {
-	(void)screen;
-	if (c == 13 && quote == 0)
+	(void)buffer;
+	(void)buffquote;
+	if (c == 13 && screen->quote == 0)
 		return (1);
-	if (c == 13 && quote != 0)
-		tputs("\n> ", 1, &ft_puterm);
+	if (c == 13 && screen->quote != 0)
+	{
+		ft_insert(10);
+		ft_insert_str("> ", screen);
+		screen->cursor = 0;
+		screen->vertical = 1;
+		screen->left = ft_strlen(">");
+		ft_strcat(buffquote, buffer);
+		ft_strcat(buffquote, " ");
+		ft_bzero(buffer, 1024);
+	}
 	return (0);
 }
 
-int			ft_isquote(int c, int quote)
+int			ft_isquote(int c, char *buffer, char *buffquote, t_screen *screen)
 {
-	if (c == '"' && quote == 0)
+	if (c == '"' && screen->quote == 0)
 		return (2);
-	if (c == 39 && quote == 0)
+	if (c == 39 && screen->quote == 0)
 		return (1);
-	if (c == '"' && quote == 2)
+	if (c == '"' && screen->quote == 2)
+	{
+		ft_return_buffquote(buffer, buffquote, 2);
 		return (0);
-	if (c == 39 && quote == 1)
+	}
+	if (c == 39 && screen->quote == 1)
+	{
+		ft_return_buffquote(buffer, buffquote, 1);
 		return (0);
-	return (quote);
+	}
+	return (screen->quote);
 }
 
 int			ft_iscol(void)
