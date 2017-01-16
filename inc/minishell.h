@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/16 19:21:03 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/17 00:27:07 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,21 @@ typedef struct		s_screen
 	char			*saved;
 }					t_screen;
 
+typedef struct		s_col
+{
+	int				block;
+	int				line;
+	int				curse;
+	int				max;
+	int				nb;
+	int				size;
+}					t_col;			
+
 typedef struct		s_info
 {
 	t_cht			*sym_tab;
 	char			**env;
+	t_dlist			**list_bin;
 	t_dlist			*history;
 	int				sizehist;
 }					t_info;
@@ -81,11 +92,13 @@ t_btree		*ft_ast_insert_cmd(t_root *tree, t_btree *father, t_dlist *operand);
 
 t_btree		*ft_goto_nxt_operand(t_btree *node, t_btree *father);
 
+void		ft_execute_ast(t_root *tree, char **env, t_cht *sym_tab);
+
 /*
 ** Functions to get shell's info
 */
 
-t_cht		*ft_gen_symtab(char **env);
+t_cht		*ft_gen_symtab(char **env, t_dlist **list_bin); 
 
 void		ft_gen_history(t_info *info);
 
@@ -144,6 +157,12 @@ void		ft_show_history(char *str, char *buffer, t_screen *screen);
 void		ft_add_history(char *buffer, t_info *info);
 
 void		ft_update_history(t_info *info);
+
+/*
+** Functions to use completion feature
+*/
+
+void		ft_complete(char *buffer, t_dlist **list_bin);
 
 /*
 ** Functions to print errors
@@ -306,7 +325,23 @@ char					**ft_grep_env(char **env, char *value);
 char					*ft_grep_envdata(char **env, char *value);
 
 /*
-**	Macro to control input processing
+** Macros to print in columns
+*/
+
+int						ft_maxis(t_dlist **list_show);
+
+int						ft_lineis(int column, t_col *col);
+
+int						ft_blockis(int column, t_col *col);
+
+t_dlist					*ft_get_normal(t_dlist *elem, t_col *col);
+
+t_dlist					*ft_get_special(t_dlist *elem, t_col *col);
+
+void					ft_space(char *buf, int max, char *s);
+
+/*
+**	Macros to control input processing
 */
 
 int						ft_isend(int c, char *buffer, char *buffquote, 

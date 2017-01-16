@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history2.c                                         :+:      :+:    :+:   */
+/*   macro_column2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/16 19:14:24 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/16 20:13:21 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/17 00:09:45 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/17 00:15:27 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		ft_update_history(t_info *info)
+void		ft_space(char *buf, int max, char *s)
 {
-	int		fd;
-	char	c;
-	char	*mask;
-	t_dlist	*tmp;
+	int		to_space;
 
-	fd = open("/Users/ariard/.ariard_history", O_WRONLY | O_CREAT);
-	tmp = ft_list_last(&info->history);
-	c = 10;	
-	while (tmp)
-	{
-		mask = tmp->data;
-		if (ft_strlen(mask) > 0)
-		{		
-			ft_putstr_fd(mask, fd);
-			if (tmp->previous)
-				ft_putchar_fd(10, fd);	
-
-		}
-		tmp = tmp->previous;
-	}
-	close(fd);
+	to_space = max - (int)ft_strlen(s);
+	while (to_space--)
+		ft_strcat(buf, " ");
 }
