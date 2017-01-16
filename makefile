@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/15 17:15:29 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/16 19:21:30 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC = src/minishell.c \
 	  src/cd.c \
 	  src/env.c \
 	  src/history.c \
+	  src/history2.c \
 	  src/tty.c \
 	  src/term.c \
 	  src/termcap.c \

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/15 18:24:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/16 19:21:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct		s_info
 	t_cht			*sym_tab;
 	char			**env;
 	t_dlist			*history;
+	int				sizehist;
 }					t_info;
 
 t_dlist		**ft_lex_analyze(char *stream);
@@ -139,6 +140,10 @@ int			ft_check_dir(char *path);
 void		ft_read_history(int n, char *buffer, t_screen *screen, t_info *info);
 
 void		ft_show_history(char *str, char *buffer, t_screen *screen);
+
+void		ft_add_history(char *buffer, t_info *info);
+
+void		ft_update_history(t_info *info);
 
 /*
 ** Functions to print errors
@@ -345,5 +350,7 @@ void					ft_read_env(char **str);
 void					ft_read_list(t_dlist **list);
 
 void					ft_read_list2(t_dlist *list);
+
+void					ft_read_list3(t_dlist *list);
 
 #endif

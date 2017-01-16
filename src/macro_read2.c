@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 14:56:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/15 17:33:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/16 18:59:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int			ft_set_info_screen(char *buffer, t_screen *screen)
 	n = 1;
 	screen->col = ft_iscol();
 	screen->amplitude = (int)ft_strlen(buffer);
+	if (screen->col == 0)
+		screen->col = 1;
 	screen->down = ((screen->amplitude + screen->left) / screen->col) + 1;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 19:02:24 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/15 18:41:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/16 19:14:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void		ft_insert_str(char *str, t_screen *screen)
 {
 	int		i;
 
+	if (!str)
+		return ;
 	i = 0;
 	while (str[i])
 	{
