@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/17 00:27:07 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/17 19:59:19 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct		s_screen
 	int				down;
 	int				col;
 	int				quote;
+	int				match;
 	char			*saved;
 }					t_screen;
 
@@ -162,7 +163,22 @@ void		ft_update_history(t_info *info);
 ** Functions to use completion feature
 */
 
-void		ft_complete(char *buffer, t_dlist **list_bin);
+void		ft_complete_switch(char *buffer, t_dlist **list_bin, t_screen *screen);
+
+void		ft_complete_bin(char *buffer, t_dlist **list_bin, t_screen *screen);
+
+void		ft_complete_arg(char *buffer, char *tmp, t_screen *screen);
+
+int			ft_ask_user(int size, char *buffer, t_screen *screen);
+
+void		ft_search_match(char *buffer, t_dlist **list_bin, t_dlist **list_show,
+		t_screen *screen);
+
+int			ft_isuncompletepath(char *str);
+
+void		ft_read_dir(char *dir, t_dlist **list_files);
+
+void		ft_complete_path(char *buffer, char *path, t_screen *screen);
 
 /*
 ** Functions to print errors
@@ -252,6 +268,11 @@ void					ft_delete_all(t_screen *screen);
 
 void					ft_clear(void);
 
+void					ft_swap_buffer(char *buffer, char *newbuffer,
+		t_screen *screen);
+
+void					ft_goto_pos(int pos, t_screen *screen);
+
 /*
 ** Functions to manipulate termcaps library
 */
@@ -339,6 +360,21 @@ t_dlist					*ft_get_normal(t_dlist *elem, t_col *col);
 t_dlist					*ft_get_special(t_dlist *elem, t_col *col);
 
 void					ft_space(char *buf, int max, char *s);
+
+int						ft_isparent(char *str);
+
+void					ft_print_column(char *buffer, t_dlist **list,
+		t_screen *screen);
+
+void					ft_display(t_col *col, t_dlist *elem);
+
+void					ft_display_columns(t_dlist **list_show, int column);
+
+char					*ft_set_new_arg(char *buffer, t_dlist **list);
+
+char					*ft_set_new_path(char *buffer, char *path, t_dlist **list);
+
+int						ft_isdir(char *str);
 
 /*
 **	Macros to control input processing

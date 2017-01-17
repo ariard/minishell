@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 19:02:24 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/16 19:14:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/17 19:13:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		ft_insert_str(char *str, t_screen *screen)
 	}
 }
 
-static void		ft_goto_pos(int pos, t_screen *screen)
+void		ft_goto_pos(int pos, t_screen *screen)
 {
 	int		i;
 
@@ -84,4 +84,20 @@ void		ft_delete_all(t_screen *screen)
 			ft_cursor_right();
 		}
 	}
+}
+
+void		ft_swap_buffer(char *buffer, char *newbuffer, t_screen *screen)
+{
+	int		i;
+	int		j;
+
+	if (!newbuffer)
+		return ;
+	ft_delete_all(screen);
+	screen->cursor = 0;
+	ft_bzero(buffer, 1024);
+	i = 0;
+	j = ft_strlen(newbuffer);
+	while (i < j)
+		ft_insert_char(newbuffer[i++], buffer, screen);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 00:51:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/16 23:46:17 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/17 17:06:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	ft_process_input2(char c, char *buffer, t_screen *screen,
 	if (c == 26)
 		ft_read_history(1, buffer, screen, info);
 	if (c == 9)
-		ft_complete(buffer, info->list_bin);
+		ft_complete_switch(buffer, info->list_bin, screen);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 14:24:02 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/15 18:40:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/17 14:41:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,3 @@ void		ft_next(char *buffer, t_screen *screen)
 	if (screen->cursor != screen->amplitude)
 		ft_move_left(screen);
 }
-
-/*int		ft_clear_screen(void)
-{
-	char	*res;
-
-	res = tgetstr("cl", NULL);
-	if (res == NULL)
-		return (-1);
-	tputs(res, 0, &ft_puterm);
-	return (1);
-}*/
