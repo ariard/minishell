@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/17 20:59:45 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/17 23:54:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,12 @@ void		ft_add_history(char *buffer, t_info *info);
 void		ft_update_history(t_info *info);
 
 /*
+** Functions to use reverse history search feature
+*/
+
+void		ft_reverse_history(char *buffer, t_screen *screen, t_info *info);
+
+/*
 ** Functions to use completion feature
 */
 
@@ -272,6 +278,8 @@ void					ft_swap_buffer(char *buffer, char *newbuffer,
 		t_screen *screen);
 
 void					ft_goto_pos(int pos, t_screen *screen);
+
+void					ft_delete_even_prompt(t_screen *screen);
 
 /*
 ** Functions to manipulate termcaps library
@@ -409,6 +417,18 @@ int						ft_lastcolumn(t_screen *screen);
 int						ft_isedit(t_screen *screen);
 
 void					ft_return_buffquote(char *buffer, char *buffquote, int n);
+
+/*
+** Macros to use reverse history mode
+*/
+
+int						ft_read_cursor(char c);
+
+void					ft_save_screen(t_screen *new_screen, t_screen *screen);
+
+int						ft_set_info_new_screen(char *buffer, t_screen *screen);
+
+void					ft_update_pattern(char *pattern);
 
 /*
 ** Read functions to verify struct generation

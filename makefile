@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/17 19:41:11 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/17 21:36:41 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC = src/minishell.c \
 	  src/env.c \
 	  src/history.c \
 	  src/history2.c \
+	  src/rev_history.c \
 	  src/completion.c \
 	  src/completion2.c \
 	  src/completion3.c \
@@ -43,6 +44,7 @@ SRC = src/minishell.c \
 	  src/termcap4.c \
 	  src/termcap5.c \
 	  src/termcap6.c \
+	  src/termcap7.c \
 	  src/termwrap1.c \
 	  src/termwrap2.c \
 	  src/termwrap3.c \
@@ -57,6 +59,7 @@ SRC = src/minishell.c \
 	  src/macro_column.c \
 	  src/macro_column2.c \
 	  src/macro_column3.c \
+	  src/macro_revhist.c \
 	  src/read.c
 
 OBJS = $(SRC:.c=.o)
