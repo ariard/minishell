@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 19:02:02 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/18 22:24:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,18 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 		char **env);
 
 /*
+** Functions to execute files aggregation
+*/
+
+int			ft_execute_aggregation(char **args);
+
+int			ft_get_first_fd(char *str);
+
+int			ft_get_last_fd(char *str);
+
+
+
+/*
 ** Functions to execute builtin utility
 */
 
@@ -199,6 +211,10 @@ int			ft_semantic_error(char *s);
 int			ft_permission_error(char *s, char **env);
 
 int			ft_existence_error(char *cmd, char *path);
+
+int			ft_ambiguous_error(char *last);
+
+int			ft_bad_fd_error(int word);
 
 /*
 ** Library functions of termcaps
@@ -335,6 +351,8 @@ char					*ft_node_nameis(t_btree *node);
 char					**ft_node_argis(t_btree *node);
 
 int						ft_nodeisleft(t_btree *node, t_btree *father);
+
+int						ft_isaggregation(char **args);
 
 /*
 ** Macros to detect operator type

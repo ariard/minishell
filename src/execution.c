@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 22:23:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/09 19:57:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/18 22:24:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ int			ft_execute_regular(char *path, t_btree *node, char **env,
 	arg = ft_node_argis(node);
 	status = fork();
 	if (status == 0)
+	{
+		if (ft_isaggregation(arg) == 1)
+			ft_execute_aggregation(arg);
 		execve(path, arg, env);
+	}
 	if (status > 0)
 		wait(0);
 	if (isinpipe == 1)

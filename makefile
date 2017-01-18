@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/18 18:37:40 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/18 21:37:23 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SRC = src/minishell.c \
 	  src/semantic_analyzer.c \
 	  src/execution.c \
 	  src/execution_redir.c \
+	  src/aggregation.c \
+	  src/aggregation2.c \
 	  src/builtin.c \
 	  src/echo.c \
 	  src/cd.c \
@@ -50,6 +52,7 @@ SRC = src/minishell.c \
 	  src/termwrap3.c \
 	  src/termwrap4.c \
 	  src/error.c \
+	  src/error2.c \
 	  src/macro_node.c \
 	  src/macro_operator.c \
 	  src/macro_operator2.c \
