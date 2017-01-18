@@ -6,33 +6,34 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 21:29:02 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 00:12:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/18 16:42:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		ft_delete_even_prompt(t_screen *screen)
+void		ft_delete_even_prompt(char *buffer, char *pattern, t_screen *screen)
 {
 	int		i;
-	int		end;
 
+	screen->col = ft_iscol();
+	if (screen->col == 0)
+		screen->col = 1;
+	if (buffer && pattern)
+		screen->down = ((ft_strlen(buffer) + 22 + ft_strlen(pattern)) 
+			/ screen->col) + 1;
+	screen->vertical = screen->down;
 	ft_go_last_line(screen);
 	ft_go_last_char(screen);
-	i = 20 * screen->col; 
-	screen->vertical = screen->down;
-	while (i != 0)
+	i = screen->down;
+	while (i--)
 	{
-		if ((end = ft_isbeginline(i, screen)))
-			ft_prev_line(screen);
-		else
-			ft_cursor_left();
-		ft_delete();
-		i--;
-		if (end)
-		{
-			ft_insert(' ');
-			ft_cursor_right();
-		}
+		ft_delete_line();
+		if (i != 0)
+			ft_go_prev_line_first();
 	}
+	i = screen->col;
+	while (i--)
+		ft_cursor_left();
+	return ;
 }

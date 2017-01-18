@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 00:21:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/15 17:33:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/18 16:35:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,9 @@ void		ft_end_edit(void)
 void		ft_clear(void)
 {
 	tputs(tgetstr("cl", NULL), 0, &ft_puterm);
+}
+
+void		ft_delete_line(void)
+{
+	tputs(tgetstr("dl", NULL), 0, &ft_puterm);
 }

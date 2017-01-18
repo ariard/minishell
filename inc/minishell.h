@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/17 23:54:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/18 16:16:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,7 +279,8 @@ void					ft_swap_buffer(char *buffer, char *newbuffer,
 
 void					ft_goto_pos(int pos, t_screen *screen);
 
-void					ft_delete_even_prompt(t_screen *screen);
+void					ft_delete_even_prompt(char *buffer, char *patter,
+		t_screen *screen);
 
 /*
 ** Functions to manipulate termcaps library
@@ -318,6 +319,8 @@ void					ft_go_line_first(void);
 void					ft_start_edit(void);
 
 void					ft_end_edit(void);
+
+void					ft_delete_line(void);
 
 /*
 ** Macros to extract data from node

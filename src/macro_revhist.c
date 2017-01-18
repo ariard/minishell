@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 21:32:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/17 23:58:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/18 15:05:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,4 @@ void		ft_update_pattern(char *pattern)
 	if ((len = (ft_strlen(tmp) - 1)) >= 0)
 		ft_strncpy(pattern, tmp, ft_strlen(tmp) - 1);
 	ft_strdel(&tmp);
-}	
-
-
+}
