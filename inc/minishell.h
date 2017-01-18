@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 16:16:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/18 19:02:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_btree		*ft_ast_insert_cmd(t_root *tree, t_btree *father, t_dlist *operand);
 
 t_btree		*ft_goto_nxt_operand(t_btree *node, t_btree *father);
 
-void		ft_execute_ast(t_root *tree, char **env, t_cht *sym_tab);
+void		ft_execute_ast(t_root *tree, t_info *info);
 
 /*
 ** Functions to get shell's info
@@ -334,6 +334,8 @@ char					*ft_node_nameis(t_btree *node);
 
 char					**ft_node_argis(t_btree *node);
 
+int						ft_nodeisleft(t_btree *node, t_btree *father);
+
 /*
 ** Macros to detect operator type
 */
@@ -347,6 +349,10 @@ int						ft_isredir_out(t_btree *father);
 int						ft_isredir_in(t_btree *father);
 
 int						ft_isappredir_out(t_btree *father);
+
+int						ft_islistor(t_btree *father);
+
+int						ft_islistand(t_btree *father);
 
 /*
 ** Macros to operate on environnement

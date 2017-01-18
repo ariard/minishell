@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 21:17:20 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/09 19:55:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/18 18:59:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,16 @@ char		**ft_node_argis(t_btree *node)
 	arg = ft_strsplitptr(to_split, &ft_isspace);
 	return (arg);
 }
+
+int			ft_nodeisleft(t_btree *node, t_btree *father)
+{
+	if (!father || !node)
+		return (0);
+	if (father->left)
+		if (ft_strcmp((father->left)->key, node->key) == 0)
+			return (1);
+	if (father->right)
+		if (ft_strcmp((father->right)->key, node->key) == 0)
+			return (-1);
+	return (0);
+}	
