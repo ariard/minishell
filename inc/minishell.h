@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 22:24:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/19 17:10:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ typedef struct		s_info
 	t_cht			*sym_tab;
 	char			**env;
 	t_dlist			**list_bin;
+	t_dlist			**delim;
 	t_dlist			*history;
 	int				sizehist;
+	int				heredoc;
 }					t_info;
 
 t_dlist		**ft_lex_analyze(char *stream);
@@ -414,6 +416,12 @@ int						ft_isdir(char *str);
 /*
 **	Macros to control input processing
 */
+
+void					ft_read_heredoc(char *buffer, t_info *info);
+
+int						ft_isinheredoc(char *buffer);
+
+int						ft_endheredoc(char c);
 
 int						ft_isend(int c, char *buffer, char *buffquote, 
 		t_screen *screen);

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 20:24:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/19 17:29:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 		read(0, &c, 1);
 		ft_process_input(c, buffer, screen, info);
 		screen->quote = ft_isquote(c, buffer, buffquote, screen);
+		if (ft_isinheredoc(buffer) == 1)
+			info->heredoc = 1;
 		if (ft_isend(c, buffer, buffquote, screen) == 1)
 			break;
 	}
+	ft_read_heredoc(buffer, info);
+	ft_read_list2(*(info->delim));
 	ft_add_history(buffer, info);
 	return (buffer);
 }
@@ -56,6 +60,8 @@ static int			ft_shell(t_info *info)
 	t_screen		*screen;
 
 	screen = ft_memalloc(sizeof(t_screen));
+	info->delim = ft_memalloc(sizeof(t_dlist));
+	*(info->delim) = NULL;
 	screen->left = ft_strlen("ariard-1.0$> ");
 	while (42)
 	{

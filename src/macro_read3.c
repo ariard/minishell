@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 21:27:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/17 21:32:03 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/19 17:20:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,21 @@ void		ft_return_buffquote(char *buffer, char *buffquote, int n)
 		tmp = ft_str_epure(buffquote, db);
 	ft_bzero(buffer, 1024);
 	ft_strcpy(buffer, tmp);
+}
+
+int			ft_isinheredoc(char *buffer)
+{
+	char	*tmp;
+
+	tmp = buffer;
+	tmp--;
+	while (*tmp && *tmp != '>' && *tmp != ';' && *tmp != '&')
+	{
+		if (*tmp == '<')
+			if (*(tmp - 1))
+				if (*(tmp - 1) == '<')
+					return (1);
+		tmp--;
+	}
+	return (0);
 }
