@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/19 17:29:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/20 15:58:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void			ft_process_buffer(char *buffer, t_info *info) 
+/*static void			ft_process_buffer(char *buffer, t_info *info) 
 {
 	t_dlist			**list_token;
 	t_root			*tree;
@@ -23,7 +23,7 @@ static void			ft_process_buffer(char *buffer, t_info *info)
 		tree = ft_syntax_analyze(list_token);
 	if (tree)
 		ft_execute_ast(tree, info); 
-}
+}*/
 
 static char			*ft_read_input(t_screen *screen, t_info *info)
 {
@@ -36,18 +36,22 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 	buffer = ft_strnew(1024);
 	buffquote = ft_strnew(1024);
 	screen->quote = 0;
+	info->heredoc = 0;
+	info->heredocsize = 0;
 	while (42)
 	{
 		c = '\0';
 		read(0, &c, 1);
 		ft_process_input(c, buffer, screen, info);
 		screen->quote = ft_isquote(c, buffer, buffquote, screen);
-		if (ft_isinheredoc(buffer) == 1)
-			info->heredoc = 1;
-		if (ft_isend(c, buffer, buffquote, screen) == 1)
+		if (ft_endheredoc(c))
+			if (ft_isinheredoc(buffer, info))
+				ft_add_heredoc(buffer, info);
+		if (c == 13)
+			ft_isendheredoc(buffer, info);
+		if (ft_isend(c, buffer, buffquote, screen, info) == 1)
 			break;
 	}
-	ft_read_heredoc(buffer, info);
 	ft_read_list2(*(info->delim));
 	ft_add_history(buffer, info);
 	return (buffer);
@@ -72,7 +76,7 @@ static int			ft_shell(t_info *info)
 		ft_tty_reset(0, old_termios);
 		if (ft_strcmp(buffer, "exit") == 0)
 			break;
-		ft_process_buffer(buffer, info);
+//		ft_process_buffer(buffer, info);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/19 17:10:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/20 15:51:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct		s_info
 	t_dlist			*history;
 	int				sizehist;
 	int				heredoc;
+	int				heredocsize;
 }					t_info;
 
 t_dlist		**ft_lex_analyze(char *stream);
@@ -138,8 +139,6 @@ int			ft_execute_aggregation(char **args);
 int			ft_get_first_fd(char *str);
 
 int			ft_get_last_fd(char *str);
-
-
 
 /*
 ** Functions to execute builtin utility
@@ -417,14 +416,18 @@ int						ft_isdir(char *str);
 **	Macros to control input processing
 */
 
+void					ft_isendheredoc(char *buffer, t_info *info);
+
 void					ft_read_heredoc(char *buffer, t_info *info);
 
-int						ft_isinheredoc(char *buffer);
+int						ft_isinheredoc(char *buffer, t_info *info);
 
 int						ft_endheredoc(char c);
 
+void					ft_add_heredoc(char *buffer, t_info *info);
+
 int						ft_isend(int c, char *buffer, char *buffquote, 
-		t_screen *screen);
+		t_screen *screen, t_info *info);
 
 int						ft_isquote(int c, char *buffer, char *buffquote, 
 		t_screen *screen);

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 21:27:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/19 17:20:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/20 15:33:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ void		ft_return_buffquote(char *buffer, char *buffquote, int n)
 {
 	char	db[2];
 	char	*tmp;
+	char	c;
 
 	ft_bzero(db, 2);
 	db[0] = 34;
+	c = 13;
 	ft_strcat(buffquote, buffer);
-	ft_strcat(buffquote, " ");
+	ft_strcat(buffquote, "\n"); 
 	if (n == 1)
 		tmp = ft_str_epure(buffquote, "'");
 	if (n == 2)
@@ -57,18 +59,24 @@ void		ft_return_buffquote(char *buffer, char *buffquote, int n)
 	ft_strcpy(buffer, tmp);
 }
 
-int			ft_isinheredoc(char *buffer)
+int			ft_isinheredoc(char *buffer, t_info *info)
 {
 	char	*tmp;
 
 	tmp = buffer;
+	while (*(tmp + 1))
+		tmp++;
 	tmp--;
 	while (*tmp && *tmp != '>' && *tmp != ';' && *tmp != '&')
 	{
+
 		if (*tmp == '<')
 			if (*(tmp - 1))
 				if (*(tmp - 1) == '<')
+				{
+					info->heredoc = 1;
 					return (1);
+				}	
 		tmp--;
 	}
 	return (0);
