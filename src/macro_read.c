@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 23:53:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/20 15:39:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/21 17:41:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int			ft_isend(int c, char *buffer, char *buffquote, t_screen *screen,
 		screen->cursor = 0;
 		screen->vertical = 1;
 		screen->left = ft_strlen(">");
-		ft_strcat(buffquote, buffer);	
+		ft_strcat(buffquote, buffer);
+		if (info->heredoc == 1)
+			ft_strcat(buffquote, "\n");
 		ft_bzero(buffer, 1024);
 	}
 	return (0);
@@ -36,7 +38,7 @@ int			ft_isquote(int c, char *buffer, char *buffquote, t_screen *screen)
 		return (2);
 	if (c == 39 && screen->quote == 0)
 		return (1);
-	if (c == '"' && screen->quote == 2)
+	if (c == '"' && screen->quote == 2 )
 	{
 		ft_return_buffquote(buffer, buffquote, 2);
 		return (0);

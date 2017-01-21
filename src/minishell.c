@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/20 15:58:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/21 17:41:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 	screen->quote = 0;
 	info->heredoc = 0;
 	info->heredocsize = 0;
+	info->buff_auxi = ft_strnew(1024);
 	while (42)
 	{
 		c = '\0';
@@ -48,12 +49,17 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 			if (ft_isinheredoc(buffer, info))
 				ft_add_heredoc(buffer, info);
 		if (c == 13)
-			ft_isendheredoc(buffer, info);
+			if (ft_isendheredoc(buffer, info) == 1)
+			{
+				ft_strcat(buffquote, buffer);
+				ft_bzero(buffer, 1024);
+				ft_strcpy(buffer, buffquote);
+			}
 		if (ft_isend(c, buffer, buffquote, screen, info) == 1)
 			break;
-	}
-	ft_read_list2(*(info->delim));
+	}	
 	ft_add_history(buffer, info);
+	ft_extract_buff_auxi(buffer, info);
 	return (buffer);
 }
 

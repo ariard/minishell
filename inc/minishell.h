@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/20 15:51:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/21 17:12:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct		s_info
 	int				sizehist;
 	int				heredoc;
 	int				heredocsize;
+	char			*buff_auxi;
 }					t_info;
 
 t_dlist		**ft_lex_analyze(char *stream);
@@ -416,7 +417,7 @@ int						ft_isdir(char *str);
 **	Macros to control input processing
 */
 
-void					ft_isendheredoc(char *buffer, t_info *info);
+int						ft_isendheredoc(char *buffer, t_info *info);
 
 void					ft_read_heredoc(char *buffer, t_info *info);
 
@@ -455,6 +456,8 @@ int						ft_lastcolumn(t_screen *screen);
 int						ft_isedit(t_screen *screen);
 
 void					ft_return_buffquote(char *buffer, char *buffquote, int n);
+
+void					ft_extract_buff_auxi(char *buffer, t_info *info);
 
 /*
 ** Macros to use reverse history mode

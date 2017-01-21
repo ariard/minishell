@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readheredoc.c                                      :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/19 16:08:03 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/20 15:54:35 by ariard           ###   ########.fr       */
+/*   Created: 2017/01/20 18:54:40 by ariard            #+#    #+#             */
+/*   Updated: 2017/01/21 17:44:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void		ft_extract_buff_auxi(char *buffer, t_info *info)
+{
+	char	*tmp;
+
+	tmp = buffer;
+	while (*tmp && *tmp != '\n')
+		tmp++;
+	if (*tmp == '\n')
+	{
+		tmp++;
+		if (*tmp)
+			ft_strcpy(info->buff_auxi, tmp);
+	}
+}	
 
 void		ft_add_heredoc(char *buffer, t_info *info)
 {
@@ -38,21 +53,3 @@ void		ft_add_heredoc(char *buffer, t_info *info)
 	info->heredocsize++;
 	ft_strdel(&buf);
 }
-
-/*void		ft_read_heredoc(char *buffer, t_info *info)
-{
-	char	*tmp;
-	int		len;
-
-	tmp = buffer;
-	while (*tmp)
-	{
-		if (ft_endheredoc(*tmp) || *(tmp + 1) == 0)
-		{
-			if (ft_isinheredoc(tmp) == 1)
-				ft_add_heredoc(tmp, info);
-			tmp++;
-		}
-		tmp++;
-	}
-}*/
