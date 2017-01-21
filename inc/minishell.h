@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/21 17:12:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/21 18:31:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,9 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 
 int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 		char **env);
+
+int			ft_execute_heredoc(char *path, t_btree *node, t_btree *father,
+		char **env, t_info *info);
 
 /*
 ** Functions to execute files aggregation
@@ -373,6 +376,8 @@ int						ft_isappredir_out(t_btree *father);
 int						ft_islistor(t_btree *father);
 
 int						ft_islistand(t_btree *father);
+
+int						ft_isheredoc(t_btree *father);
 
 /*
 ** Macros to operate on environnement

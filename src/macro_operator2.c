@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:12:09 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 21:53:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/21 18:24:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,16 @@ int			ft_isaggregation(char **args)
 		last++;
 	}
 	return (0);
-}	
+}
+
+int				ft_isheredoc(t_btree *father)
+{
+	t_token		*token;
+
+	if (!father)
+		return (-1);
+	token = father->data;
+	if (ft_strcmp(token->name, "<<") == 0)
+		return (1);
+	return (0);
+}

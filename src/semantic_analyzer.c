@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 20:51:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/21 18:57:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_btree			*ft_goto_nxt_operand(t_btree *node, t_btree *father)
 }
 
 int				ft_execute_cmd(char	*path, t_btree *node, t_btree *father,
-		char **env, t_root *tree)
+		char **env, t_root *tree, t_info *info)
 {
 	static int	isinpipe;
 
@@ -67,6 +67,8 @@ int				ft_execute_cmd(char	*path, t_btree *node, t_btree *father,
 	}
 	if (ft_isregular(father) == 1)
 		return (ft_execute_regular(path, node, env, isinpipe));
+	if (ft_isheredoc(father) == 1)
+		return (ft_execute_heredoc(path, node, father, env, info));
 	if (ft_isredir_out(father) == 1)
 		return (ft_redir_out(path, node, father, env));
 	if (ft_isredir_in(father) == 1)
@@ -94,7 +96,8 @@ int				ft_execute_operand(t_btree *node, t_btree *father, t_info *info,
 		if (entry->perm == -1)
 			return (ft_permission_error(operand, info->env));
 		else if (entry->perm == 0)
-			return (ft_execute_cmd(entry->path, node, father, info->env, tree));
+			return (ft_execute_cmd(entry->path, node, father, 
+				info->env, tree, info));
 	}
 	return (0);	
 }
@@ -115,7 +118,7 @@ void			ft_execute_ast(t_root *tree, t_info *info)
 		if (ft_isredir_out(father) == 1 || ft_isredir_in(father) == 1
 				|| ft_isappredir_out(father) == 1)
 			tmp = ft_goto_nxt_operand(tmp, father);
-		if (ft_islistand(father) == 1 && ret == -1)
+		if ((ft_islistand(father) == 1 && ret == -1) || ft_isheredoc(father))
 			tmp = ft_jump_nxt_operand(tree, tmp);
 		else if (ft_islistor(father) == 1 && ret == 1)
 			tmp = ft_jump_nxt_operand(tree, tmp);
