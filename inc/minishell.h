@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/21 18:31:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 17:00:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct		s_info
 	int				sizehist;
 	int				heredoc;
 	int				heredocsize;
+	char			*previous_eof;
 	char			*buff_auxi;
 }					t_info;
 
@@ -431,6 +432,8 @@ int						ft_isinheredoc(char *buffer, t_info *info);
 int						ft_endheredoc(char c);
 
 void					ft_add_heredoc(char *buffer, t_info *info);
+
+char					*ft_extract_file(char *eof, char *buffer, t_info *info);	
 
 int						ft_isend(int c, char *buffer, char *buffquote, 
 		t_screen *screen, t_info *info);

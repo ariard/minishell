@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/20 15:10:26 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/22 16:20:01 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC = src/minishell.c \
 	  src/completion2.c \
 	  src/completion3.c \
 	  src/heredoc.c \
+	  src/heredoc2.c \
 	  src/tty.c \
 	  src/term.c \
 	  src/termcap.c \

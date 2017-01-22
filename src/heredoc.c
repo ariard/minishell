@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 18:54:40 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/21 21:20:02 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 17:13:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,20 @@ char		*ft_extract_file(char *eof, char *buffer, t_info *info)
 	
 	new = ft_strnew(1024);
 	tmp = new;
+	if (info->previous_eof)
+	{
+		while (ft_strncmp(buffer, info->previous_eof,
+			ft_strlen(info->previous_eof)))
+			buffer++;
+		len = ft_strlen(info->previous_eof) + 1;
+		while (len--)
+			buffer++;	
+	}
 	while (ft_strncmp(buffer, eof, ft_strlen(eof)) != 0)
 	{
 		*new++ = *buffer;
 		*buffer++ = 0;
 	}
-	*--new = 0;
-	len = ft_strlen(eof);
-	while (len--)
-		*buffer++ = 0;
-	info->buff_auxi = buffer;
 	return (tmp);
 }	
 
@@ -76,46 +80,4 @@ void		ft_add_heredoc(char *buffer, t_info *info)
 	ft_list_push_back(info->delim, ft_strdup(buf), NULL);
 	info->heredocsize++;
 	ft_strdel(&buf);
-}
-
-int			ft_execute_heredoc(char *path, t_btree *node, t_btree *father,
-		char **env, t_info *info)
-{
-	char	**arg;
-	char	**arg2;
-	char	*eof;
-	char	*file;
-	int		fd;
-	t_btree	*tmp;
-	pid_t	status;
-
-	arg = ft_node_argis(node);
-	status = fork();
-	if (status == 0)
-	{	
-		if (!*(arg + 1))
-		{
-			tmp = ft_goto_nxt_operand(node, father);
-			eof = ft_node_nameis(tmp);
-			arg2 = ft_node_argis(tmp);	
-			if (*(arg2 + 1))
-			{
-				*arg2 = *arg;
-				arg = arg2;
-			}
-			else
-			{
-				fd = open("/tmp/heredoc", O_CREAT | O_RDWR, 0644);
-				file = ft_extract_file(eof, info->buff_auxi, info);
-				ft_putstr_fd(file, fd);
-				close(fd);
-				fd = open("/tmp/heredoc", O_CREAT | O_RDWR, 0644);
-				dup2(fd, 0);
-			}
-			execve(path, arg, env);
-		}
-	}
-	if (status > 0)
-		wait(0);
-	return (1);
 }
