@@ -5,12 +5,13 @@ void		sighandler(int signum)
 {
 	ft_putstr("Signal caught :");
 	ft_putnbr(signum);
-	exit(1);
+	exit(0);
 }
 
 int			main(int __unused argc, char __unused **argv)
 {
-	signal(SIGSTOP, sighandler);
+	signal(SIGINT, sighandler);
+	
 
 	while (1)
 	{

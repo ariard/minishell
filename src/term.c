@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 00:51:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 16:10:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 20:26:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int			ft_process_input(char c, char *buffer, t_screen *screen,
 		ft_crop(buffer, screen);
 	if (c == 16)
 		ft_insert_string(buffer, screen);
-	if (c == 4)
+	if (c == 5)
 		ft_delete_string(buffer, screen);
 	if (c == 127 && screen->cursor != 0)
 		ft_delete_char(buffer, screen);

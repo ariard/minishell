@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/22 17:06:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 20:35:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 				ft_bzero(buffer, 1024);
 				ft_strcpy(buffer, buffquote);
 			}
-		if (ft_isend(c, buffer, buffquote, screen, info) == 1)
+		if (ft_interrupt(c, buffer, screen, info))
+			break;
+		if (ft_isend(c, buffer, buffquote, screen, info) == 1) 
 			break;
 	}	
 	ft_extract_buff_auxi(buffer, info);
@@ -96,6 +98,8 @@ int					main(int __unused ac, char __unused **av, char **ev)
 {
 	t_info			*info;
 
+	signal(SIGINT, ft_sigint_handler);
+	ft_putstr("coucou");
 	info = ft_memalloc(sizeof(t_info));
 	info->env = ft_array_strdup(ev);
 	info->list_bin = ft_memalloc(sizeof(t_dlist));

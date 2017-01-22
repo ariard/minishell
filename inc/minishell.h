@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/22 17:00:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 20:32:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,14 @@ int			ft_isuncompletepath(char *str);
 void		ft_read_dir(char *dir, t_dlist **list_files);
 
 void		ft_complete_path(char *buffer, char *path, t_screen *screen);
+
+/*
+ * Functions to handle signals
+*/
+
+int			ft_interrupt(char c, char *buffer, t_screen *screen, t_info *info);
+
+void		ft_sigint_handler(int signo);
 
 /*
 ** Functions to print errors
