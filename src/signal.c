@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 19:59:03 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/22 20:36:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 20:40:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,10 @@ void	ft_sigint_handler(int signo)
 {
 	(void)signo;
 	ft_putchar(10);
+}
+
+void	ft_sigint_handler_child(int signo)
+{
+	(void)signo;
+	exit(0);
 }

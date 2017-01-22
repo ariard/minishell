@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/22 20:35:05 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 20:55:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int					main(int __unused ac, char __unused **av, char **ev)
 	t_info			*info;
 
 	signal(SIGINT, ft_sigint_handler);
-	ft_putstr("coucou");
 	info = ft_memalloc(sizeof(t_info));
 	info->env = ft_array_strdup(ev);
 	info->list_bin = ft_memalloc(sizeof(t_dlist));

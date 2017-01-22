@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/22 20:32:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/22 20:54:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,8 @@ void		ft_complete_path(char *buffer, char *path, t_screen *screen);
 int			ft_interrupt(char c, char *buffer, t_screen *screen, t_info *info);
 
 void		ft_sigint_handler(int signo);
+
+void		ft_sigint_handler_child(int signo);
 
 /*
 ** Functions to print errors
