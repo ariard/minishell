@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/21 21:23:19 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/23 17:27:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,15 @@ t_btree			*ft_goto_nxt_operand(t_btree *node, t_btree *father)
 int				ft_execute_cmd(char	*path, t_btree *node, t_btree *father,
 		char **env, t_root *tree, t_info *info)
 {
-	static int	isinpipe;
-
-	if (!isinpipe)
-		isinpipe = 0;
 	if (ft_node_islast(tree->size, node->key) == 1)
-		return (ft_execute_regular(path, node, env, isinpipe));
+		return (ft_execute_regular(path, node, env, info));
 	if (ft_ispipe(father) == 1)
 	{
-		isinpipe = 1;
+		info->pipe = 1;
 		return (ft_execute_pipe(path, node, env));
 	}
 	if (ft_isregular(father) == 1)
-		return (ft_execute_regular(path, node, env, isinpipe));
+		return (ft_execute_regular(path, node, env, info));
 	if (ft_isheredoc(father) == 1)
 		return (ft_execute_heredoc(path, node, father, env, info));
 	if (ft_isredir_out(father) == 1)

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/22 20:54:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/23 17:41:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,21 @@ typedef struct		s_info
 	t_dlist			*history;
 	int				sizehist;
 	int				heredoc;
+	int				buff_heredoc;
 	int				heredocsize;
 	char			*previous_eof;
 	char			*buff_auxi;
+	int				quote;
+	int				pipe;
 }					t_info;
 
-t_dlist		**ft_lex_analyze(char *stream);
+t_dlist		**ft_lex_analyze(char *stream, t_info *info);
 
 t_root		*ft_syntax_analyze(t_dlist **list_token);
 
-t_dlist		**ft_lexer(char *stream);
+t_dlist		**ft_lexer(char *stream, t_info *info);
 
-int			ft_isoperand(char *stream);
+int			ft_isoperand(char *stream, t_info *info);
 
 int			ft_isoperator(char *stream);
 
@@ -119,7 +122,7 @@ int			ft_process_input(char c, char *stream, t_screen *screen, t_info *info);
 */
 
 int			ft_execute_regular(char *path, t_btree *node, char **env,
-		int isinpipe);
+	t_info *info);
 
 int			ft_execute_pipe(char *path, t_btree *node, char **env);
 
@@ -164,6 +167,14 @@ int			ft_unsetenv(char **arg, char **env);
 char		*ft_builtin_option(char **arg, char *builtin);
 
 int			ft_check_dir(char *path);
+
+/*
+** Functions to execute cmd
+*/
+
+int			ft_close_pipe(t_info *info);
+
+char		**ft_quoteis(t_btree *node);
 
 /*
 ** Functions to use history feature

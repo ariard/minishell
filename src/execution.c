@@ -6,20 +6,22 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 22:23:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/22 20:55:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/23 17:40:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int			ft_execute_regular(char *path, t_btree *node, char **env,
-		int isinpipe)
+	t_info *info)
 {
 	char	**arg;
-	pid_t	status;
-	int		nb;
+	pid_t	status;	
 
-	arg = ft_node_argis(node);
+	if (info->quote == 1)
+		arg = ft_quoteis(node);	
+	else
+		arg = ft_node_argis(node);
 	status = fork();
 	if (status == 0)
 	{
@@ -30,12 +32,8 @@ int			ft_execute_regular(char *path, t_btree *node, char **env,
 	}
 	if (status > 0)
 		wait(0);
-	if (isinpipe == 1)
-	{	
-		close(0);
-		nb = open("/dev/stdout", O_WRONLY);	
-		isinpipe = 0;
-	}
+	if (info->pipe == 1)
+		ft_close_pipe(info);
 	return (1);
 }
 

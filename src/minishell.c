@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/22 20:55:22 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/23 17:45:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void			ft_process_buffer(char *buffer, t_info *info)
 	t_root			*tree;
 
 	tree = NULL;
-	list_token = ft_lex_analyze(buffer);
+	list_token = ft_lex_analyze(buffer, info);
 	if (list_token)
 	{
 		tree = ft_syntax_analyze(list_token);
@@ -41,7 +41,10 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 	buffquote = ft_strnew(1024);
 	screen->quote = 0;
 	info->heredoc = 0;
+	info->buff_heredoc = 0;
 	info->heredocsize = 0;
+	info->pipe = 0;
+	info->quote = 0;
 	info->previous_eof = NULL;
 	info->buff_auxi = ft_strnew(1024);
 	while (42)
@@ -50,6 +53,8 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 		read(0, &c, 1);
 		ft_process_input(c, buffer, screen, info);
 		screen->quote = ft_isquote(c, buffer, buffquote, screen);
+		if (screen->quote != 0)
+			info->quote = 1;
 		if (ft_endheredoc(c))
 			if (ft_isinheredoc(buffer, info))
 				ft_add_heredoc(buffer, info);
@@ -64,7 +69,7 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 			break;
 		if (ft_isend(c, buffer, buffquote, screen, info) == 1) 
 			break;
-	}	
+	}
 	ft_extract_buff_auxi(buffer, info);
 	ft_add_history(buffer, info);
 	return (buffer);

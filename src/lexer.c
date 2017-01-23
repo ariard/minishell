@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/31 14:54:04 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/21 20:13:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/23 17:14:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char			*ft_detect_pattern(char *stream)
+static char			*ft_detect_pattern(char *stream, t_info *info)
 {
 	char	*lexem;
 	int		ret;
@@ -22,12 +22,12 @@ static char			*ft_detect_pattern(char *stream)
 		return (NULL);
 	if ((ret = ft_isoperator(stream)))
 		return (ft_strncpy(lexem, stream, ret));
-	if ((ret = ft_isoperand(stream)))
+	if ((ret = ft_isoperand(stream, info)))
 		return (ft_strncpy(lexem, stream, ret));
 	return (NULL);
 }
 
-static t_token		*ft_gen_token(char *lexem)
+static t_token		*ft_gen_token(char *lexem, t_info *info)
 {
 	t_token			*token;
 
@@ -35,14 +35,14 @@ static t_token		*ft_gen_token(char *lexem)
 	token->name = ft_strdup(ft_strtrim(lexem)); 
 	if (ft_isoperator(lexem))
 		token->id = ft_strdup("operator");
-	else if (ft_isoperand(lexem))
+	else if (ft_isoperand(lexem, info))
 		token->id = ft_strdup("operand");
 	else
 		token->id = ft_strdup("null");
 	return (token);
 }
 
-t_dlist				**ft_lexer(char *stream)
+t_dlist				**ft_lexer(char *stream, t_info *info)
 {
 	char	*lexem;
 	t_dlist	**list_token;
@@ -53,10 +53,10 @@ t_dlist				**ft_lexer(char *stream)
 	id = 0;
 	while (*stream && *stream != '\n')
 	{
-		lexem = ft_detect_pattern(stream);
+		lexem = ft_detect_pattern(stream, info);
 		if (lexem)
 		{
-			ft_list_push_back(list_token, ft_gen_token(lexem), ft_itoa(id));
+			ft_list_push_back(list_token, ft_gen_token(lexem, info), ft_itoa(id));
 			id++;
 		}
 		if (lexem)

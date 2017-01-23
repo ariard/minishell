@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/31 14:32:40 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 20:31:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/23 17:10:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ static int		ft_scan_stream(char *stream)
 	return (0);	
 }
 
-t_dlist			**ft_lex_analyze(char *stream)
+t_dlist			**ft_lex_analyze(char *stream, t_info *info)
 {
 	t_dlist		**list_token;
 
 	if (ft_scan_stream(stream))
 		return (NULL);
-	list_token = ft_lexer(stream);
+	list_token = ft_lexer(stream, info);
 	return (list_token);	
 }
