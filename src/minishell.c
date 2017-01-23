@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/23 17:45:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/23 20:14:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 	buffquote = ft_strnew(1024);
 	screen->quote = 0;
 	info->heredoc = 0;
+	info->ismultidir = 0;
 	info->buff_heredoc = 0;
 	info->heredocsize = 0;
 	info->pipe = 0;

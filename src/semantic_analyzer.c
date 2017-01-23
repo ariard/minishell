@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/23 17:27:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/23 20:57:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ int				ft_execute_cmd(char	*path, t_btree *node, t_btree *father,
 	if (ft_isheredoc(father) == 1)
 		return (ft_execute_heredoc(path, node, father, env, info));
 	if (ft_isredir_out(father) == 1)
-		return (ft_redir_out(path, node, father, env));
+		return (ft_redir_out(path, node, father, env, info));
 	if (ft_isredir_in(father) == 1)
 		return (ft_redir_in(path, node, father, env));
 	if (ft_isappredir_out(father) == 1)
-		return (ft_app_redir_out(path, node, father, env));
+		return (ft_app_redir_out(path, node, father, env, info));
 	return (0);
 }
 
@@ -110,10 +110,22 @@ void			ft_execute_ast(t_root *tree, t_info *info)
 	while (tmp)
 	{
 		father = ft_get_father(tree->root, tree->root, tmp->key, &ft_itoacmp);
-		ret = ft_execute_operand(tmp, father, info, tree);
-		if (ft_isredir_out(father) == 1 || ft_isredir_in(father) == 1
-				|| ft_isappredir_out(father) == 1)
-			tmp = ft_goto_nxt_operand(tmp, father);
+		if (!ft_goto_nxt_operand(tmp, father) && (ft_isredir_out(father) == 1
+			|| ft_isredir_in(father) == 1 || ft_isappredir_out(father) == 1))
+			break;
+		if (ft_isredir_out(father))
+			ft_create_or_flush(tmp);
+		if (ft_nxt_operand_isdir(tmp, father, info, tree) == 0)
+		{
+			if (info->ismultidir == -1)
+			{
+				info->file = ft_get_fdfiles(tmp, father);
+				ret = ft_execute_operand(info->heritance, info->heritancefather,
+					info, tree);
+			}
+			else
+				ret = ft_execute_operand(tmp, father, info, tree);
+		}
 		if ((ft_islistand(father) == 1 && ret == -1) || ft_isheredoc(father))
 			tmp = ft_jump_nxt_operand(tree, tmp);
 		else if (ft_islistor(father) == 1 && ret == 1)

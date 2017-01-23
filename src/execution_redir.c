@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 23:47:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/21 21:23:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/23 20:52:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int		ft_get_fdfiles(t_btree *node, t_btree *father)
+int		ft_get_fdfiles(t_btree *node, t_btree *father)
 {
 	t_btree		*tmp;
 	char		*files;
@@ -47,20 +47,20 @@ static int		ft_get_fdfiles2(t_btree *node, t_btree *father)
 }
 
 int				ft_redir_out(char *path, t_btree *node, t_btree *father,
-		char **env)
+		char **env, t_info *info)
 {
 	char	**arg;
 	pid_t	status;
-	int		files;
 
 	arg = ft_node_argis(node);
-	if ((files = ft_get_fdfiles(node, father)) == -1)
-		return (-1);
+	if (info->ismultidir == 0)
+		if ((info->file = ft_get_fdfiles2(node, father)) == -1)
+			return (-1);
 	status = fork();
 	if (status == 0)
 	{
 		close(1);
-		dup(files);
+		dup(info->file);
 		execve(path, arg, env);
 	}
 	if (status > 0)
@@ -90,22 +90,22 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 }
 
 int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
-		char **env)
+		char **env, t_info *info)
 {
 	char	**arg;
 	pid_t	status;
-	int		files;
 	char	*line;
 
 	arg = ft_node_argis(node);
-	if ((files = ft_get_fdfiles(node, father)) == -1)
-		return (-1);
+	if (info->ismultidir == 0)
+		if ((info->file = ft_get_fdfiles(node, father)) == -1)
+			return (-1);
 	line = NULL;
-	while (get_next_line(files, &line));
+	while (get_next_line(info->file, &line));
 	status = fork();
 	if (status == 0)
 	{
-		dup2(files, 1);
+		dup2(info->file, 1);
 		execve(path, arg, env);
 	}
 	if (status > 0)
