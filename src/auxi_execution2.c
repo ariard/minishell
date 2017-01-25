@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:57:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 18:30:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 18:44:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ int			ft_execute_all_dir(t_btree *node, t_btree *father, t_info *info,
 	}
 	if (ft_isredir_out(father) && tmp)
 		ft_flush(tmp);
-	info->file = ft_get_fdfiles(node, father);
+	if (ft_isredir_out(father) || ft_isappredir_out(father))
+		info->file = ft_get_fdfiles(node, father);
+	else if (ft_isredir_in(father))
+		info->file = ft_get_fdfiles2(node, father);
 	if (info->ismultidir == 2)
 		ret = ft_execute_operand(info->heritance, info->heritancefather, info,
 			tree);

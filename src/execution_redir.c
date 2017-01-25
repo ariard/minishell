@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 23:47:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 18:21:58 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 18:46:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_get_fdfiles(t_btree *node, t_btree *father)
 	return (fd);
 }
 
-static int		ft_get_fdfiles2(t_btree *node, t_btree *father)
+int		ft_get_fdfiles2(t_btree *node, t_btree *father)
 {
 	t_btree		*tmp;
 	char		*files;
@@ -67,20 +67,18 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 }
 
 int			ft_redir_in(char *path, t_btree *node, t_btree *father,
-		char **env)
+		t_info *info)
 {
 	char	**arg;
 	pid_t	status;
-	int		files;
 
+	(void)father;
 	arg = ft_node_argis(node);
-	if ((files = ft_get_fdfiles2(node, father)) == -1)
-		return (-1);
 	status = fork();
 	if (status == 0)
 	{
-		dup2(files, 0);
-		execve(path, arg, env);
+		dup2(info->file, 0);
+		execve(path, arg, info->env);
 	}
 	if (status > 0)
 		wait(0);
@@ -94,10 +92,8 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 	pid_t	status;
 	char	*line;
 
+	(void)father;
 	arg = ft_node_argis(node);
-	if (info->ismultidir == 0)
-		if ((info->file = ft_get_fdfiles(node, father)) == -1)
-			return (-1);
 	line = NULL;
 	while (get_next_line(info->file, &line));
 	status = fork();

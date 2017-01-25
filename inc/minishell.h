@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 17:43:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 18:47:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int			ft_redir_out(char *path, t_btree *node, t_btree *father,
 		char **env, t_info *info);
 
 int			ft_redir_in(char *path, t_btree *node, t_btree *father,
-		char **env);
+		t_info *info);
 
 int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 		char **env, t_info *info);
@@ -185,6 +185,8 @@ int			ft_multidir(t_btree *node, t_btree *father, t_info *info,
 		t_root *tree);
 
 int			ft_get_fdfiles(t_btree *node, t_btree *father);
+
+int			ft_get_fdfiles2(t_btree *node, t_btree *father);
 
 int			ft_flush(t_btree *node);
 
