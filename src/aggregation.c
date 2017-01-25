@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 21:09:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 17:03:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 20:40:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static int			ft_input_aggregation(char *aggregation)
 	if (n == -1)
 		n = 1;
 	if (word == -1)
+	{
+		close(n);
 		return (ft_ambiguous_error(aggregation));
+	}
 	else if (word == -2)
 		close(n);
 	else if (read(word, NULL, 0) == -1)
@@ -42,7 +45,10 @@ static int			ft_output_aggregation(char *aggregation)
 	if (n == -1)
 		n = 1;
 	if (word == -1)
+	{
+		close(n);
 		return (ft_ambiguous_error(aggregation));
+	}
 	else if (word == -2)
 		close(n);
 	else if (read(word, NULL, 0) == -1)

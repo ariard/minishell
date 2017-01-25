@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 18:47:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 20:43:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int			ft_process_input(char c, char *stream, t_screen *screen, t_info *info);
 int			ft_execute_regular(char *path, t_btree *node, char **env,
 	t_info *info);
 
-int			ft_execute_pipe(char *path, t_btree *node, char **env);
+int			ft_execute_pipe(char *path, t_btree *node, t_info *info);
 
 int			ft_redir_out(char *path, t_btree *node, t_btree *father,
 		char **env, t_info *info);
@@ -195,6 +195,8 @@ int			ft_execute_all_dir(t_btree *node, t_btree *father, t_info *info,
 
 int			ft_execute_operand(t_btree *node, t_btree *father, t_info *info,
 		t_root *tree);
+
+void		ft_fddir(char **arg, t_info *info, int n);
 
 /*
 ** Functions to use history feature
@@ -422,6 +424,8 @@ int						ft_islistor(t_btree *father);
 int						ft_islistand(t_btree *father);
 
 int						ft_isheredoc(t_btree *father);
+
+int						ft_isfddir(char **args);
 
 /*
 ** Macros to operate on environnement

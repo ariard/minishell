@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 21:37:06 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 17:49:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 19:48:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int		ft_ambiguous_error(char *last)
 {
 	while (*last && ft_isdigit(*last) == 1)
 		last++;
-	while (*last && ft_isdigit(*last) == 0)
+	while (*last && ft_isalnum(*last) == 0)
 		last++;
-	ft_putstr_fd("ariard : ", 2);
-	ft_putstr_fd(last, 2);
-	ft_putstr_fd(": ambiguous redirect\n", 2);
+	ft_putstr_fd("ariard : ", 1);
+	ft_putstr_fd(last, 1);
+	ft_putstr_fd(": ambiguous redirect\n", 1);
 	return (-1);
 }
 

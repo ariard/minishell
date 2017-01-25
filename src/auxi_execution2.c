@@ -6,11 +6,30 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:57:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 18:44:52 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 20:44:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void		ft_fddir(char **arg, t_info *info, int n)
+{
+	int		fd;
+	char	*last;
+
+	if (!arg || !*arg)
+		return ;
+	while (*(arg + 1))
+		arg++;
+	last = *arg;
+	fd = ft_atoi(last);
+	if (n == 0)
+		dup2(info->file, fd);
+	else if (n == 1)
+		dup2(fd, info->file);
+	ft_strdel(&last);
+	*arg = NULL;
+}
 
 int			ft_check_permission(char *path)
 {
@@ -40,6 +59,8 @@ int			ft_execute_all_dir(t_btree *node, t_btree *father, t_info *info,
 	{
 		if (info->ismultidir == 1)
 			info->ismultidir = -2;
+		if (info->pipe == 1)
+			ft_close_pipe(info);
 		return(ft_file_error(path));
 	}
 	if (ft_isredir_out(father) && tmp)

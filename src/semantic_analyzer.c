@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 18:45:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 20:10:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int				ft_execute_cmd(char	*path, t_btree *node, t_btree *father,
 	if (ft_ispipe(father) == 1)
 	{
 		info->pipe = 1;
-		return (ft_execute_pipe(path, node, env));
+		return (ft_execute_pipe(path, node, info));
 	}
 	if (ft_isregular(father) == 1)
 		return (ft_execute_regular(path, node, env, info));
