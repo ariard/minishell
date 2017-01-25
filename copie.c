@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 18:32:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 18:02:47 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,19 +110,24 @@ void			ft_execute_ast(t_root *tree, t_info *info)
 	while (tmp)
 	{
 		father = ft_get_father(tree->root, tree->root, tmp->key, &ft_itoacmp);
-		if (ft_isredir_out(father) || ft_isredir_in(father) 
-			|| ft_isappredir_out(father))
-			ret = ft_execute_all_dir(tmp, father, info, tree);
-		else
-			ret = ft_execute_operand(tmp, father, info, tree);
+		if (ft_nxt_operand_isdir(tmp, father, info, tree) == 0)
+		{
+			if (info->ismultidir == -1)
+			{
+				info->file = ft_get_fdfiles(tmp, father);
+				ret = ft_execute_operand(info->heritance, info->heritancefather,
+					info, tree);
+			}
+			else
+				ret = ft_execute_operand(tmp, father, info, tree);
+		}
+		else if (ft_isredir_out(father))
+			ft_create_or_flush(tmp);
 		if ((ft_islistand(father) == 1 && ret == -1) || ft_isheredoc(father))
 			tmp = ft_jump_nxt_operand(tree, tmp);
 		else if (ft_islistor(father) == 1 && ret == 1)
 			tmp = ft_jump_nxt_operand(tree, tmp);
-		else if (ft_ispipe(father) == 1 && ret == -1) 
-			tmp = ft_jump_nxt_operand(tree, tmp);
 		else
 			tmp = ft_goto_nxt_operand(tmp, father);
-		info->prev_father = father;
 	}
 }

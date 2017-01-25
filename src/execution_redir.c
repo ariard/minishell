@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 23:47:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/23 20:52:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 18:21:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,8 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 	char	**arg;
 	pid_t	status;
 
+	(void)father;
 	arg = ft_node_argis(node);
-	if (info->ismultidir == 0)
-		if ((info->file = ft_get_fdfiles2(node, father)) == -1)
-			return (-1);
 	status = fork();
 	if (status == 0)
 	{

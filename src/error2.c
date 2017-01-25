@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 21:37:06 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 22:24:52 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 17:49:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,11 @@ int		ft_bad_fd_error(int word)
 	ft_putstr_fd(": Bad file descriptor\n", 2);
 	return (-1);
 }
+
+int		ft_file_error(char *path)
+{
+	ft_putstr_fd("ariard : ", 2);
+	ft_putstr_fd(path, 2);
+	ft_putstr_fd(": Permission denied\n", 2);
+	return (-1);
+}	

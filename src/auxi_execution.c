@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:25:11 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/23 20:55:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 18:23:06 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	**ft_quoteis(t_btree *node)
 	return (tmp);
 }
 
-int			ft_nxt_operand_isdir(t_btree *node, t_btree *father,
+int			ft_multidir(t_btree *node, t_btree *father,
 		t_info *info, t_root *tree)
 {
 	t_btree		*tmp;
@@ -50,6 +50,8 @@ int			ft_nxt_operand_isdir(t_btree *node, t_btree *father,
 
 	tmp = NULL;
 	father_next = NULL;
+	if (info->ismultidir == -2)	
+		return (0);
 	if (ft_isredir_out(father) == 1 || ft_isappredir_out(father) == 1)
 	{
 		tmp = ft_goto_nxt_operand(node, father);
@@ -66,16 +68,14 @@ int			ft_nxt_operand_isdir(t_btree *node, t_btree *father,
 				}
 				info->ismultidir = 1;
 				return (1);
-		}
+			}
 	}
-	if (info->ismultidir == -1)
-		info->ismultidir = 0;
 	if (info->ismultidir == 1)
-		info->ismultidir = -1;
+		info->ismultidir = 2;
 	return (0);
 }
 
-int			ft_create_or_flush(t_btree *node)
+int			ft_flush(t_btree *node)
 {
 	char	*file;
 	int		fd;

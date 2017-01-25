@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/23 20:51:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/25 17:43:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct		s_info
 	int				pipe;
 	t_btree			*heritance;
 	t_btree			*heritancefather;
+	t_btree			*prev_father;
 	int				ismultidir;
 	int				file;
 }					t_info;
@@ -180,12 +181,18 @@ int			ft_close_pipe(t_info *info);
 
 char		**ft_quoteis(t_btree *node);
 
-int			ft_nxt_operand_isdir(t_btree *node, t_btree *father, t_info *info,
+int			ft_multidir(t_btree *node, t_btree *father, t_info *info,
 		t_root *tree);
 
 int			ft_get_fdfiles(t_btree *node, t_btree *father);
 
-int			ft_create_or_flush(t_btree *node);
+int			ft_flush(t_btree *node);
+
+int			ft_execute_all_dir(t_btree *node, t_btree *father, t_info *info,
+		t_root *tree);
+
+int			ft_execute_operand(t_btree *node, t_btree *father, t_info *info,
+		t_root *tree);
 
 /*
 ** Functions to use history feature
@@ -253,6 +260,8 @@ int			ft_existence_error(char *cmd, char *path);
 int			ft_ambiguous_error(char *last);
 
 int			ft_bad_fd_error(int word);
+
+int			ft_file_error(char *path);
 
 /*
 ** Library functions of termcaps
