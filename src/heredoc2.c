@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 16:16:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/23 17:28:49 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/27 16:16:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		ft_execute_rm(char *path, char **arg, char **env)
 }
 
 int			ft_execute_heredoc(char *path, t_btree *node, t_btree *father,
-		char **env, t_info *info)
+		t_info *info)
 {
 	char	**arg;
 	char	**arg2;
@@ -53,22 +53,25 @@ int			ft_execute_heredoc(char *path, t_btree *node, t_btree *father,
 	pid_t	status;
 
 	arg = ft_node_argis(node);
-	status = fork();
 	tmp = ft_goto_nxt_operand(node, father);
 	eof = ft_node_nameis(tmp);
-	arg2 = ft_node_argis(tmp);		
+	arg2 = ft_node_argis(tmp);
+	if (ft_builtin(node, info->env))
+		status = -1;
+	else
+		status = fork();	
 	if (status == 0)
 	{	
 			if (*(arg2 + 1))
 			{
 				*arg2 = *arg;
 				arg = arg2;
-				execve(path, arg, env);
+				execve(path, arg, info->env);
 			}
 			else
 			{
 				ft_execute_child_heredoc(eof, info);
-				ft_execute_rm(path, arg, env);
+				ft_execute_rm(path, arg, info->env);
 			}	
 	}
 	if (status > 0)

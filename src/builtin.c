@@ -6,21 +6,38 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 00:02:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/17 18:31:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/27 16:13:50 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_builtin(t_btree *node, t_btree *father, char **env)
+int			ft_isbuiltin(t_btree *node)
+{	
+	char		**str;
+
+
+	str = ft_node_argis(node);
+	if (ft_strncmp("echo", *str, 4) == 0)
+		return (1);
+	if (ft_strncmp("cd", *str, 2) == 0)
+		return (1);
+	if (ft_strncmp("setenv", *str, 6) == 0)
+		return (1);
+	if (ft_strcmp("unsetenv", *str) == 0)
+		return (1);
+	if (ft_strcmp("env", *str) == 0)
+		return (1);
+	return (0);
+}
+
+int			ft_builtin(t_btree *node, char **env)
 {	
 	char		**str;
 	char		*arg;
 
 	str = ft_node_argis(node);
 	arg = *(str + 1);
-	(void)father;
-	(void)env;
 	if (ft_strncmp("echo", *str, 4) == 0)
 		return (ft_echo(str, env));
 	if (ft_strncmp("cd", *str, 2) == 0)
@@ -34,8 +51,6 @@ int			ft_builtin(t_btree *node, t_btree *father, char **env)
 		return (ft_unsetenv(str, env));
 	if (ft_strcmp("env", *str) == 0)
 		return (ft_env(str, env));
-	if (ft_strcmp("exit", *str) == 0)
-		return (1);
 	return (0);
 }
 

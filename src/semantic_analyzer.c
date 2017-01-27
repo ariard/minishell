@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 20:10:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/27 15:02:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,25 @@ t_btree			*ft_goto_nxt_operand(t_btree *node, t_btree *father)
 }
 
 int				ft_execute_cmd(char	*path, t_btree *node, t_btree *father,
-		char **env, t_root *tree, t_info *info)
+		t_root *tree, t_info *info)
 {
 	if (ft_node_islast(tree->size, node->key) == 1)
-		return (ft_execute_regular(path, node, env, info));
+		return (ft_execute_regular(path, node, info));
 	if (ft_ispipe(father) == 1)
 	{
 		info->pipe = 1;
 		return (ft_execute_pipe(path, node, info));
 	}
 	if (ft_isregular(father) == 1)
-		return (ft_execute_regular(path, node, env, info));
+		return (ft_execute_regular(path, node, info));
 	if (ft_isheredoc(father) == 1)
-		return (ft_execute_heredoc(path, node, father, env, info));
+		return (ft_execute_heredoc(path, node, father, info));
 	if (ft_isredir_out(father) == 1)
-		return (ft_redir_out(path, node, father, env, info));
+		return (ft_redir_out(path, node, father, info));
 	if (ft_isredir_in(father) == 1)
 		return (ft_redir_in(path, node, father, info));
 	if (ft_isappredir_out(father) == 1)
-		return (ft_app_redir_out(path, node, father, env, info));
+		return (ft_app_redir_out(path, node, father, info));
 	return (0);
 }
 
@@ -83,17 +83,16 @@ int				ft_execute_operand(t_btree *node, t_btree *father, t_info *info,
 	if (!(operand = ft_node_nameis(node))) 
 		return (-1);
 	entry = ft_cht_lookup(info->sym_tab, operand, &ft_strcmp);
-	if (!entry && ft_strcmp(operand, "setenv") && ft_strcmp(operand, "unsetenv"))
+	if (ft_strcmp(operand, "exit") == 0)
+		exit(0);
+	else if (!entry) 
 		return (ft_semantic_error(operand));
 	else
 	{
-		if (ft_builtin(node, father, info->env) == 1)
-			return (1);
 		if (entry->perm == -1)
 			return (ft_permission_error(operand, info->env));
 		else if (entry->perm == 0)
-			return (ft_execute_cmd(entry->path, node, father, 
-				info->env, tree, info));
+			return (ft_execute_cmd(entry->path, node, father, tree, info)); 
 	}
 	return (0);	
 }

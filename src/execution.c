@@ -6,14 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 22:23:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 20:16:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/27 16:11:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_execute_regular(char *path, t_btree *node, char **env,
-	t_info *info)
+int			ft_execute_regular(char *path, t_btree *node, t_info *info)
 {
 	char	**arg;
 	pid_t	status;	
@@ -22,13 +21,16 @@ int			ft_execute_regular(char *path, t_btree *node, char **env,
 		arg = ft_quoteis(node);	
 	else
 		arg = ft_node_argis(node);
-	status = fork();
+	if	(ft_builtin(node, info->env))
+		status = -1;
+	else
+		status = fork();
 	if (status == 0)
 	{
 		signal(SIGINT, ft_sigint_handler_child);
 		if (ft_isaggregation(arg) == 1)
 			ft_execute_aggregation(arg);
-		execve(path, arg, env);
+		execve(path, arg, info->env);
 	}
 	if (status > 0)
 		wait(0);
@@ -58,7 +60,10 @@ int			ft_execute_pipe(char *path, t_btree *node, t_info *info)
 		dup2(fd[1], 1);
 		if (ft_isaggregation(arg) == 1)
 			ft_execute_aggregation(arg);
-		execve(path, arg, info->env);
+		if (ft_builtin(node, info->env))
+			exit(0);
+		else
+			execve(path, arg, info->env);
 	}
 	if (status > 0)
 	{

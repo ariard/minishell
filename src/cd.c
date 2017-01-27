@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:27:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/17 19:09:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/27 15:51:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int			ft_cd(char **arg, char **env)
 {
 	char	*path;
 
-	ft_putstr("builtin\n");
 	if (!arg)
 		return (1);
 	arg++;

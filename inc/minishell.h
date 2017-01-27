@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 20:43:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/27 15:40:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,22 +126,21 @@ int			ft_process_input(char c, char *stream, t_screen *screen, t_info *info);
 ** Functions to execute command according to its operator
 */
 
-int			ft_execute_regular(char *path, t_btree *node, char **env,
-	t_info *info);
+int			ft_execute_regular(char *path, t_btree *node, t_info *info);
 
 int			ft_execute_pipe(char *path, t_btree *node, t_info *info);
 
 int			ft_redir_out(char *path, t_btree *node, t_btree *father,
-		char **env, t_info *info);
+		t_info *info);
 
 int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 		t_info *info);
 
 int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
-		char **env, t_info *info);
+		t_info *info);
 
 int			ft_execute_heredoc(char *path, t_btree *node, t_btree *father,
-		char **env, t_info *info);
+		t_info *info);
 
 /*
 ** Functions to execute files aggregation
@@ -157,9 +156,11 @@ int			ft_get_last_fd(char *str);
 ** Functions to execute builtin utility
 */
 
-int			ft_builtin(t_btree *node, t_btree *father, char **env);
+int			ft_builtin(t_btree *node, char **env);
 
 int			ft_echo(char **arg, char **env);
+
+int			ft_exit(char **arg, char **env);
 
 int			ft_cd(char **arg, char **env);
 
@@ -426,6 +427,8 @@ int						ft_islistand(t_btree *father);
 int						ft_isheredoc(t_btree *father);
 
 int						ft_isfddir(char **args);
+
+int						ft_isbuiltin(t_btree *node);
 
 /*
 ** Macros to operate on environnement

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 16:25:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/27 16:07:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ static int			ft_shell(t_info *info)
 		buffer = ft_read_input(screen, info);
 		ft_insert(10);
 		ft_tty_reset(0, old_termios);
-		if (ft_strcmp(buffer, "exit") == 0)
-			break;
 		ft_process_buffer(buffer, info);
 	}
 	return (0);
@@ -104,6 +102,8 @@ int					main(int __unused ac, char __unused **av, char **ev)
 {
 	t_info			*info;
 
+	if (isatty(0) == 0)
+		return (-1);
 	signal(SIGINT, ft_sigint_handler);
 	info = ft_memalloc(sizeof(t_info));
 	info->env = ft_array_strdup(ev);

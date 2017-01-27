@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 23:47:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 20:44:14 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/27 16:10:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		ft_get_fdfiles2(t_btree *node, t_btree *father)
 }
 
 int				ft_redir_out(char *path, t_btree *node, t_btree *father,
-		char **env, t_info *info)
+		t_info *info)
 {
 	char	**arg;
 	pid_t	status;
@@ -58,6 +58,10 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 	else
 		arg = ft_node_argis(node);
 	status = fork();
+	if (ft_builtin(node, info->env))
+		status = -1;
+	else
+		status = fork();
 	if (status == 0)
 	{
 		if (ft_isaggregation(arg) == 1)
@@ -66,7 +70,7 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 			ft_fddir(arg, info, 0);
 		close(1);
 		dup(info->file);
-		execve(path, arg, env);
+		execve(path, arg, info->env);
 	}
 	if (status > 0)
 		wait(0);
@@ -86,7 +90,10 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 		arg = ft_quoteis(node);
 	else
 		arg = ft_node_argis(node);
-	status = fork();
+	if (ft_builtin(node, info->env))
+		status = -1;
+	else
+		status = fork();
 	if (status == 0)
 	{
 		if (ft_isaggregation(arg) == 1)
@@ -104,7 +111,7 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 }
 
 int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
-		char **env, t_info *info)
+		t_info *info)
 {
 	char	**arg;
 	pid_t	status;
@@ -117,7 +124,10 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 		arg = ft_node_argis(node);
 	line = NULL;
 	while (get_next_line(info->file, &line));
-	status = fork();
+	if (ft_builtin(node, info->env))
+		status = -1;
+	else
+		status = fork();
 	if (status == 0)
 	{
 		if (ft_isaggregation(arg) == 1)
@@ -125,7 +135,7 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 		if (ft_isfddir(arg))
 			ft_fddir(arg, info, 0);
 		dup2(info->file, 1);
-		execve(path, arg, env);
+		execve(path, arg, info->env);
 	}
 	if (status > 0)
 		wait(0);
