@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 23:47:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/27 16:10:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/27 16:25:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 	else
 		arg = ft_node_argis(node);
 	status = fork();
-	if (ft_builtin(node, info->env))
+	if (ft_builtin(node, info))
 		status = -1;
 	else
 		status = fork();
@@ -90,7 +90,7 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 		arg = ft_quoteis(node);
 	else
 		arg = ft_node_argis(node);
-	if (ft_builtin(node, info->env))
+	if (ft_builtin(node, info))
 		status = -1;
 	else
 		status = fork();
@@ -124,7 +124,7 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 		arg = ft_node_argis(node);
 	line = NULL;
 	while (get_next_line(info->file, &line));
-	if (ft_builtin(node, info->env))
+	if (ft_builtin(node, info))
 		status = -1;
 	else
 		status = fork();

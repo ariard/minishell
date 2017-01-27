@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/27 15:40:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/27 16:45:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct		s_info
 	t_btree			*prev_father;
 	int				ismultidir;
 	int				file;
+	char			*prev_path;
 }					t_info;
 
 t_dlist		**ft_lex_analyze(char *stream, t_info *info);
@@ -156,13 +157,13 @@ int			ft_get_last_fd(char *str);
 ** Functions to execute builtin utility
 */
 
-int			ft_builtin(t_btree *node, char **env);
+int			ft_builtin(t_btree *node, t_info *info);
 
 int			ft_echo(char **arg, char **env);
 
 int			ft_exit(char **arg, char **env);
 
-int			ft_cd(char **arg, char **env);
+int			ft_cd(char **arg, t_info *info);
 
 int			ft_env(char **arg, char **env);
 

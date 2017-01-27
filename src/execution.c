@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 22:23:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/27 16:11:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/27 16:45:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			ft_execute_regular(char *path, t_btree *node, t_info *info)
 		arg = ft_quoteis(node);	
 	else
 		arg = ft_node_argis(node);
-	if	(ft_builtin(node, info->env))
+	if	(ft_builtin(node, info))
 		status = -1;
 	else
 		status = fork();
@@ -60,7 +60,7 @@ int			ft_execute_pipe(char *path, t_btree *node, t_info *info)
 		dup2(fd[1], 1);
 		if (ft_isaggregation(arg) == 1)
 			ft_execute_aggregation(arg);
-		if (ft_builtin(node, info->env))
+		if (ft_builtin(node, info))
 			exit(0);
 		else
 			execve(path, arg, info->env);

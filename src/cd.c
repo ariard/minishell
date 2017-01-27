@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:27:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/27 15:51:09 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/27 16:45:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char		*ft_construct_path(char **new_tab_dir)
 	return (path);
 }
 
-int			ft_process_cd(char *curpath, char *option, char **env)
+int			ft_process_cd(char *curpath, char *option, t_info *info)
 {
 	char	**new_tab_dir;
 	char	*path;
@@ -59,10 +59,10 @@ int			ft_process_cd(char *curpath, char *option, char **env)
 		return (1);
 	if (chdir(path) == 0)
 	{
-		tmp = ft_grep_env(env, "OLDPWD");
+		tmp = ft_grep_env(info->env, "OLDPWD");
 		free(*tmp);
-		*tmp = ft_strjoin("OLDPWD=", ft_grep_envdata(env, "PWD"));
-		tmp = ft_grep_env(env, "PWD");
+		*tmp = ft_strjoin("OLDPWD=", ft_grep_envdata(info->env, "PWD"));
+		tmp = ft_grep_env(info->env, "PWD");
 		free(*tmp);
 		*tmp = ft_strjoin("PWD=", path);
 		free(path);
@@ -97,28 +97,33 @@ char		*ft_read_cdpath(char *arg, char **env)
 	return (NULL);
 }
 		
-int			ft_cd(char **arg, char **env)
+int			ft_cd(char **arg, t_info *info)
 {
 	char	*path;
 
 	if (!arg)
 		return (1);
 	arg++;
-	if (ft_grep_envdata(env, "HOME") == NULL && *arg == NULL)
+	if (ft_grep_envdata(info->env, "HOME") == NULL && *arg == NULL)
 		return (ft_home_error());
-	if (ft_grep_envdata(env, "HOME") != NULL && *arg == NULL)
-		*arg = ft_grep_envdata(env, "HOME");
+	if (ft_grep_envdata(info->env, "HOME") != NULL && *arg == NULL)
+		*arg = ft_grep_envdata(info->env, "HOME");
+	if (ft_strcmp(*arg, "-") == 0)
+		return (ft_process_cd(ft_grep_envdata(info->env, "OLDPWD"),
+			ft_builtin_option(arg, "cd"), info));
 	if (*arg)
 	{	
 		if (ft_strncmp(*arg, "/", 1) == 0)
-			return (ft_process_cd(*arg, ft_builtin_option(arg, "cd"), env));
+			return (ft_process_cd(*arg, ft_builtin_option(arg, "cd"), info));
 		if (ft_strncmp(*arg, ".", 1) != 0 || ft_strncmp(*arg, "..", 2) != 0)
-			if ((path = ft_read_cdpath(*arg, env)) != NULL)
-				return (ft_process_cd(path, ft_builtin_option(arg, "cd"), env));
+			if ((path = ft_read_cdpath(*arg, info->env)) != NULL)
+				return (ft_process_cd(path, ft_builtin_option(arg, "cd"),
+					info));
 		path = ft_strnew(256);	
-		ft_strcpy(path, ft_grep_envdata(env, "PWD"));
+		ft_strcpy(path, ft_grep_envdata(info->env, "PWD"));
 		ft_strcat(path, "/");
-		ft_process_cd(ft_strcat(path, *arg), ft_builtin_option(arg, "cd"), env);
+		ft_process_cd(ft_strcat(path, *arg), ft_builtin_option(arg, "cd"),
+			info);
 	}
 	return (1);
 }
