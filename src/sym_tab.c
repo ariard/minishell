@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 22:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 16:56:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 17:10:05 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_cht				*ft_gen_symtab(t_info *info)
 	htb = ft_memalloc(sizeof(t_cht));
 	ft_cht_init(htb, 2441, &ft_hash_string, &ft_clear_entry);
 	path = ft_grep_envdata(info->env, "PATH");
+	if (!path)
+		return (htb);
 	while (*path)
 	{
 		new = ft_strnew(256);

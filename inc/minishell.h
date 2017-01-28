@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 16:48:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 17:55:30 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,10 @@ t_btree		*ft_goto_nxt_operand(t_btree *node, t_btree *father);
 
 void		ft_execute_ast(t_root *tree, t_info *info);
 
+t_entry		*ft_add_bin(char *bin, t_info *info);
+
+int			ft_full_path(char *full_path);
+
 /*
 ** Functions to get shell's info
 */
@@ -115,8 +119,6 @@ void		ft_execute_ast(t_root *tree, t_info *info);
 t_cht		*ft_gen_symtab(t_info *info);
 
 void		ft_gen_history(t_info *info);
-
-t_entry		*ft_add_bin(char *bin, t_info *info);
 
 /*
 ** Function to process input control 
