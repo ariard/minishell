@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 18:13:42 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 22:05:39 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,13 @@ int				ft_execute_operand(t_btree *node, t_btree *father, t_info *info,
 	if (!(operand = ft_node_nameis(node))) 
 		return (-1);
 	if (ft_strncmp(operand, "exit", 4) == 0)
+	{
+		ft_putstr("exit");
 		exit(0);
+	}
 	else if (ft_strcmp(operand, "setenv") == 0 
 		|| ft_strcmp(operand, "unsetenv") == 0 || ft_strcmp(operand, "echo") == 0
-			|| ft_strcmp(operand, "env") == 0)
+			|| ft_strcmp(operand, "env") == 0 || ft_strcmp(operand, "cd") == 0)
 		return (ft_execute_cmd(operand, node, father, tree, info));
 	if (ft_full_path(operand))
 		return (ft_execute_cmd(operand, node, father, tree, info));

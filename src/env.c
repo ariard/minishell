@@ -6,16 +6,36 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 18:32:40 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 15:51:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 21:33:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	ft_execute_env(char *path, t_info *info)
+{
+	pid_t	status;
+	char	*arg[2];
+
+	arg[0] = path;
+	arg[1] = NULL;
+	status = fork();
+	if (status == 0)
+	{
+		signal(SIGINT, ft_sigint_handler_child);
+		execve(path, arg, info->env);
+	}
+	if (status > 0)
+		wait(0);
+}
+
 int			ft_env(char **arg, t_info *info)
 {
 	char	*option;
+	char	*var;
+	t_entry	*entry;
 
+	entry = NULL;
 	if (!arg || !*arg || !info->env)
 		return (1);
 	option = ft_builtin_option(arg, "env");
@@ -24,11 +44,22 @@ int			ft_env(char **arg, t_info *info)
 	{	
 		while (*arg)
 		{
-			ft_setenv(*arg, info);
-			arg++;				
+			if ((var = strrchr(*arg, '=')) && ft_strlen(*arg) > 1)
+				ft_setenv(*arg, info);
+			else if ((entry = ft_add_bin(*arg, info)))
+			{	
+				if (entry->perm == -1)
+					return (ft_permission_error(*arg, info->env));
+				if (entry->perm == 0)
+					ft_execute_env(entry->path, info);	
+			}
+			else if (!var && !entry)
+				return (ft_existence_error("env", *arg));
+			arg++;
 		}
 	}
-	ft_read_env(info->env);
+	if (!entry)
+		ft_read_env(info->env);
 	return (1);
 }
 

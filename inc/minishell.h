@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 17:55:30 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 21:36:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct		s_info
 	int				ismultidir;
 	int				file;
 	char			*prev_path;
+	char			**av;
 }					t_info;
 
 t_dlist		**ft_lex_analyze(char *stream, t_info *info);

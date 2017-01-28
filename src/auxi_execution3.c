@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 15:33:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 18:20:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 22:16:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,9 @@ t_entry			*ft_add_bin(char *bin, t_info *info)
 
 int			ft_full_path(char *full_path)
 {
-	int		fd;
-
-	fd = open(full_path, 0);
-	if (fd == -1)
+	if (!(ft_strchr(full_path, '/')))
 		return (0);
-	close(fd);
+	if (access(full_path, F_OK) == -1)
+		return (0);
 	return (1);
 }	

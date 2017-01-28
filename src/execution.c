@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 22:23:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 15:18:09 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 21:53:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ int			ft_execute_regular(char *path, t_btree *node, t_info *info)
 	char	**arg;
 	pid_t	status;	
 
+	if (!node || !path)
+		return (0);
 	if (info->quote == 1)
 		arg = ft_quoteis(node);	
 	else
 		arg = ft_node_argis(node);
-	if	(ft_builtin(node, info))
+	if (ft_builtin(node, info))
 		status = -1;
 	else
 		status = fork();

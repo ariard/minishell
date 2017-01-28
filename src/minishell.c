@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 16:58:03 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 22:02:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static int			ft_shell(t_info *info)
 	return (0);
 }
 
-int					main(int __unused ac, char __unused **av, char **ev)
+int					main(int __unused ac, char **av, char **ev)
 {
 	t_info			*info;
 
@@ -115,6 +115,7 @@ int					main(int __unused ac, char __unused **av, char **ev)
 	ft_list_reverse(info->list_bin);
 	ft_gen_history(info);
 	ft_init_term_data();
+	info->av = av;
 	ft_shell(info);
 	ft_update_history(info);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:27:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/27 16:45:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 22:04:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ char		*ft_construct_path(char **new_tab_dir)
 				}
 			}
 			else
-			{
 				ft_strcat(path, *new_tab_dir);
-				ft_strcat(path, "/");
-			}
 		}
 		if (ft_check_dir(path) == -1)
 			return (NULL);
@@ -107,7 +104,8 @@ int			ft_cd(char **arg, t_info *info)
 	if (ft_grep_envdata(info->env, "HOME") == NULL && *arg == NULL)
 		return (ft_home_error());
 	if (ft_grep_envdata(info->env, "HOME") != NULL && *arg == NULL)
-		*arg = ft_grep_envdata(info->env, "HOME");
+		return (ft_process_cd(ft_strdup(ft_grep_envdata(info->env, "HOME")),
+			"HOME", info));
 	if (ft_strcmp(*arg, "-") == 0)
 		return (ft_process_cd(ft_grep_envdata(info->env, "OLDPWD"),
 			ft_builtin_option(arg, "cd"), info));
