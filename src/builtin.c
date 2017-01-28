@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 00:02:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/27 16:45:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 15:32:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int			ft_builtin(t_btree *node, t_info *info)
 		return (ft_cd(str, info));
 	if (ft_strncmp("setenv", *str, 6) == 0)
 	{
-		ft_setenv(arg, info->env);
+		ft_setenv(arg, info);
 		return (1);
 	}
 	if (ft_strcmp("unsetenv", *str) == 0)
-		return (ft_unsetenv(str, info->env));
+		return (ft_unsetenv(str, info));
 	if (ft_strcmp("env", *str) == 0)
-		return (ft_env(str, info->env));
+		return (ft_env(str, info));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 23:47:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/27 16:25:09 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 17:05:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 		arg = ft_quoteis(node);
 	else
 		arg = ft_node_argis(node);
-	status = fork();
 	if (ft_builtin(node, info))
 		status = -1;
 	else

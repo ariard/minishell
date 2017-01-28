@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/01/27 16:13:48 by ariard           ###   ########.fr        #
+#    Updated: 2017/01/28 15:49:08 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRC = src/minishell.c \
 	  src/error2.c \
 	  src/auxi_execution.c \
 	  src/auxi_execution2.c \
+	  src/auxi_execution3.c \
 	  src/macro_node.c \
 	  src/macro_operator.c \
 	  src/macro_operator2.c \

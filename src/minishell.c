@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/27 16:45:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 16:58:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int					main(int __unused ac, char __unused **av, char **ev)
 	info->env = ft_array_strdup(ev);
 	info->list_bin = ft_memalloc(sizeof(t_dlist));
 	*(info->list_bin) = NULL;
-	info->sym_tab = ft_gen_symtab(info->env, info->list_bin);
+	info->sym_tab = ft_gen_symtab(info);
 	ft_insert_cmpsort(info->list_bin, &ft_stralphcmp);
 	ft_list_reverse(info->list_bin);
 	ft_gen_history(info);

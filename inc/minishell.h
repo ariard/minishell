@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/27 16:45:36 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/28 16:48:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 
 typedef struct		s_entry
 {
-	char			*bin;
 	char			*path;
 	int				perm;
 }					t_entry;
@@ -113,9 +112,11 @@ void		ft_execute_ast(t_root *tree, t_info *info);
 ** Functions to get shell's info
 */
 
-t_cht		*ft_gen_symtab(char **env, t_dlist **list_bin); 
+t_cht		*ft_gen_symtab(t_info *info);
 
 void		ft_gen_history(t_info *info);
+
+t_entry		*ft_add_bin(char *bin, t_info *info);
 
 /*
 ** Function to process input control 
@@ -165,11 +166,11 @@ int			ft_exit(char **arg, char **env);
 
 int			ft_cd(char **arg, t_info *info);
 
-int			ft_env(char **arg, char **env);
+int			ft_env(char **arg, t_info *info);
 
-char		**ft_setenv(char *arg, char **env);
+char		**ft_setenv(char *arg, t_info *info);
 
-int			ft_unsetenv(char **arg, char **env);
+int			ft_unsetenv(char **arg, t_info *info);
 
 char		*ft_builtin_option(char **arg, char *builtin);
 
