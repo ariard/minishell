@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 00:02:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 21:17:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/30 00:11:07 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,38 @@
 
 int			ft_isbuiltin(t_btree *node)
 {	
-	char		**str;
+	char		*str;
 
-
-	str = ft_node_argis(node);
-	if (ft_strncmp("echo", *str, 4) == 0)
+	str = ft_node_nameis(node);
+	if (ft_strncmp("echo", str, 4) == 0)
 		return (1);
-	if (ft_strncmp("cd", *str, 2) == 0)
+	if (ft_strncmp("cd", str, 2) == 0)
 		return (1);
-	if (ft_strncmp("setenv", *str, 6) == 0)
+	if (ft_strncmp("setenv", str, 6) == 0)
 		return (1);
-	if (ft_strcmp("unsetenv", *str) == 0)
+	if (ft_strcmp("unsetenv", str) == 0)
 		return (1);
-	if (ft_strcmp("env", *str) == 0)
+	if (ft_strcmp("env", str) == 0)
 		return (1);
 	return (0);
 }
 
-int			ft_builtin(t_btree *node, t_info *info)
-{	
-	char		**str;
-	char		*arg;
-
-	str = ft_node_argis(node);
-	arg = *(str + 1);
-	if (ft_strncmp("echo", *str, 4) == 0)
-		return (ft_echo(str, info->env));
-	if (ft_strncmp("cd", *str, 2) == 0)
+int			ft_builtin(char *name, char **str, t_info *info)
+{
+	if (ft_isaggregation(str) == 1 && ft_strncmp("echo", name, 4) == 0)
+		ft_execute_aggregation(str, info);	
+	if (ft_strncmp("echo", name, 4) == 0)
+		return (ft_echo(str, info));
+	if (ft_strncmp("cd", name, 2) == 0)
 		return (ft_cd(str, info));
-	if (ft_strncmp("setenv", *str, 6) == 0)
+	if (ft_strncmp("setenv", name, 6) == 0)
 	{
-		ft_setenv(arg, info);
+		ft_setenv(*(str + 1), info);
 		return (1);
 	}
-	if (ft_strcmp("unsetenv", *str) == 0)
+	if (ft_strcmp("unsetenv", name) == 0)
 		return (ft_unsetenv(str, info));
-	if (ft_strcmp("env", *str) == 0)
+	if (ft_strcmp("env", name) == 0)
 		return (ft_env(str, info));
 	return (0);
 }

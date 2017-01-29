@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 21:17:20 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 19:39:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/29 23:52:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,11 @@ char		*ft_node_nameis(t_btree *node)
 char		**ft_node_argis(t_btree *node)
 {
 	t_token		*token;
-	char		**arg;
-	char		*to_split;
 
 	if (!node)
 		return (NULL);
 	token = node->data;
-	arg = ft_memalloc(sizeof(char *));
-	to_split = ft_strdup(token->name);
-	arg = ft_strsplitptr(to_split, &ft_isspace);
-	return (arg);
+	return (ft_strsplitptr(token->name, &ft_isspace));
 }
 
 int			ft_nodeisleft(t_btree *node, t_btree *father)

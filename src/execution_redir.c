@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 23:47:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 17:09:27 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/29 23:51:41 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 		arg = ft_quoteis(node);
 	else
 		arg = ft_node_argis(node);
-	if (ft_builtin(node, info))
+	if (ft_builtin(ft_node_nameis(node), arg, info))
 		status = -1;
 	else
 		status = fork();
 	if (status == 0)
 	{
+		signal(SIGINT, ft_sigint_handler_child);
 		if (ft_isaggregation(arg) == 1)
-			ft_execute_aggregation(arg);
+			ft_execute_aggregation(arg, info);
 		if (ft_isfddir(arg))
 			ft_fddir(arg, info, 0);
-		close(1);
-		dup(info->file);
+		dup2(info->file, 1);
 		execve(path, arg, info->env);
 	}
 	if (status > 0)
@@ -89,14 +89,15 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 		arg = ft_quoteis(node);
 	else
 		arg = ft_node_argis(node);
-	if (ft_builtin(node, info))
+	if (ft_builtin(ft_node_nameis(node), arg, info))
 		status = -1;
 	else
 		status = fork();
 	if (status == 0)
 	{
+		signal(SIGINT, ft_sigint_handler_child);
 		if (ft_isaggregation(arg) == 1)
-			ft_execute_aggregation(arg);
+			ft_execute_aggregation(arg, info);
 		if (ft_isfddir(arg))
 			ft_fddir(arg, info, 1);
 		dup2(info->file, 0);
@@ -123,14 +124,15 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 		arg = ft_node_argis(node);
 	line = NULL;
 	while (get_next_line(info->file, &line));
-	if (ft_builtin(node, info))
+	if (ft_builtin(ft_node_nameis(node), arg, info))
 		status = -1;
 	else
 		status = fork();
 	if (status == 0)
 	{
+		signal(SIGINT, ft_sigint_handler_child);
 		if (ft_isaggregation(arg) == 1)
-			ft_execute_aggregation(arg);
+			ft_execute_aggregation(arg, info);
 		if (ft_isfddir(arg))
 			ft_fddir(arg, info, 0);
 		dup2(info->file, 1);

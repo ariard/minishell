@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 22:02:31 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/29 22:03:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static int			ft_shell(t_info *info)
 	*(info->delim) = NULL;
 	screen->left = ft_strlen("ariard-1.0$> ");
 	info->prev_path = NULL;
+	info->prev_father = NULL;
+	info->prev_node = NULL;
 	while (42)
 	{
 		old_termios = ft_tty_raw(0);

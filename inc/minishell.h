@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 21:36:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/29 23:52:07 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <term.h>
 # include <sys/ioctl.h>
+# include <signal.h>
 
 typedef struct		s_entry
 {
@@ -84,10 +85,13 @@ typedef struct		s_info
 	t_btree			*heritance;
 	t_btree			*heritancefather;
 	t_btree			*prev_father;
+	t_btree			*prev_node;
+	char			*previous_path;
 	int				ismultidir;
 	int				file;
 	char			*prev_path;
 	char			**av;
+	pid_t			status;
 }					t_info;
 
 t_dlist		**ft_lex_analyze(char *stream, t_info *info);
@@ -112,6 +116,8 @@ void		ft_execute_ast(t_root *tree, t_info *info);
 t_entry		*ft_add_bin(char *bin, t_info *info);
 
 int			ft_full_path(char *full_path);
+
+int			ft_redir(t_btree *father);
 
 /*
 ** Functions to get shell's info
@@ -151,7 +157,7 @@ int			ft_execute_heredoc(char *path, t_btree *node, t_btree *father,
 ** Functions to execute files aggregation
 */
 
-int			ft_execute_aggregation(char **args);
+int			ft_execute_aggregation(char **args, t_info *info);
 
 int			ft_get_first_fd(char *str);
 
@@ -161,11 +167,9 @@ int			ft_get_last_fd(char *str);
 ** Functions to execute builtin utility
 */
 
-int			ft_builtin(t_btree *node, t_info *info);
+int			ft_builtin(char *name, char **arg, t_info *info);
 
-int			ft_echo(char **arg, char **env);
-
-int			ft_exit(char **arg, char **env);
+int			ft_echo(char **arg, t_info *info);
 
 int			ft_cd(char **arg, t_info *info);
 

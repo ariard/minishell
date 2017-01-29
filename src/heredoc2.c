@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 16:16:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 19:57:54 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/29 23:51:38 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int			ft_execute_heredoc(char *path, t_btree *node, t_btree *father,
 	tmp = ft_goto_nxt_operand(node, father);
 	eof = ft_node_nameis(tmp);
 	arg2 = ft_node_argis(tmp);
-	if (ft_builtin(node, info))
+	if (ft_builtin(ft_node_nameis(node), arg, info))
 		status = -1;
 	else
 		status = fork();	

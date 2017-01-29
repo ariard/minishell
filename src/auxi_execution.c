@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:25:11 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 18:52:27 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/29 21:04:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,21 @@ char	**ft_quoteis(t_btree *node)
 	t_token		*token;
 	char		**arg;	
 	char		**tmp;
+	char		*cp;
 
 	if (!node)
 		return (NULL);
 	token = node->data;
+	cp = token->name;
 	arg = ft_memalloc(sizeof(char *) * 3);
 	tmp = arg;
-	*arg++ = ft_strduptr(token->name, ft_isspace);
-	token->name++;
-	while (*(token->name - 1) && ft_isspace(*(token->name - 1)) != 1)
-		token->name++;
-	while (ft_isspace(*(token->name)) == 1)
-		token->name++;
-	*arg++ = ft_strdup(token->name);
+	*arg++ = ft_strduptr(cp, ft_isspace);
+	cp++;
+	while (*(cp - 1) && ft_isspace(*(cp - 1)) != 1)
+		cp++;
+	while (ft_isspace(*(cp)) == 1)
+		cp++;
+	*arg++ = ft_strdup(cp);
 	*arg = NULL;
 	return (tmp);
 }

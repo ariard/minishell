@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 22:05:39 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/29 22:47:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,14 @@ int				ft_execute_operand(t_btree *node, t_btree *father, t_info *info,
 		return (ft_execute_cmd(operand, node, father, tree, info));
 	if (operand[0] == '/')
 		return (ft_existence_error("ariard", operand));
+	if (ft_redir(info->prev_father))
+		return (1);
 	entry = ft_add_bin(operand, info);
 	if (!entry) 
 		return (ft_semantic_error(operand));
 	else if (entry)
 	{
+		info->previous_path = entry->path;
 		if (entry->perm == -1)
 			return (ft_permission_error(operand, info->env));
 		else if (entry->perm == 0)
@@ -123,7 +126,7 @@ void			ft_execute_ast(t_root *tree, t_info *info)
 		if (ft_isredir_out(father) || ft_isredir_in(father) 
 			|| ft_isappredir_out(father))
 			ret = ft_execute_all_dir(tmp, father, info, tree);
-		else
+		else 
 			ret = ft_execute_operand(tmp, father, info, tree);
 		if ((ft_islistand(father) == 1 && ret == -1) || ft_isheredoc(father))
 			tmp = ft_jump_nxt_operand(tree, tmp);
@@ -133,6 +136,8 @@ void			ft_execute_ast(t_root *tree, t_info *info)
 			tmp = ft_jump_nxt_operand(tree, tmp);
 		else
 			tmp = ft_goto_nxt_operand(tmp, father);
+		info->prev_node = tmp;
 		info->prev_father = father;
+		info->file = 0;
 	}
 }
