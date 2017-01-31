@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 16:16:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/29 23:51:38 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 10:08:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int			ft_execute_heredoc(char *path, t_btree *node, t_btree *father,
 			}	
 	}
 	if (status > 0)
-		wait(0);
+		waitpid(status, 0, WUNTRACED | WCONTINUED);
 	info->previous_eof = eof;
 	return (1);
 }

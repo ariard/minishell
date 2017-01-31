@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/29 23:52:07 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 10:17:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,6 +276,8 @@ int			ft_ambiguous_error(char *last);
 int			ft_bad_fd_error(int word);
 
 int			ft_file_error(char *path);
+
+char		*ft_buffer_error(void);
 
 /*
 ** Library functions of termcaps

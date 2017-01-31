@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/29 22:03:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 10:19:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 			break;
 		if (ft_isend(c, buffer, buffquote, screen, info) == 1) 
 			break;
+		if (ft_strlen(buffer) >= 1024)
+			return (ft_buffer_error());
 	}
 	ft_extract_buff_auxi(buffer, info);
 	ft_add_history(buffer, info);
@@ -96,7 +98,8 @@ static int			ft_shell(t_info *info)
 		buffer = ft_read_input(screen, info);
 		ft_insert(10);
 		ft_tty_reset(0, old_termios);
-		ft_process_buffer(buffer, info);
+		if (buffer)
+			ft_process_buffer(buffer, info);
 	}
 	return (0);
 }

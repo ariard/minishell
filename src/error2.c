@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 21:37:06 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/25 19:48:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 10:18:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,10 @@ int		ft_file_error(char *path)
 	ft_putstr_fd(path, 2);
 	ft_putstr_fd(": Permission denied\n", 2);
 	return (-1);
-}	
+}
+
+char	*ft_buffer_error(void)
+{
+	ft_putstr_fd("\nariard : command too big", 2);
+	return (NULL);
+}
