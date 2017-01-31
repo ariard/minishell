@@ -12,7 +12,7 @@ int			main(int __unused argc, char __unused **argv)
 {
 	signal(SIGINT, sighandler);
 	
-
+//	execve("/bin/cat", argv, NULL);
 	while (1)
 	{
 		ft_putstr("inifnie looooop\n");
