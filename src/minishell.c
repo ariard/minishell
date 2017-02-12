@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/09 16:37:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/12 22:01:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*static void			ft_process_buffer(char *buffer, t_info *info) 
+static void			ft_process_buffer(char *buffer, t_info *info) 
 {
 //	t_dlist			**list_token;
 //	t_root			*tree;
@@ -83,7 +83,6 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 			return (ft_buffer_error());
 	}
 	ft_extract_buff_auxi(buffer, info);
-//	ft_add_history(buffer, info);
 	ft_strdel(&buffquote);
 	ft_putstr_fd("FIN DE LECTURE\n", 3);
 	return (buffer);
@@ -114,12 +113,11 @@ static int			ft_shell(t_info *info)
 	}
 	return (0);
 }
-*/
+
 int					main(int __unused ac, char **av, char **ev)
 {
 	t_info			*info;
 
-	(void)av;
 	if (isatty(0) == 0)
 		return (-1);
 	signal(SIGINT, ft_sigint_handler);
@@ -130,10 +128,8 @@ int					main(int __unused ac, char **av, char **ev)
 	info->sym_tab = ft_gen_symtab(info);
 	ft_insert_cmpsort(info->list_bin, &ft_stralphcmp);
 	ft_list_reverse(info->list_bin);
-	ft_gen_history(info);
-//	ft_init_term_data();
-//	info->av = av;
-//	ft_shell(info);
-//	ft_update_history(info);
+	ft_init_term_data();
+	info->av = av;
+	ft_shell(info);
 	return (0);
 }
