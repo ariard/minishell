@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 16:40:57 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/21 21:06:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 16:51:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@ void			ft_gen_history(t_info *info)
 	int			fd;
 	int			ret;
 	char		*line;
-	t_dlist		**list_history;
 
 	fd = open("/Users/ariard/.ariard_history", O_RDONLY | O_CREAT, 0644);
 	if (fd == -1)
-		ft_putstr("probleme");
+		return ;
 	line = 0;
-	list_history = ft_memalloc(sizeof(t_dlist));
-	*list_history = 0;
 	ret = 0;
 	while ((get_next_line(fd, &line)) > 0)
 	{
-		ft_list_push_front(list_history, ft_strdup(line), NULL);
+//		ft_list_push_front(&info->history, ft_strdup(line), NULL);
+		ft_strdel(&line);
 		ret++;
 	}
-	ft_list_push_front(list_history, ft_strdup(""), NULL);
-	info->history = *list_history;
+//	ft_list_push_front(&info->history, ft_strdup(""), NULL);
 	info->sizehist = ret;
+	sleep(5);
+	ft_putstr("first sleep");
 	close(fd);
+	sleep(10);
 }
 
 static void		ft_save_current_buff(char *buffer, t_info *info)

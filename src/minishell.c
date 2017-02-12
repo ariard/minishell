@@ -6,39 +6,37 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 10:41:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/09 16:37:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void			ft_process_buffer(char *buffer, t_info *info) 
+/*static void			ft_process_buffer(char *buffer, t_info *info) 
 {
-	t_dlist			**list_token;
-	t_root			*tree;
+//	t_dlist			**list_token;
+//	t_root			*tree;
 
-	tree = NULL;
-	list_token = ft_lex_analyze(buffer, info);
-	if (list_token)
-	{
-		tree = ft_syntax_analyze(list_token);
+	ft_putstr_fd("PROCESS\n", 3);
+//	tree = NULL;
+//	list_token = ft_lex_analyze(buffer, info);
+//	if (list_token)
+//	{
+//		tree = ft_syntax_analyze(list_token);
 //		if (tree)
 //			ft_display_prefix(tree->root);
-	if (tree)
-		ft_execute_ast(tree, info); 
-	}
+//	if (tree)
+//		ft_execute_ast(tree, info); 
+//	}
+	ft_strdel(&buffer);
+	ft_strdel(&info->buff_auxi);
 }
 
-static char			*ft_read_input(t_screen *screen, t_info *info)
-{
-	char			*buffer;
-	char			*buffquote;
-	char			c;
 
+static void			ft_init_read(t_info *info, t_screen *screen)
+{
 	screen->cursor = 0; 
 	screen->vertical = 1;
-	buffer = ft_strnew(1024);
-	buffquote = ft_strnew(1024);
 	screen->quote = 0;
 	info->heredoc = 0;
 	info->ismultidir = 0;
@@ -48,6 +46,17 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 	info->quote = 0;
 	info->previous_eof = NULL;
 	info->buff_auxi = ft_strnew(1024);
+}
+
+static char			*ft_read_input(t_screen *screen, t_info *info)
+{
+	char			*buffer;
+	char			*buffquote;
+	char			c;
+
+	ft_init_read(info, screen);
+	buffer = ft_strnew(1024);
+	buffquote = ft_strnew(1024);
 	while (42)
 	{
 		c = '\0';
@@ -74,7 +83,9 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 			return (ft_buffer_error());
 	}
 	ft_extract_buff_auxi(buffer, info);
-	ft_add_history(buffer, info);
+//	ft_add_history(buffer, info);
+	ft_strdel(&buffquote);
+	ft_putstr_fd("FIN DE LECTURE\n", 3);
 	return (buffer);
 }
 
@@ -103,11 +114,12 @@ static int			ft_shell(t_info *info)
 	}
 	return (0);
 }
-
+*/
 int					main(int __unused ac, char **av, char **ev)
 {
 	t_info			*info;
 
+	(void)av;
 	if (isatty(0) == 0)
 		return (-1);
 	signal(SIGINT, ft_sigint_handler);
@@ -119,9 +131,9 @@ int					main(int __unused ac, char **av, char **ev)
 	ft_insert_cmpsort(info->list_bin, &ft_stralphcmp);
 	ft_list_reverse(info->list_bin);
 	ft_gen_history(info);
-	ft_init_term_data();
-	info->av = av;
-	ft_shell(info);
-	ft_update_history(info);
+//	ft_init_term_data();
+//	info->av = av;
+//	ft_shell(info);
+//	ft_update_history(info);
 	return (0);
 }

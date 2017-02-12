@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 18:54:40 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/29 23:50:58 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 16:21:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		ft_extract_buff_auxi(char *buffer, t_info *info)
 		if (*tmp)
 			ft_strcpy(new, tmp);	
 	}
+	ft_strdel(&info->buff_auxi);
 	info->buff_auxi = new;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 19:14:24 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/16 20:13:21 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 16:51:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void		ft_update_history(t_info *info)
 		{		
 			ft_putstr_fd(mask, fd);
 			if (tmp->previous)
-				ft_putchar_fd(10, fd);	
-
+				ft_putchar_fd(10, fd);
 		}
 		tmp = tmp->previous;
 	}

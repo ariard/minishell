@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 23:03:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/16 18:06:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/01/31 16:24:53 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int				ft_tty_reset(int fd, struct termios *old_termios)
 {
 	(void)fd;
 	tcsetattr(fd, TCSAFLUSH, old_termios);
-//	free(old_termios);
-//	old_termios = NULL;
+	free(old_termios);
+	old_termios = NULL;
 	return (0);
 }
 
