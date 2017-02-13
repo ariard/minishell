@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/30 00:19:19 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/13 18:14:16 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_btree			*ft_goto_nxt_operand(t_btree *node, t_btree *father)
 int				ft_execute_cmd(char	*path, t_btree *node, t_btree *father,
 		t_root *tree, t_info *info)
 {
+	ft_putstr_fd("EXEC CMD\n", 3);
 	if (ft_node_islast(tree->size, node->key) == 1)
 		return (ft_execute_regular(path, node, info));
 	if (ft_ispipe(father) == 1)
@@ -140,4 +141,5 @@ void			ft_execute_ast(t_root *tree, t_info *info)
 		info->prev_father = father;
 		info->file = 0;
 	}
+	info->prev_father = NULL;
 }

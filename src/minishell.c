@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 17:20:06 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/13 18:29:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,22 @@ static void			ft_process_buffer(char *buffer, t_info *info)
 	t_dlist			**list_token;
 	t_root			*tree;
 
-	ft_putstr_fd("PROCESS\n", 3);
 	tree = NULL;
 	list_token = ft_lex_analyze(buffer, info);
+	ft_putstr_fd("END LEXER\n", 3);
 	if (list_token)
 	{
 		tree = ft_syntax_analyze(list_token);
 //		if (tree)
 //			ft_display_prefix(tree->root);
+	}
 	if (tree)
 		ft_execute_ast(tree, info); 
-	}
+	ft_putstr_fd("CLEAN\n", 3);
 	if (list_token)
 		ft_list_clear(list_token, &ft_token_free);
 	if (tree)
-	{
 		ft_apply_postfix(tree->root, &free);
-		free(tree);	
-	}
 	ft_strdel(&buffer);
 	ft_strdel(&info->buff_auxi);
 }
@@ -91,7 +89,7 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 	}
 	ft_extract_buff_auxi(buffer, info);
 	ft_strdel(&buffquote);
-	ft_putstr_fd("FIN DE LECTURE\n", 3);
+	ft_putstr_fd("\nFIN DE LECTURE\n", 3);
 	return (buffer);
 }
 

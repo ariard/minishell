@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/31 14:54:04 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 16:50:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/13 18:28:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char			*ft_detect_pattern(char *stream, t_info *info)
 
 	lexem = ft_strnew(1024);
 	if ((ret = ft_isspace(*stream)))
-		return (NULL);
+		return (lexem);
 	if ((ret = ft_isoperator(stream)))
 		return (ft_strncpy(lexem, stream, ret));
 	if ((ret = ft_isoperand(stream, info)))
@@ -66,10 +66,10 @@ t_dlist				**ft_lexer(char *stream, t_info *info)
 		lexem = ft_detect_pattern(stream, info);
 		if (ft_strlen(lexem) > 0)
 		{
-			ft_list_push_back(list_token, ft_gen_token(lexem, info), NULL);
+			ft_list_push_back(list_token, ft_gen_token(lexem, info), ft_itoa(id));
 			id++;
 		}
-		if (lexem)
+		if (ft_strlen(lexem) > 0)
 			stream += ft_strlen(lexem);
 		else
 			stream++;
