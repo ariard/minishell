@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 21:39:33 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 21:39:00 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/13 17:05:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_root			*ft_syntax_analyze(t_dlist **list_token)
 	{
 		expr = ft_find_expr(tmp);
 		ret = ft_eval_expr(expr, tmp);
+		free(expr);
 		if (ret == -1)
 			return (NULL);
 		if (ret == 2)
