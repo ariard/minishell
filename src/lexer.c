@@ -6,12 +6,22 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/31 14:54:04 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/23 17:14:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/13 16:50:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void				ft_token_free(void	*data)
+{
+	t_token			*token;
+
+	token = data;
+	ft_strdel(&token->name);
+	ft_strdel(&token->id);
+	free(token);
+}
+	
 static char			*ft_detect_pattern(char *stream, t_info *info)
 {
 	char	*lexem;
@@ -24,7 +34,7 @@ static char			*ft_detect_pattern(char *stream, t_info *info)
 		return (ft_strncpy(lexem, stream, ret));
 	if ((ret = ft_isoperand(stream, info)))
 		return (ft_strncpy(lexem, stream, ret));
-	return (NULL);
+	return (lexem);
 }
 
 static t_token		*ft_gen_token(char *lexem, t_info *info)
@@ -32,7 +42,7 @@ static t_token		*ft_gen_token(char *lexem, t_info *info)
 	t_token			*token;
 
 	token = ft_memalloc(sizeof(t_token));
-	token->name = ft_strdup(ft_strtrim(lexem)); 
+	token->name = ft_strtrim(lexem); 
 	if (ft_isoperator(lexem))
 		token->id = ft_strdup("operator");
 	else if (ft_isoperand(lexem, info))
@@ -54,15 +64,16 @@ t_dlist				**ft_lexer(char *stream, t_info *info)
 	while (*stream && *stream != '\n')
 	{
 		lexem = ft_detect_pattern(stream, info);
-		if (lexem)
+		if (ft_strlen(lexem) > 0)
 		{
-			ft_list_push_back(list_token, ft_gen_token(lexem, info), ft_itoa(id));
+			ft_list_push_back(list_token, ft_gen_token(lexem, info), NULL);
 			id++;
 		}
 		if (lexem)
 			stream += ft_strlen(lexem);
 		else
 			stream++;
+		ft_strdel(&lexem);
 	}
 	return (list_token);
 }

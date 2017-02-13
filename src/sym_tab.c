@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 22:13:19 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 16:32:50 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/13 16:07:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ static void			ft_read_path(char *exe, t_dlist **list_bin)
 	int				i;
 
 	i = 0;
-	ds = opendir(exe);
+	if(!(ds = opendir(exe)))
+		return ;
 	while ((lu = readdir(ds)))
 	{
-		if (lu->d_name[0] != '.')
-			ft_list_push_front(list_bin, ft_strdup(lu->d_name), 
+			if (lu->d_name[0] != '.')
+				ft_list_push_front(list_bin, ft_strdup(lu->d_name), 
 					ft_strdup(lu->d_name));
 	}
 	closedir(ds);
@@ -40,8 +41,6 @@ t_cht				*ft_gen_symtab(t_info *info)
 	char		*new;
 	char		*path;
 
-
-	(void)info;
 	htb = ft_memalloc(sizeof(t_cht));
 	ft_cht_init(htb, 2441, &ft_hash_string, &ft_clear_entry);
 	path = ft_grep_envdata(info->env, "PATH");
@@ -54,6 +53,6 @@ t_cht				*ft_gen_symtab(t_info *info)
 		ft_read_path(new, info->list_bin);
 		path += ft_strlen(new) + 1;
 		ft_strdel(&new);
-	}
+	}	
 	return (htb);
 }

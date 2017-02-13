@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 10:26:25 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/13 16:22:11 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ t_entry		*ft_add_bin(char *bin, t_info *info);
 int			ft_full_path(char *full_path);
 
 int			ft_redir(t_btree *father);
+
+void		ft_token_free(void *data);
 
 /*
 ** Functions to get shell's info
