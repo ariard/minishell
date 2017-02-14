@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 00:02:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/30 00:19:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/14 14:08:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,27 @@ int			ft_isbuiltin(t_btree *node)
 
 int			ft_builtin(char *name, char **str, t_info *info)
 {
+	int		ret;
+
+	ret = 0;
 	if (ft_isaggregation(str) == 1 && ft_strncmp("echo", name, 4) == 0)
 		ft_execute_aggregation(str, info);	
 	if (ft_strncmp("echo", name, 4) == 0)
-		return (ft_echo(str, info));
+		ret = ft_echo(str, info);
 	if (ft_strncmp("cd", name, 2) == 0)
-		return (ft_cd(str, info));
+		ret = ft_cd(str, info);
 	if (ft_strncmp("setenv", name, 6) == 0)
 	{
 		ft_setenv(*(str + 1), info);
+		ft_strdel(&name);
 		return (1);
 	}
 	if (ft_strcmp("unsetenv", name) == 0)
-		return (ft_unsetenv(str, info));
+		ret = ft_unsetenv(str, info);
 	if (ft_strcmp("env", name) == 0)
-		return (ft_env(str, info));
-	return (0);
+		ret = ft_env(str, info);
+	ft_strdel(&name);
+	return (ret);
 }
 
 char		*ft_builtin_option(char **arg, char *builtin)

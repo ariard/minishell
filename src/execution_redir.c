@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 23:47:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 10:08:42 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/14 14:10:51 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 		waitpid(status, 0, WUNTRACED | WCONTINUED);
 	if (info->pipe == 1)
 		ft_close_pipe(info);
+	ft_tabdel(arg);
 	return (1);
 }
 
@@ -107,6 +108,7 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 		waitpid(status, 0, WUNTRACED | WCONTINUED);
 	if (info->pipe == 1)
 		ft_close_pipe(info);
+	ft_tabdel(arg);
 	return (1);
 }
 
@@ -142,5 +144,6 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 		waitpid(status, 0, WUNTRACED | WCONTINUED);
 	if (info->pipe == 1)
 		ft_close_pipe(info);
+	ft_tabdel(arg);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/14 12:39:48 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/14 14:42:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_btree			*ft_goto_nxt_operand(t_btree *node, t_btree *father)
 		if (ft_strcmp((char *)(father->left)->key, (char *)node->key) == 0)
 		{
 			if (father->right)
-			{
+			{	
 				if (ft_node_typeis(father->right) == 0)
 					return ((father->right)->left);
 				else
@@ -104,7 +104,6 @@ void			ft_execute_ast(t_root *tree, t_info *info)
 	t_btree 	*tmp;
 	t_btree		*father;
 	int			ret;
-
 
 	tmp = tree->root;
 	if (ft_node_typeis(tree->root) == 0)

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 22:23:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 17:20:54 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/14 14:26:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int			ft_execute_regular(char *path, t_btree *node, t_info *info)
 		waitpid(status, 0, WUNTRACED | WCONTINUED);
 	if (info->pipe == 1)
 		ft_close_pipe(info);
+	ft_tabdel(arg);
 	return (1);
 }
 
@@ -58,8 +59,8 @@ int			ft_execute_pipe(char *path, t_btree *node, t_info *info)
 		signal(SIGINT, ft_sigint_handler_child);
 		close(fd[0]);
 		dup2(fd[1], 1);
-		if (ft_isaggregation(arg) == 1)
-			ft_execute_aggregation(arg, info);
+//		if (ft_isaggregation(arg) == 1)
+//			ft_execute_aggregation(arg, info);
 		if (ft_builtin(ft_node_nameis(node), arg, info))
 			exit(0);
 		else
@@ -71,5 +72,6 @@ int			ft_execute_pipe(char *path, t_btree *node, t_info *info)
 		dup2(fd[0], 0);
 	}
 	info->status = status;
+	ft_tabdel(arg);
 	return (1);
 }
