@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/02/11 18:20:37 by ariard           ###   ########.fr        #
+#    Updated: 2017/02/14 12:28:19 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC = src/minishell.c \
 	  src/semantic_analyzer.c \
 	  src/execution.c \
 	  src/execution_redir.c \
+	  src/execution_distribution.c\
 	  src/aggregation.c \
 	  src/aggregation2.c \
 	  src/builtin.c \

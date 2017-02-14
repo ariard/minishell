@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 18:14:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/14 12:39:48 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,10 @@ int				ft_execute_cmd(char	*path, t_btree *node, t_btree *father,
 int				ft_execute_operand(t_btree *node, t_btree *father, t_info *info,
 		t_root *tree)
 {
-	t_entry		*entry;
 	char		*operand;
+	int			ret;
 
+	ft_putstr_fd("EXEC OPERAND\n", 3);
 	if (!(operand = ft_node_nameis(node))) 
 		return (-1);
 	if (ft_strncmp(operand, "exit", 4) == 0)
@@ -91,25 +92,11 @@ int				ft_execute_operand(t_btree *node, t_btree *father, t_info *info,
 	else if (ft_strcmp(operand, "setenv") == 0 
 		|| ft_strcmp(operand, "unsetenv") == 0 || ft_strcmp(operand, "echo") == 0
 			|| ft_strcmp(operand, "env") == 0 || ft_strcmp(operand, "cd") == 0)
-		return (ft_execute_cmd(operand, node, father, tree, info));
-	if (ft_full_path(operand))
-		return (ft_execute_cmd(operand, node, father, tree, info));
-	if (operand[0] == '/')
-		return (ft_existence_error("ariard", operand));
-	if (ft_redir(info->prev_father))
-		return (1);
-	entry = ft_add_bin(operand, info);
-	if (!entry) 
-		return (ft_semantic_error(operand));
-	else if (entry)
-	{
-		info->previous_path = entry->path;
-		if (entry->perm == -1)
-			return (ft_permission_error(operand, info->env));
-		else if (entry->perm == 0)
-			return (ft_execute_cmd(entry->path, node, father, tree, info)); 
-	}
-	return (0);	
+		ret = ft_execute_cmd(operand, node, father, tree, info);
+	else
+		ret = ft_distribute_execution(node, father, info, tree, operand);
+	ft_strdel(&operand);	
+	return (ret);
 }
 
 void			ft_execute_ast(t_root *tree, t_info *info) 
@@ -117,6 +104,7 @@ void			ft_execute_ast(t_root *tree, t_info *info)
 	t_btree 	*tmp;
 	t_btree		*father;
 	int			ret;
+
 
 	tmp = tree->root;
 	if (ft_node_typeis(tree->root) == 0)

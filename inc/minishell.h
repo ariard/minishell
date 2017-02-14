@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 16:22:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/14 12:29:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,12 @@ int			ft_full_path(char *full_path);
 int			ft_redir(t_btree *father);
 
 void		ft_token_free(void *data);
+
+int			ft_distribute_execution(t_btree *node, t_btree *father, t_info *info,
+			t_root *tree, char *operand);
+
+int			ft_execute_cmd(char *path, t_btree *node, t_btree *father,
+			t_root *tree, t_info *info);
 
 /*
 ** Functions to get shell's info

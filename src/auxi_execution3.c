@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 15:33:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 17:53:07 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/14 12:59:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ int			ft_search_bin(char *dir, char *bin)
 	while ((lu = readdir(ds)))
 	{
 		if (ft_strcmp(bin, lu->d_name) == 0)
+		{
+			closedir(ds);
 			return (1);
+		}	
 	}
+	closedir(ds);
 	return (0);
 }
 		
@@ -46,6 +50,7 @@ t_entry			*ft_add_bin(char *bin, t_info *info)
 	char	*dir;
 	t_entry *entry;
 
+	(void)info;
 	path = ft_grep_envdata(info->env, "PATH");
 	if (!path)
 		return (NULL);

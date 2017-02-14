@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 18:29:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/14 12:04:17 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ static void			ft_process_buffer(char *buffer, t_info *info)
 	if (list_token)
 		ft_list_clear(list_token, &ft_token_free);
 	if (tree)
+	{
 		ft_apply_postfix(tree->root, &free);
+		free(tree);
+	}
 	ft_strdel(&buffer);
 	ft_strdel(&info->buff_auxi);
 }
