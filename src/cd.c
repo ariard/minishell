@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:27:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 22:28:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 12:26:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ char		*ft_construct_path(char **new_tab_dir)
 				ft_strcat(path, *new_tab_dir);
 		}
 		if (ft_check_dir(path) == -1)
+		{
+			free(path);
 			return (NULL);
+		}
 		new_tab_dir++;
 	}
 	return (path);
@@ -49,10 +52,13 @@ int			ft_process_cd(char *curpath, char *option, t_info *info)
 	char	**tmp;
 
 	(void)option;
+	path = NULL;
 	if (*curpath == '/')	
 		curpath++;
 	new_tab_dir = ft_strsplit(curpath, '/'); 
-	if ((path = ft_construct_path(new_tab_dir)) == NULL)
+	path = ft_construct_path(new_tab_dir);
+	ft_array_clean(new_tab_dir);
+	if (!path)
 		return (1);
 	if (chdir(path) == 0)
 	{
@@ -70,6 +76,7 @@ int			ft_process_cd(char *curpath, char *option, t_info *info)
 char		*ft_read_cdpath(char *arg, char **env)
 {
 	char	**new_tab;
+	char	**temp;
 	char	*path;
 	char	*data;
 
@@ -77,6 +84,7 @@ char		*ft_read_cdpath(char *arg, char **env)
 	new_tab = ft_strsplit(data, ';');
 	if (!new_tab)
 		return (NULL);
+	temp = new_tab;
 	path = ft_strnew(256);
 	while (*new_tab)
 	{	
@@ -88,6 +96,7 @@ char		*ft_read_cdpath(char *arg, char **env)
 	}
 	ft_strcat(path, "./");
 	ft_strcat(path, arg);
+	ft_array_clean(temp);
 	if (ft_check_dir(path) == 1)
 		return (path);
 	free(path);
@@ -104,7 +113,7 @@ int			ft_cd(char **arg, t_info *info)
 	if (ft_grep_envdata(info->env, "HOME") == NULL && *arg == NULL)
 		return (ft_home_error());
 	if (ft_grep_envdata(info->env, "HOME") != NULL && *arg == NULL)
-		return (ft_process_cd(ft_strdup(ft_grep_envdata(info->env, "HOME")),
+		return (ft_process_cd(ft_grep_envdata(info->env, "HOME"),
 			"HOME", info));
 	if (ft_strcmp(*arg, "-") == 0)
 		return (ft_process_cd(ft_grep_envdata(info->env, "OLDPWD"),
@@ -113,15 +122,19 @@ int			ft_cd(char **arg, t_info *info)
 	{	
 		if (ft_strncmp(*arg, "/", 1) == 0)
 			return (ft_process_cd(*arg, ft_builtin_option(arg, "cd"), info));
-		if (ft_strncmp(*arg, ".", 1) != 0 || ft_strncmp(*arg, "..", 2) != 0)
+		if (ft_strncmp(*arg, ".", 1) != 0 || ft_strncmp(*arg, "..", 2) != 0)	
 			if ((path = ft_read_cdpath(*arg, info->env)) != NULL)
-				return (ft_process_cd(path, ft_builtin_option(arg, "cd"),
-					info));
+			{	
+				ft_process_cd(path, ft_builtin_option(arg, "cd"),
+					info);
+				return (1);
+			}
 		path = ft_strnew(256);	
 		ft_strcpy(path, ft_grep_envdata(info->env, "PWD"));
 		ft_strcat(path, "/");
 		ft_process_cd(ft_strcat(path, *arg), ft_builtin_option(arg, "cd"),
 			info);
+		free(path);
 	}
 	return (1);
 }
