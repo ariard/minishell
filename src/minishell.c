@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 10:38:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 12:38:01 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void			ft_process_buffer(char *buffer, t_info *info)
 	ft_strdel(&buffer);
 	ft_strdel(&info->buff_auxi);
 }
-
 
 static void			ft_init_read(t_info *info, t_screen *screen)
 {

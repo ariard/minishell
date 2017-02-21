@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 22:23:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 12:00:48 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 12:29:52 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int			ft_execute_regular(char *path, t_btree *node, t_info *info)
 		waitpid(status, 0, WUNTRACED | WCONTINUED);
 	if (info->pipe == 1)
 		ft_close_pipe(info);
-	ft_tabdel(arg);
+	if (arg)
+		ft_tabdel(arg);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:25:11 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/14 14:27:18 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 12:36:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	**ft_quoteis(t_btree *node)
 	char		**tmp;
 	char		*cp;
 
+	ft_putstr_fd("quote", 3);
 	if (!node)
 		return (NULL);
 	token = node->data;

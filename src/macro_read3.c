@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 21:27:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 16:10:11 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 12:35:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void		ft_return_buffquote(char *buffer, char *buffquote, int n)
 		tmp = ft_str_epure(buffquote, db);
 	ft_bzero(buffer, 1024);
 	ft_strcpy(buffer, tmp);
+	ft_strdel(&tmp);
 }
 
 int			ft_isinheredoc(char *buffer, t_info *info)
