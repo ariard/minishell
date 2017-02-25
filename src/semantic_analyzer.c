@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 10:38:09 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 17:09:36 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,7 @@ void			ft_execute_ast(t_root *tree, t_info *info)
 	while (tmp)
 	{
 		father = ft_get_father(tree->root, tree->root, tmp->key, &ft_itoacmp);
-		if (ft_isredir_out(father) || ft_isredir_in(father) 
-			|| ft_isappredir_out(father))
-			ret = ft_execute_all_dir(tmp, father, info, tree);
-		else 
-			ret = ft_execute_operand(tmp, father, info, tree);
+		ret = ft_execute_operand(tmp, father, info, tree);
 		if ((ft_islistand(father) == 1 && ret == -1) || ft_isheredoc(father))
 			tmp = ft_jump_nxt_operand(tree, tmp);
 		else if (ft_islistor(father) == 1 && ret == 1)

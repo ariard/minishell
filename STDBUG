@@ -1,32 +1,4 @@
-completion debutcomplete argbranch 1completion debutcomplete pathbranch 3completion debutcomplete argbranch 1completion debutcomplete argbranch 1completion debutcomplete argbranch 1completion debutcomplete argbranch 1completion debutcomplete pathbranch 3completion debutcomplete argbranch 1completion debutcomplete pathcompletion debutcomplete pathcompletion debutcomplete pathcompletion debutcomplete pathcompletion debutcomplete path
-FIN DE LECTURE
-END LEXER
-EXEC OPERAND
-DISTRIBUTE EXECUTION
-EXEC CMD
-CLEAN
 
-FIN DE LECTURE
-END LEXER
-EXEC OPERAND
-DISTRIBUTE EXECUTION
-EXEC CMD
-CLEAN
-
-FIN DE LECTURE
-END LEXER
-EXEC OPERAND
-DISTRIBUTE EXECUTION
-EXEC CMD
-CLEAN
-completion debutcomplete argbranch 2completion debutcomplete argbranch 2
-FIN DE LECTURE
-END LEXER
-EXEC OPERAND
-DISTRIBUTE EXECUTION
-EXEC CMD
-CLEAN
-completion debutcomplete bincompletion debutcomplete bin
 FIN DE LECTURE
 END LEXER
 EXEC OPERAND

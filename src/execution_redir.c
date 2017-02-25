@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 23:47:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/14 14:10:51 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 17:09:34 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 	char	**arg;
 	pid_t	status;
 
-	(void)father;
+	if (!node || !path)
+		return (0);
 	if (info->quote == 1)
 		arg = ft_quoteis(node);
 	else
@@ -68,6 +69,7 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 			ft_execute_aggregation(arg, info);
 		if (ft_isfddir(arg))
 			ft_fddir(arg, info, 0);
+		info->file = ft_get_fdfiles(node, father);
 		dup2(info->file, 1);
 		execve(path, arg, info->env);
 	}
@@ -75,6 +77,7 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 		waitpid(status, 0, WUNTRACED | WCONTINUED);
 	if (info->pipe == 1)
 		ft_close_pipe(info);
+	if (arg)
 	ft_tabdel(arg);
 	return (1);
 }
@@ -86,6 +89,8 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 	pid_t	status;
 
 	(void)father;
+	if (!node || !path)
+		return (0);
 	if (info->quote == 1)
 		arg = ft_quoteis(node);
 	else
@@ -101,6 +106,7 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 			ft_execute_aggregation(arg, info);
 		if (ft_isfddir(arg))
 			ft_fddir(arg, info, 1);
+		info->file = ft_get_fdfiles2(node, father);
 		dup2(info->file, 0);
 		execve(path, arg, info->env);
 	}
@@ -108,7 +114,8 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 		waitpid(status, 0, WUNTRACED | WCONTINUED);
 	if (info->pipe == 1)
 		ft_close_pipe(info);
-	ft_tabdel(arg);
+	if (arg)
+		ft_tabdel(arg);
 	return (1);
 }
 
@@ -137,6 +144,7 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 			ft_execute_aggregation(arg, info);
 		if (ft_isfddir(arg))
 			ft_fddir(arg, info, 0);
+		info->file = ft_get_fdfiles(node, father);
 		dup2(info->file, 1);
 		execve(path, arg, info->env);
 	}
