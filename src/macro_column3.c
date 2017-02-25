@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 22:33:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/17 21:38:03 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 14:38:46 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		ft_display_columns(t_dlist **list_show, int column)
 	tmp = *list_show;
 	col = ft_memalloc(sizeof(t_col));
 	if ((col->max = ft_maxis(list_show) + 1) == 1)
-		return ;
+		return (free(col));
 	col->size = ft_list_size(list_show);
 	col->line = ft_lineis(column, col);
 	col->block = ft_blockis(column, col);
@@ -58,6 +58,7 @@ void		ft_display_columns(t_dlist **list_show, int column)
 		col->line--;
 		tmp = tmp->next;
 	}
+	free(col);
 }
 
 char		*ft_set_new_path(char *buffer, char *path, t_dlist **list)

@@ -1,9 +1,9 @@
-
+completion debutcomplete arg
 FIN DE LECTURE
 END LEXER
 EXEC OPERAND
 EXEC CMD
-quoteCLEAN
+CLEAN
 
 FIN DE LECTURE
 END LEXER

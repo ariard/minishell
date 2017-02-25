@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:20:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/17 20:40:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 16:25:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,19 @@ void			ft_complete_path(char *buffer, char *path, t_screen *screen)
 	ft_search_match(match, list_path, list_show, screen);
 	size = ft_list_size(list_show);
 	if (ft_ask_user(size, buffer, screen) == -1)
-		return ;
+	{
+
+		ft_strdel(&valid_path);
+		return (ft_clean_list(list_path, list_show));
+	}
 	if (size > 1)
 		ft_print_column(buffer, list_show, screen);
 	else if (size == 1)
-		ft_swap_buffer(buffer, ft_set_new_path(buffer, valid_path, list_show),
-			screen);
+	{
+		match = ft_set_new_path(buffer, valid_path, list_show);
+		ft_swap_buffer(buffer, match, screen);
+		ft_strdel(&match);
+	}
+	ft_strdel(&valid_path);
+	return (ft_clean_list(list_path, list_show));
 }

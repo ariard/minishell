@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/14 13:47:59 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 15:53:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,9 +251,11 @@ void		ft_search_match(char *buffer, t_dlist **list_bin, t_dlist **list_show,
 
 int			ft_isuncompletepath(char *str);
 
-void		ft_read_dir(char *dir, t_dlist **list_files);
+int			ft_read_dir(char *dir, t_dlist **list_files);
 
 void		ft_complete_path(char *buffer, char *path, t_screen *screen);
+
+void		ft_clean_list(t_dlist **list_files, t_dlist **list_show);
 
 /*
  * Functions to handle signals

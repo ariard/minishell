@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 15:10:56 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/17 20:40:22 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 16:21:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_read_dir(char *dir, t_dlist **list_files)
+int		ft_read_dir(char *dir, t_dlist **list_files)
 {
 	DIR *ds;
 	struct dirent *lu;
@@ -25,15 +25,21 @@ void	ft_read_dir(char *dir, t_dlist **list_files)
 				ft_list_push_back(list_files, ft_strdup(lu->d_name),
 					ft_strdup(lu->d_name));
 		closedir(ds);
-		ft_insert_cmpsort(list_files, &ft_stralphcmp);
-		ft_list_reverse(list_files);
+		if (*list_files)
+		{
+			ft_insert_cmpsort(list_files, &ft_stralphcmp);
+			ft_list_reverse(list_files);
+		}
+		return (0);
 	}
+	return (1);
 }
 
 int			ft_ask_user(int	size, char *buffer, t_screen *screen)
 {
 	char	question[256];
 	char	*prompt;
+	char	*str_size;
 	int		c;
 
 	c = '\0';
@@ -42,7 +48,9 @@ int			ft_ask_user(int	size, char *buffer, t_screen *screen)
 		prompt = "ariard-1.0$> ";
 		ft_bzero(question, 256);
 		ft_strcpy(question, "Display all ");
-		ft_strcat(question, ft_itoa(size));
+		str_size = ft_itoa(size);
+		ft_strcat(question, str_size);
+		ft_strdel(&str_size);
 		ft_strcat(question, " possibilities? (y or n)");
 		ft_insert(10);
 		ft_insert_str(question, screen);
@@ -66,6 +74,7 @@ void		ft_complete_arg(char *buffer, char *files, t_screen *screen)
 	t_dlist	**list_show;
 	int		size;
 	char	*dir;
+	char	*tmp;
 
 	list_files = ft_memalloc(sizeof(t_dlist));
 	list_show = ft_memalloc(sizeof(t_dlist));
@@ -77,7 +86,7 @@ void		ft_complete_arg(char *buffer, char *files, t_screen *screen)
 	{
 		size = ft_list_size(list_files);
 		if (ft_ask_user(size, buffer, screen) == -1)
-			return ;
+			return (ft_clean_list(list_files, list_show));
 		ft_print_column(buffer, list_files, screen);
 	}
 	else
@@ -88,14 +97,19 @@ void		ft_complete_arg(char *buffer, char *files, t_screen *screen)
 		if (size == 0 && files[0] == 0)
 			size = ft_list_size(list_files);
 		if (ft_ask_user(size, buffer, screen) == -1)
-			return ;
+			return (ft_clean_list(list_files, list_show));
 		if (size == 1)
-			ft_swap_buffer(buffer, ft_set_new_arg(buffer, list_show), screen);
+		{
+			tmp = ft_set_new_arg(buffer, list_show);
+			ft_swap_buffer(buffer, tmp, screen);
+			ft_strdel(&tmp);
+		}
 		else if (size == ft_list_size(list_files))
 			ft_print_column(buffer, list_files, screen);
 		else if (size > 1)
 			ft_print_column(buffer, list_show, screen);
 	}
+	return (ft_clean_list(list_files, list_show));
 }
 
 void		ft_complete_switch(char *buffer, t_dlist **list_bin,

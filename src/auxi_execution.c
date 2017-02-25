@@ -6,13 +6,13 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:25:11 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 12:36:49 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 14:35:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_close_pipe(t_info *info)
+int			ft_close_pipe(t_info *info)
 {
 	close(0);
 	open("/dev/stdout", O_WRONLY);
@@ -20,10 +20,10 @@ int		ft_close_pipe(t_info *info)
 	return (0);
 }
 
-char	**ft_quoteis(t_btree *node)
+char		**ft_quoteis(t_btree *node)
 {
 	t_token		*token;
-	char		**arg;	
+	char		**arg;
 	char		**tmp;
 	char		*cp;
 
@@ -53,7 +53,7 @@ int			ft_multidir(t_btree *node, t_btree *father,
 
 	tmp = NULL;
 	father_next = NULL;
-	if (info->ismultidir == -2)	
+	if (info->ismultidir == -2)
 		return (0);
 	if (ft_isredir_out(father) == 1 || ft_isappredir_out(father) == 1
 		|| ft_isredir_in(father) == 1)
@@ -63,12 +63,12 @@ int			ft_multidir(t_btree *node, t_btree *father,
 			father_next = ft_get_father(tree->root, tree->root,
 				tmp->key, &ft_itoacmp);
 		if (father_next && ft_strcmp(father->key, father_next->key) != 0)
-			if (ft_isredir_out(father_next) == 1 
+			if (ft_isredir_out(father_next) == 1
 				|| ft_isappredir_out(father_next) == 1
 				|| ft_isredir_in(father_next) == 1)
 			{
 				if (info->ismultidir == 0)
-				{	
+				{
 					info->heritance = node;
 					info->heritancefather = father;
 				}

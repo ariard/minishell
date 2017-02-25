@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 21:09:05 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/30 00:19:15 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/21 14:33:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int			ft_output_aggregation(char *aggregation, t_info *info)
 	return (1);
 }
 
-int			ft_execute_aggregation(char **args, t_info *info)
+int					ft_execute_aggregation(char **args, t_info *info)
 {
 	char	*last;
 	char	*tmp;
