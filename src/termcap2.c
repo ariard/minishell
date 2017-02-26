@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 14:41:02 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 14:57:43 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 19:18:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		ft_home(t_screen *screen)
 	int		j;
 
 	i = screen->left;
-	j = screen->vertical;	
+	j = screen->vertical;
 	if (j == 1)
 		ft_go_line_first();
 	while (j-- != 1)
@@ -45,11 +45,11 @@ void		ft_end(t_screen *screen)
 {
 	int		i;
 	int		j;
-	
+
 	i = (screen->col * (screen->down - 1)) - screen->left;
 	j = screen->vertical;
 	if (j == screen->down)
-		ft_go_line_first();			
+		ft_go_line_first();
 	while (j++ != screen->down)
 		ft_go_next_line();
 	while (i++ != screen->amplitude)

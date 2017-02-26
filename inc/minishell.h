@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 18:57:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 19:56:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int			ft_isoperand(char *stream, t_info *info);
 int			ft_isoperator(char *stream);
 
 t_btree		*ft_ast_insert_sequence(t_root *tree, t_btree *father, t_dlist *operand,
-		t_dlist *operator);
+			t_dlist *operator);
 
 t_btree		*ft_ast_insert_cmd(t_root *tree, t_btree *father, t_dlist *operand);
 

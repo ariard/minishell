@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 23:03:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 16:24:53 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 19:22:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-struct termios		*ft_tty_raw(int fd)
+struct termios	*ft_tty_raw(int fd)
 {
 	struct termios	buf;
 	struct termios	*old_termios;
@@ -39,7 +39,7 @@ int				ft_tty_reset(int fd, struct termios *old_termios)
 	return (0);
 }
 
-int			ft_puterm(int c)
+int				ft_puterm(int c)
 {
 	write(1, &c, 1);
 	return (1);
@@ -55,4 +55,4 @@ int				ft_init_term_data(void)
 		return (-1);
 	tgetent(buf_struct, tname);
 	return (1);
-}	
+}

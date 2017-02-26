@@ -6,15 +6,15 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 00:51:12 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 14:32:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 19:17:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"minishell.h"
+#include "minishell.h"
 
-static int			ft_cursor(int c, t_screen *screen)
+static int		ft_cursor(int c, t_screen *screen)
 {
-	int 	d;
+	int		d;
 
 	d = '\0';
 	if (c == '\033')
@@ -37,9 +37,8 @@ static int			ft_cursor(int c, t_screen *screen)
 	return (0);
 }
 
-
-static int	ft_process_input2(char c, char *buffer, t_screen *screen, 
-		t_info *info)
+static int		ft_process_input2(char c, char *buffer, t_screen *screen,
+				t_info *info)
 {
 	if (c == 12)
 		ft_clear_screen(buffer, screen);
@@ -48,8 +47,8 @@ static int	ft_process_input2(char c, char *buffer, t_screen *screen,
 	return (1);
 }
 
-int			ft_process_input(char c, char *buffer, t_screen *screen,
-		t_info *info)
+int				ft_process_input(char c, char *buffer, t_screen *screen,
+				t_info *info)
 {
 	ft_set_info_screen(buffer, screen);
 	if (ft_cursor(c, screen) == 1)

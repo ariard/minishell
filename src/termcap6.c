@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 19:02:24 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 15:05:45 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 19:19:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		ft_delete_all(t_screen *screen)
 
 	ft_go_last_line(screen);
 	ft_go_last_char(screen);
-	i = screen->down * screen->col; 
+	i = screen->down * screen->col;
 	screen->vertical = screen->down;
 	while (i != 14)
 	{

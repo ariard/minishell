@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 19:59:03 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 16:34:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:59:42 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_interrupt(char c, char *buffer, t_screen *screen, t_info *info)
 		ft_bzero(buffer, 1024);
 		return (1);
 	}
-	if (c == 4 && ft_strlen(buffer) == 0 && screen->quote == 0 
+	if (c == 4 && ft_strlen(buffer) == 0 && screen->quote == 0
 		&& info->heredoc == 0)
 	{
 		ft_putstr("exit");

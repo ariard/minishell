@@ -6,11 +6,11 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 16:16:14 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/17 14:27:45 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 19:19:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include 	"minishell.h"
+#include "minishell.h"
 
 static void		ft_change_char(char *buffer, int tmp, t_screen *screen)
 {
@@ -19,7 +19,7 @@ static void		ft_change_char(char *buffer, int tmp, t_screen *screen)
 
 	c = buffer[tmp];
 	if ((end = ft_isbeginline(tmp, screen)))
-			ft_prev_line(screen);
+		ft_prev_line(screen);
 	else
 		ft_cursor_left();
 	ft_delete();
@@ -51,9 +51,9 @@ static void		ft_highlights_ahead(char *buffer, t_screen *screen)
 		i++;
 	}
 	ft_end_edit();
-}	
+}
 
-void		ft_highlights_edit(char *buffer, t_screen *screen)
+void			ft_highlights_edit(char *buffer, t_screen *screen)
 {
 	ft_highlights_ahead(buffer, screen);
 }

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:27:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 16:37:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 19:49:23 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int			ft_cd(char **arg, t_info *info)
 
 				ft_process_cd(path, ft_builtin_option(arg, "cd"),
 					info);
+				free(&path);
 				return (1);
 			}
 		path = ft_strnew(256);	

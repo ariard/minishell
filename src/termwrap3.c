@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 19:26:32 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/18 17:09:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 19:20:04 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		ft_go_last_char(t_screen *screen)
 	i = 0;
 	tputs(tgetstr("cr", NULL), 0, &ft_puterm);
 	while (i++ != screen->col)
-		ft_cursor_right();;
+		ft_cursor_right();
 }
 
 void		ft_go_last_line(t_screen *screen)
