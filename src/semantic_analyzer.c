@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 17:09:36 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 17:33:09 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ int				ft_execute_cmd(char	*path, t_btree *node, t_btree *father,
 	}
 	if (ft_isregular(father) == 1)
 		return (ft_execute_regular(path, node, info));
-	if (ft_isheredoc(father) == 1)
-		return (ft_execute_heredoc(path, node, father, info));
 	if (ft_isredir_out(father) == 1)
 		return (ft_redir_out(path, node, father, info));
 	if (ft_isredir_in(father) == 1)

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 14:24:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 16:30:28 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,6 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 		screen->quote = ft_isquote(c, buffer, buffquote, screen);
 		if (screen->quote != 0)
 			info->quote = 1;
-		if (ft_endheredoc(c))
-			if (ft_isinheredoc(buffer, info))
-				ft_add_heredoc(buffer, info);
-		if (c == 13)
-			if (ft_isendheredoc(buffer, info) == 1)
-			{
-				ft_strcat(buffquote, buffer);
-				ft_bzero(buffer, 1024);
-				ft_strcpy(buffer, buffquote);
-			}
 		if (ft_interrupt(c, buffer, screen, info))
 			break;
 		if (ft_isend(c, buffer, buffquote, screen, info) == 1) 
@@ -89,7 +79,6 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 		if (ft_strlen(buffer) >= 1024)
 			return (ft_buffer_error());
 	}
-	ft_extract_buff_auxi(buffer, info);
 	ft_strdel(&buffquote);
 	ft_putstr_fd("\nFIN DE LECTURE\n", 3);
 	return (buffer);

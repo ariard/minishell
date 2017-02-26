@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:27:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 12:26:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 16:37:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,15 @@ char		*ft_construct_path(char **new_tab_dir)
 	ft_strcat(path, "/");
 	while (*new_tab_dir)
 	{
-		if (ft_strcmp(".", *new_tab_dir) != 0)
-		{
-			if (*(new_tab_dir + 1))
-			{
-				if (ft_strcmp(*(new_tab_dir + 1), "..") != 0)
-				{
-					ft_strcat(path, *new_tab_dir);
-					ft_strcat(path, "/");
-				}
-			}
-			else
-				ft_strcat(path, *new_tab_dir);
-		}
+		ft_putstr_fd(*new_tab_dir, 3);
+		if (ft_strcmp(".", *new_tab_dir) == 0)
+			break;
+		if (*(new_tab_dir + 1) && ft_strcmp("..", *(new_tab_dir + 1)) == 0)
+			break;	
+		ft_putstr_fd("still alive", 3);
+		ft_strcat(path, *new_tab_dir);
+		if (*(new_tab_dir + 1) && ft_strcmp(*(new_tab_dir + 1), ".") != 0)
+			ft_strcat(path, "/");
 		if (ft_check_dir(path) == -1)
 		{
 			free(path);
@@ -60,6 +56,7 @@ int			ft_process_cd(char *curpath, char *option, t_info *info)
 	ft_array_clean(new_tab_dir);
 	if (!path)
 		return (1);
+	ft_putstr_fd(path, 3);
 	if (chdir(path) == 0)
 	{
 		tmp = ft_grep_env(info->env, "OLDPWD");
@@ -125,6 +122,7 @@ int			ft_cd(char **arg, t_info *info)
 		if (ft_strncmp(*arg, ".", 1) != 0 || ft_strncmp(*arg, "..", 2) != 0)	
 			if ((path = ft_read_cdpath(*arg, info->env)) != NULL)
 			{	
+
 				ft_process_cd(path, ft_builtin_option(arg, "cd"),
 					info);
 				return (1);

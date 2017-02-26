@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 15:33:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 10:34:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 16:35:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_entry		*ft_gen_entry(char *bin, char *path)
 {
 	t_entry		*entry;
-	
+
 	(void)path;
 	(void)bin;
 	entry = ft_memalloc(sizeof(t_entry));
@@ -24,7 +24,7 @@ static t_entry		*ft_gen_entry(char *bin, char *path)
 	return (entry);
 }
 
-int			ft_search_bin(char *dir, char *bin)
+int					ft_search_bin(char *dir, char *bin)
 {
 	DIR				*ds;
 	struct dirent	*lu;
@@ -40,13 +40,13 @@ int			ft_search_bin(char *dir, char *bin)
 		{
 			closedir(ds);
 			return (1);
-		}	
+		}
 	}
 	closedir(ds);
 	return (0);
 }
-		
-t_entry			*ft_add_bin(char *bin, t_info *info)
+
+t_entry				*ft_add_bin(char *bin, t_info *info)
 {
 	char	*path;
 	char	*dir;
@@ -59,7 +59,7 @@ t_entry			*ft_add_bin(char *bin, t_info *info)
 	while (*path)
 	{
 		dir = ft_strnew(256);
-		ft_strchrcpy(dir, path, ':');	
+		ft_strchrcpy(dir, path, ':');
 		if (ft_search_bin(dir, bin))
 		{
 			entry = ft_gen_entry(bin, dir);
@@ -74,11 +74,35 @@ t_entry			*ft_add_bin(char *bin, t_info *info)
 	return (NULL);
 }
 
-int			ft_full_path(char *full_path)
+int					ft_full_path(char *full_path)
 {
 	if (!(ft_strchr(full_path, '/')))
 		return (0);
 	if (access(full_path, F_OK) == -1)
 		return (0);
 	return (1);
-}	
+}
+
+void				ft_getold(char *path)
+{
+	char	*temp;
+	int		i;
+
+	temp = path;
+	i = 0;
+	while (*(path + 1))
+		path++;
+	if (path[ft_strlen(path) - 1] == '.' && path[ft_strlen(path) - 2] == '.')
+		i = 2;
+	else if (path[ft_strlen(path) - 1] == '.')
+		i = 1;
+	while (temp < path)
+	{
+		if (*path == '/')
+			i--;
+		if (i == 0)
+			break ;
+		*path = 0;
+		path--;
+	}
+}

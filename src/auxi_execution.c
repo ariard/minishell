@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 16:25:11 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 14:35:24 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 16:32:44 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,42 +43,6 @@ char		**ft_quoteis(t_btree *node)
 	*arg++ = ft_strdup(cp);
 	*arg = NULL;
 	return (tmp);
-}
-
-int			ft_multidir(t_btree *node, t_btree *father,
-		t_info *info, t_root *tree)
-{
-	t_btree		*tmp;
-	t_btree		*father_next;
-
-	tmp = NULL;
-	father_next = NULL;
-	if (info->ismultidir == -2)
-		return (0);
-	if (ft_isredir_out(father) == 1 || ft_isappredir_out(father) == 1
-		|| ft_isredir_in(father) == 1)
-	{
-		tmp = ft_goto_nxt_operand(node, father);
-		if (tmp)
-			father_next = ft_get_father(tree->root, tree->root,
-				tmp->key, &ft_itoacmp);
-		if (father_next && ft_strcmp(father->key, father_next->key) != 0)
-			if (ft_isredir_out(father_next) == 1
-				|| ft_isappredir_out(father_next) == 1
-				|| ft_isredir_in(father_next) == 1)
-			{
-				if (info->ismultidir == 0)
-				{
-					info->heritance = node;
-					info->heritancefather = father;
-				}
-				info->ismultidir = 1;
-				return (1);
-			}
-	}
-	if (info->ismultidir == 1)
-		info->ismultidir = 2;
-	return (0);
 }
 
 int			ft_flush(t_btree *node)

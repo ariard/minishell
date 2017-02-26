@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:57:21 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 17:09:44 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 16:33:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int			ft_check_permission(char *path)
 	return (0);
 }
 
-int		ft_redir(t_btree *father)
+int			ft_redir(t_btree *father)
 {
 	if (!father)
 		return (0);
-	if (ft_isredir_in(father) || ft_isredir_out(father) 
+	if (ft_isredir_in(father) || ft_isredir_out(father)
 		|| ft_isappredir_out(father))
 		return (1);
 	return (0);

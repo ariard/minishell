@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macro_operand2.c                                   :+:      :+:    :+:   */
+/*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 00:02:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 11:16:38 by ariard           ###   ########.fr       */
+/*   Created: 2017/02/26 16:35:47 by ariard            #+#    #+#             */
+/*   Updated: 2017/02/26 16:36:33 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int			ft_isbuiltin(t_btree *node)
-{	
+{
 	char		*str;
 
 	str = ft_node_nameis(node);
@@ -35,8 +35,6 @@ int			ft_builtin(char *name, char **str, t_info *info)
 	int		ret;
 
 	ret = 0;
-	if (ft_isaggregation(str) == 1 && ft_strncmp("echo", name, 4) == 0)
-		ft_execute_aggregation(str, info);	
 	if (ft_strncmp("echo", name, 4) == 0)
 		ret = ft_echo(str, info);
 	if (ft_strncmp("cd", name, 2) == 0)
@@ -68,7 +66,6 @@ char		*ft_builtin_option(char **arg, char *builtin)
 			option = "P";
 		if (ft_strcmp(*arg, "-L") == 0 && ft_strcmp(builtin, "cd") == 0)
 			option = "L";
-		if (ft_strcmp(*arg, "-i") == 0 && ft_strcmp(builtin, "env") == 0)
 		arg++;
 	}
 	return (option);

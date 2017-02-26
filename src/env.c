@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 18:32:40 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 21:33:04 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 17:32:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,27 @@ static void	ft_execute_env(char *path, t_info *info)
 
 int			ft_env(char **arg, t_info *info)
 {
-	char	*option;
 	char	*var;
 	t_entry	*entry;
 
 	entry = NULL;
 	if (!arg || !*arg || !info->env)
 		return (1);
-	option = ft_builtin_option(arg, "env");
 	arg++;
-	if (*arg)
-	{	
-		while (*arg)
+	while (*arg)
+	{
+		if ((var = strrchr(*arg, '=')) && ft_strlen(*arg) > 1)
+			ft_setenv(*arg, info);
+		else if ((entry = ft_add_bin(*arg, info)))
 		{
-			if ((var = strrchr(*arg, '=')) && ft_strlen(*arg) > 1)
-				ft_setenv(*arg, info);
-			else if ((entry = ft_add_bin(*arg, info)))
-			{	
-				if (entry->perm == -1)
-					return (ft_permission_error(*arg, info->env));
-				if (entry->perm == 0)
-					ft_execute_env(entry->path, info);	
-			}
-			else if (!var && !entry)
-				return (ft_existence_error("env", *arg));
-			arg++;
+			if (entry->perm == -1)
+				return (ft_permission_error(*arg, info->env));
+			if (entry->perm == 0)
+				ft_execute_env(entry->path, info);
 		}
+		else if (!var && !entry)
+			return (ft_existence_error("env", *arg));
+		arg++;
 	}
 	if (!entry)
 		ft_read_env(info->env);
@@ -99,7 +94,7 @@ int			ft_unsetenv(char **arg, t_info *info)
 	{
 		del = ft_grep_env(info->env, *arg);
 		if (del)
-			if (*del)	
+			if (*del)
 				info->env = ft_array_del(info->env, *del);
 	}
 	return (1);

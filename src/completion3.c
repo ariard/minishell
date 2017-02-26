@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:20:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 16:25:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 17:40:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void			ft_complete_path(char *buffer, char *path, t_screen *screen)
 {
 	char	*valid_path;
 	char	*match;
-	int		size;
 	t_dlist	**list_path;
 	t_dlist	**list_show;
+	int		size;
 
 	list_path = ft_memalloc(sizeof(t_dlist));
 	list_show = ft_memalloc(sizeof(t_dlist));
@@ -79,18 +79,9 @@ void			ft_complete_path(char *buffer, char *path, t_screen *screen)
 	size = ft_list_size(list_show);
 	if (ft_ask_user(size, buffer, screen) == -1)
 	{
-
 		ft_strdel(&valid_path);
 		return (ft_clean_list(list_path, list_show));
 	}
-	if (size > 1)
-		ft_print_column(buffer, list_show, screen);
-	else if (size == 1)
-	{
-		match = ft_set_new_path(buffer, valid_path, list_show);
-		ft_swap_buffer(buffer, match, screen);
-		ft_strdel(&match);
-	}
-	ft_strdel(&valid_path);
+	ft_complete_path2(list_show, screen, buffer, valid_path);
 	return (ft_clean_list(list_path, list_show));
 }

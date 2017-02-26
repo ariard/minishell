@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/02/14 12:28:19 by ariard           ###   ########.fr        #
+#    Updated: 2017/02/26 17:07:22 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,6 @@ SRC = src/minishell.c \
 	  src/execution.c \
 	  src/execution_redir.c \
 	  src/execution_distribution.c\
-	  src/aggregation.c \
-	  src/aggregation2.c \
 	  src/builtin.c \
 	  src/echo.c \
 	  src/cd.c \
@@ -39,8 +37,7 @@ SRC = src/minishell.c \
 	  src/completion.c \
 	  src/completion2.c \
 	  src/completion3.c \
-	  src/heredoc.c \
-	  src/heredoc2.c \
+	  src/completion4.c\
 	  src/signal.c \
 	  src/tty.c \
 	  src/term.c \

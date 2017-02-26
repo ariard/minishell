@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 23:47:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 17:09:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/25 18:11:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 	if (status == 0)
 	{
 		signal(SIGINT, ft_sigint_handler_child);
-		if (ft_isaggregation(arg) == 1)
-			ft_execute_aggregation(arg, info);
 		if (ft_isfddir(arg))
 			ft_fddir(arg, info, 0);
 		info->file = ft_get_fdfiles(node, father);
@@ -102,8 +100,6 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 	if (status == 0)
 	{
 		signal(SIGINT, ft_sigint_handler_child);
-		if (ft_isaggregation(arg) == 1)
-			ft_execute_aggregation(arg, info);
 		if (ft_isfddir(arg))
 			ft_fddir(arg, info, 1);
 		info->file = ft_get_fdfiles2(node, father);
@@ -140,8 +136,6 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 	if (status == 0)
 	{
 		signal(SIGINT, ft_sigint_handler_child);
-		if (ft_isaggregation(arg) == 1)
-			ft_execute_aggregation(arg, info);
 		if (ft_isfddir(arg))
 			ft_fddir(arg, info, 0);
 		info->file = ft_get_fdfiles(node, father);

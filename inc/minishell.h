@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 15:53:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 17:29:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,8 @@ char		*ft_builtin_option(char **arg, char *builtin);
 
 int			ft_check_dir(char *path);
 
+void		ft_getold(char *path);
+
 /*
 ** Functions to execute cmd
 */
@@ -237,6 +239,14 @@ void		ft_reverse_history(char *buffer, t_screen *screen, t_info *info);
 /*
 ** Functions to use completion feature
 */
+
+void		ft_complete_arg2(t_dlist **list_files, char *files,
+			t_screen *screen, char *buffer);
+
+void		ft_complete_path2(t_dlist **list_show, t_screen *screen,
+			char *buffer, char *valid_path);
+
+int			ft_complete_question(char *str, int size);
 
 void		ft_complete_switch(char *buffer, t_dlist **list_bin, t_screen *screen);
 
