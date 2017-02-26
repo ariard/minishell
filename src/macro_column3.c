@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 22:33:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 14:38:46 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:26:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		ft_display(t_col *col, t_dlist *elem)
 {
 	char		buf[256];
 	t_dlist		*tmp;
-	
+
 	ft_bzero(buf, 256);
 	if (col->size == col->block * col->curse)
 		tmp = ft_get_special(elem, col);

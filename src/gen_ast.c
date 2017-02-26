@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:50:59 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 17:07:13 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:21:24 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_btree			*ft_ast_insert_sequence(t_root *tree, t_btree *father, 
+t_btree			*ft_ast_insert_sequence(t_root *tree, t_btree *father,
 		t_dlist *operand, t_dlist *operator)
 {
 	t_btree		*tmp;

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:12:09 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/14 14:07:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:28:22 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			ft_isaggregation(char **args)
 	return (0);
 }
 
-int				ft_isheredoc(t_btree *father)
+int			ft_isheredoc(t_btree *father)
 {
 	t_token		*token;
 

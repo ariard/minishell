@@ -6,12 +6,11 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 21:37:06 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 10:59:12 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 17:45:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int		ft_ambiguous_error(char *last)
 {

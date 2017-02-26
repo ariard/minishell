@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 20:39:19 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/29 16:44:58 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:45:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void			ft_read_entry(t_cht *htb)
 	i = 0;
 	while (i < 2300)
 	{
-		if (htb->head)	
+		if (htb->head)
 			if (htb->head[i])
 				if (htb->head[i]->key)
 				{
@@ -28,37 +28,6 @@ void			ft_read_entry(t_cht *htb)
 					ft_putchar(10);
 				}
 		i++;
-	}
-}
-
-void			ft_read_list(t_dlist **list)
-{
-	t_dlist		*tmp;
-	t_token		*token;
-	int			i;
-
-	if (!list || !*list)
-		return ;
-	tmp = *list;
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->data)
-		{
-			token = tmp->data;
-			if (token)
-			{
-				if (token->id)
-				{
-					ft_putstr(token->id);
-					ft_putstr(" : ");
-				}
-				if (token->name)
-					ft_putstr(token->name);
-				ft_putchar(10);
-			}
-		}
-		tmp = tmp->next;
 	}
 }
 

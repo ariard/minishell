@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/31 14:32:40 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 18:28:26 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:22:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static int		ft_scan_stream(char *stream)
 				*stream = '\0';
 				stream++;
 			}
-			break;
+			break ;
 		}
 		only_spaces += ft_isspace(*stream);
 		stream++;
 	}
 	if (only_spaces == len)
-	   return (1);
-	return (0);	
+		return (1);
+	return (0);
 }
 
 t_dlist			**ft_lex_analyze(char *stream, t_info *info)
@@ -45,5 +45,5 @@ t_dlist			**ft_lex_analyze(char *stream, t_info *info)
 	if (ft_scan_stream(stream))
 		return (NULL);
 	list_token = ft_lexer(stream, info);
-	return (list_token);	
+	return (list_token);
 }

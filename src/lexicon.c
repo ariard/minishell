@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/31 15:47:32 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 18:24:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:25:02 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			ft_aggregation(char *stream)
 		{
 			if ((*stream == '>' || *stream == '<') && *(stream + 1) == '&')
 				return (1);
-		}	
+		}
 	return (-1);
 }
 
@@ -55,11 +55,11 @@ int			ft_isoperand(char *stream, t_info *info)
 	while (*stream != ';' && *stream != '|' && *stream)
 	{
 		if (*stream == '\n' && info->buff_heredoc == 1)
-			break;
+			break ;
 		if (*stream == '>' || *stream == '<')
 		{
 			if (ft_aggregation(stream) == -1)
-				break;
+				break ;
 			else
 			{
 				stream++;

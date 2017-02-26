@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 18:10:26 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 16:38:48 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:27:59 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int			ft_isregular(t_btree *father)
 	if (!father)
 		return (-1);
 	token = father->data;
-	if (ft_strcmp(token->name, ";") == 0 
-		|| ft_strcmp(token->name, "||") == 0 || ft_strcmp(token->name, "&&") == 0)
+	if (ft_strcmp(token->name, ";") == 0
+		|| ft_strcmp(token->name, "||") == 0
+		|| ft_strcmp(token->name, "&&") == 0)
 		return (1);
 	return (0);
 }

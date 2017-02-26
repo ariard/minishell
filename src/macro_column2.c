@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 00:09:45 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 16:25:54 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:25:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			ft_isparent(char *str)
 void		ft_print_column(char *buffer, t_dlist **list, t_screen *screen)
 {
 	char	*prompt;
-	
+
 	prompt = "ariard-1.0$> ";
 	ft_putchar(10);
 	ft_display_columns(list, ft_iscol());
@@ -57,7 +57,7 @@ char		*ft_set_new_arg(char *buffer, t_dlist **list)
 	return (new);
 }
 
-int		ft_isdir(char *str)
+int			ft_isdir(char *str)
 {
 	DIR *ds;
 

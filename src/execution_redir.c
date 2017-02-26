@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 23:47:35 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 18:11:54 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:20:49 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_get_fdfiles(t_btree *node, t_btree *father)
+int			ft_get_fdfiles(t_btree *node, t_btree *father)
 {
 	t_btree		*tmp;
 	char		*files;
@@ -29,7 +29,7 @@ int		ft_get_fdfiles(t_btree *node, t_btree *father)
 	return (fd);
 }
 
-int		ft_get_fdfiles2(t_btree *node, t_btree *father)
+int			ft_get_fdfiles2(t_btree *node, t_btree *father)
 {
 	t_btree		*tmp;
 	char		*files;
@@ -46,18 +46,15 @@ int		ft_get_fdfiles2(t_btree *node, t_btree *father)
 	return (fd);
 }
 
-int				ft_redir_out(char *path, t_btree *node, t_btree *father,
-		t_info *info)
+int			ft_redir_out(char *path, t_btree *node, t_btree *father,
+			t_info *info)
 {
 	char	**arg;
 	pid_t	status;
 
 	if (!node || !path)
 		return (0);
-	if (info->quote == 1)
-		arg = ft_quoteis(node);
-	else
-		arg = ft_node_argis(node);
+	arg = ft_getarg(node, info);
 	if (ft_builtin(ft_node_nameis(node), arg, info))
 		status = -1;
 	else
@@ -73,10 +70,7 @@ int				ft_redir_out(char *path, t_btree *node, t_btree *father,
 	}
 	if (status > 0)
 		waitpid(status, 0, WUNTRACED | WCONTINUED);
-	if (info->pipe == 1)
-		ft_close_pipe(info);
-	if (arg)
-	ft_tabdel(arg);
+	ft_exit_redir(info, arg);
 	return (1);
 }
 
@@ -86,13 +80,9 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 	char	**arg;
 	pid_t	status;
 
-	(void)father;
 	if (!node || !path)
 		return (0);
-	if (info->quote == 1)
-		arg = ft_quoteis(node);
-	else
-		arg = ft_node_argis(node);
+	arg = ft_getarg(node, info);
 	if (ft_builtin(ft_node_nameis(node), arg, info))
 		status = -1;
 	else
@@ -108,10 +98,7 @@ int			ft_redir_in(char *path, t_btree *node, t_btree *father,
 	}
 	if (status > 0)
 		waitpid(status, 0, WUNTRACED | WCONTINUED);
-	if (info->pipe == 1)
-		ft_close_pipe(info);
-	if (arg)
-		ft_tabdel(arg);
+	ft_exit_redir(info, arg);
 	return (1);
 }
 
@@ -120,15 +107,10 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 {
 	char	**arg;
 	pid_t	status;
-	char	*line;
 
-	(void)father;
-	if (info->quote == 1)
-		arg = ft_quoteis(node);
-	else
-		arg = ft_node_argis(node);
-	line = NULL;
-	while (get_next_line(info->file, &line));
+	if (!node || !path)
+		return (0);
+	arg = ft_getarg(node, info);
 	if (ft_builtin(ft_node_nameis(node), arg, info))
 		status = -1;
 	else
@@ -139,13 +121,12 @@ int			ft_app_redir_out(char *path, t_btree *node, t_btree *father,
 		if (ft_isfddir(arg))
 			ft_fddir(arg, info, 0);
 		info->file = ft_get_fdfiles(node, father);
+		ft_read_file(info);
 		dup2(info->file, 1);
 		execve(path, arg, info->env);
 	}
 	if (status > 0)
 		waitpid(status, 0, WUNTRACED | WCONTINUED);
-	if (info->pipe == 1)
-		ft_close_pipe(info);
-	ft_tabdel(arg);
+	ft_exit_redir(info, arg);
 	return (1);
 }

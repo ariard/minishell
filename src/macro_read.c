@@ -6,18 +6,17 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 23:53:48 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 12:34:34 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:32:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_isend(int c, char *buffer, char *buffquote, t_screen *screen,
-		t_info *info)
+int			ft_isend(int c, char *buffer, char *buffquote, t_screen *screen)
 {
-	if (c == 13 && screen->quote == 0 && info->heredoc != 1) 
+	if (c == 13 && screen->quote == 0)
 		return (1);
-	if (c == 13 && (screen->quote != 0 || info->heredoc == 1))
+	if (c == 13 && screen->quote != 0)
 	{
 		ft_insert(10);
 		ft_insert_str("> ", screen);
@@ -25,7 +24,7 @@ int			ft_isend(int c, char *buffer, char *buffquote, t_screen *screen,
 		screen->vertical = 1;
 		screen->left = ft_strlen(">");
 		ft_strcat(buffquote, buffer);
-		if (info->heredoc == 1 || screen->quote != 0)
+		if (screen->quote != 0)
 			ft_strcat(buffquote, "\n");
 		ft_bzero(buffer, 1024);
 	}
@@ -38,9 +37,9 @@ int			ft_isquote(int c, char *buffer, char *buffquote, t_screen *screen)
 		return (2);
 	if (c == 39 && screen->quote == 0)
 		return (1);
-	if (c == '"' && screen->quote == 2 )
+	if (c == '"' && screen->quote == 2)
 	{
-		ft_return_buffquote(buffer, buffquote, 2);	
+		ft_return_buffquote(buffer, buffquote, 2);
 		return (0);
 	}
 	if (c == 39 && screen->quote == 1)
@@ -53,8 +52,8 @@ int			ft_isquote(int c, char *buffer, char *buffquote, t_screen *screen)
 
 int			ft_iscol(void)
 {
-	struct	winsize w;
-	
+	struct winsize	w;
+
 	ioctl(0, TIOCGWINSZ, &w);
 	return (w.ws_col);
 }

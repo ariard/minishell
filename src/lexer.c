@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/31 14:54:04 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/13 18:28:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:24:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void				ft_token_free(void	*data)
+void				ft_token_free(void *data)
 {
 	t_token			*token;
 
@@ -21,7 +21,7 @@ void				ft_token_free(void	*data)
 	ft_strdel(&token->id);
 	free(token);
 }
-	
+
 static char			*ft_detect_pattern(char *stream, t_info *info)
 {
 	char	*lexem;
@@ -42,7 +42,7 @@ static t_token		*ft_gen_token(char *lexem, t_info *info)
 	t_token			*token;
 
 	token = ft_memalloc(sizeof(t_token));
-	token->name = ft_strtrim(lexem); 
+	token->name = ft_strtrim(lexem);
 	if (ft_isoperator(lexem))
 		token->id = ft_strdup("operator");
 	else if (ft_isoperand(lexem, info))
@@ -66,7 +66,8 @@ t_dlist				**ft_lexer(char *stream, t_info *info)
 		lexem = ft_detect_pattern(stream, info);
 		if (ft_strlen(lexem) > 0)
 		{
-			ft_list_push_back(list_token, ft_gen_token(lexem, info), ft_itoa(id));
+			ft_list_push_back(list_token, ft_gen_token(lexem, info),
+			ft_itoa(id));
 			id++;
 		}
 		if (ft_strlen(lexem) > 0)

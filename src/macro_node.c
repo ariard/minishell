@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 21:17:20 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/25 16:56:19 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:27:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,4 @@ int			ft_nodeisleft(t_btree *node, t_btree *father)
 		if (ft_strcmp((father->right)->key, node->key) == 0)
 			return (-1);
 	return (0);
-}	
+}

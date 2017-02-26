@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 21:27:07 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/21 12:35:56 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:33:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int			ft_iscolumn(t_screen *screen)
 {
 	int		col;
 
-	col = (screen->cursor + screen->left) - ((screen->vertical - 1) * screen->col);
+	col = (screen->cursor + screen->left) - ((screen->vertical - 1)
+	* screen->col);
 	return (col);
 }
 
@@ -24,7 +25,8 @@ int			ft_lastcolumn(t_screen *screen)
 {
 	int		col;
 
-	col = (screen->amplitude + screen->left) - ((screen->down - 1) * screen->col);
+	col = (screen->amplitude + screen->left) - ((screen->down - 1)
+	* screen->col);
 	return (col);
 }
 
@@ -69,7 +71,6 @@ int			ft_isinheredoc(char *buffer, t_info *info)
 	tmp--;
 	while (*tmp && *tmp != '>' && *tmp != ';' && *tmp != '&')
 	{
-
 		if (*tmp == '<')
 			if (*(tmp - 1))
 				if (*(tmp - 1) == '<')
@@ -77,7 +78,7 @@ int			ft_isinheredoc(char *buffer, t_info *info)
 					info->heredoc = 1;
 					info->buff_heredoc = 1;
 					return (1);
-				}	
+				}
 		tmp--;
 	}
 	return (0);

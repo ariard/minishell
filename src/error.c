@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 22:09:47 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/28 17:34:16 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 17:45:40 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				ft_syntax_error(t_dlist *list_token)
 	return (-1);
 }
 
-int			ft_semantic_error(char *s)
+int				ft_semantic_error(char *s)
 {
 	ft_putstr_fd("ariard: ", 2);
 	ft_putstr_fd(s, 2);
@@ -35,7 +35,7 @@ int			ft_semantic_error(char *s)
 	return (-1);
 }
 
-int			ft_permission_error(char *s, char **env)
+int				ft_permission_error(char *s, char **env)
 {
 	char	*log;
 
@@ -51,13 +51,13 @@ int			ft_permission_error(char *s, char **env)
 	return (-1);
 }
 
-int			ft_home_error(void)
+int				ft_home_error(void)
 {
 	ft_putstr_fd("ariard: cd: HOME not set\n", 2);
 	return (1);
 }
 
-int			ft_existence_error(char *cmd, char *path)
+int				ft_existence_error(char *cmd, char *path)
 {
 	ft_putstr_fd("ariard : ", 2);
 	ft_putstr_fd(cmd, 2);

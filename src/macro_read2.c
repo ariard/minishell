@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 14:56:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/23 17:21:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:32:31 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			ft_set_info_screen(char *buffer, t_screen *screen)
 
 int			ft_overflow(t_screen *screen)
 {
-	if (screen->amplitude + screen->left >= screen->col * 
+	if (screen->amplitude + screen->left >= screen->col *
 			screen->vertical && screen->cursor < screen->amplitude)
 		return (1);
 	return (0);
@@ -35,7 +35,7 @@ int			ft_overflow(t_screen *screen)
 
 int			ft_underflow(t_screen *screen)
 {
-	if (screen->amplitude + screen->left > screen->col * 
+	if (screen->amplitude + screen->left > screen->col *
 			screen->vertical && screen->cursor < screen->amplitude)
 		return (1);
 	return (0);

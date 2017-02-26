@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 15:19:55 by ariard            #+#    #+#             */
-/*   Updated: 2017/01/31 16:10:01 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:34:14 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int			ft_isendheredoc(char *buffer, t_info *info)
 	}
 	return (0);
 }
-		
+
 int			ft_endheredoc(char c)
 {
 	if (c == '&' || c == ';' || c == '|' || c == '>' || c == 13)
-	   return (1);
+		return (1);
 	return (0);
 }

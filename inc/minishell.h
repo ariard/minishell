@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 17:29:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/26 18:57:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct		s_info
 	char			*prev_path;
 	char			**av;
 	pid_t			status;
+	char			*generic;
 }					t_info;
 
 t_dlist		**ft_lex_analyze(char *stream, t_info *info);
@@ -122,10 +123,16 @@ int			ft_redir(t_btree *father);
 void		ft_token_free(void *data);
 
 int			ft_distribute_execution(t_btree *node, t_btree *father, t_info *info,
-			t_root *tree, char *operand);
+			t_root *tree);
 
-int			ft_execute_cmd(char *path, t_btree *node, t_btree *father,
+int			ft_execute_cmd(t_btree *node, t_btree *father,
 			t_root *tree, t_info *info);
+
+char		**ft_getarg(t_btree *node, t_info *info);
+
+void		ft_exit_redir(t_info *info, char **arg);
+
+void		ft_read_file(t_info *info);
 
 /*
 ** Functions to get shell's info
@@ -517,7 +524,7 @@ void					ft_add_heredoc(char *buffer, t_info *info);
 char					*ft_extract_file(char *eof, char *buffer, t_info *info);	
 
 int						ft_isend(int c, char *buffer, char *buffquote, 
-		t_screen *screen, t_info *info);
+						t_screen *screen);
 
 int						ft_isquote(int c, char *buffer, char *buffquote, 
 		t_screen *screen);
