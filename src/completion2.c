@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 15:10:56 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 18:16:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 18:12:15 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void		ft_complete_arg(char *buffer, char *files, t_screen *screen)
 	if (ft_isdir(files) == 1)
 	{
 		size = ft_list_size(list_files);
-		if (ft_ask_user(size, buffer, screen) == -1)
-			return (ft_clean_list(list_files, NULL));
-		ft_print_column(buffer, list_files, screen);
+		if (ft_ask_user(size, buffer, screen) == 1)
+			ft_print_column(buffer, list_files, screen);
+		return (ft_clean_list(list_files, NULL));
 	}
 	else
 		ft_complete_arg2(list_files, files, screen, buffer);
@@ -99,12 +99,12 @@ void		ft_complete_switch(char *buffer, t_dlist **list_bin,
 			inword = 1;
 		if (ft_isspace(*tmp) == 1 && inword == 1)
 		{
-			while (*tmp && ft_isspace(*tmp) == 1 && *tmp++)
+			while (*tmp && ft_isspace(*tmp) == 1)
+			{
+				tmp++;
 				screen->match++;
-			if (ft_isuncompletepath(tmp) == 1)
-				ft_complete_path(buffer, tmp, screen);
-			else
-				ft_complete_arg(buffer, tmp, screen);
+			}
+			ft_complete_arg(buffer, tmp, screen);
 			return ;
 		}
 		tmp++;

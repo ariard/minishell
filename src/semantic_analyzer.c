@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 18:58:40 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 17:33:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int				ft_execute_operand(t_btree *node, t_btree *father, t_info *info,
 	if (ft_strncmp(info->generic, "exit", 4) == 0)
 	{
 		ft_putstr("exit");
+		ft_strdel(&info->generic);
 		exit(0);
 	}
 	else if (ft_strcmp(info->generic, "setenv") == 0
@@ -88,10 +89,12 @@ int				ft_execute_operand(t_btree *node, t_btree *father, t_info *info,
 		|| ft_strcmp(info->generic, "echo") == 0
 		|| ft_strcmp(info->generic, "env") == 0
 		|| ft_strcmp(info->generic, "cd") == 0)
+	{
 		ret = ft_execute_cmd(node, father, tree, info);
+		ft_strdel(&info->generic);
+	}
 	else
 		ret = ft_distribute_execution(node, father, info, tree);
-	ft_strdel(&info->generic);
 	return (ret);
 }
 
@@ -109,11 +112,7 @@ void			ft_execute_ast(t_root *tree, t_info *info)
 		info->generic = NULL;
 		father = ft_get_father(tree->root, tree->root, tmp->key, &ft_itoacmp);
 		ret = ft_execute_operand(tmp, father, info, tree);
-		if ((ft_islistand(father) == 1 && ret == -1) || ft_isheredoc(father))
-			tmp = ft_jump_nxt_operand(tree, tmp);
-		else if (ft_islistor(father) == 1 && ret == 1)
-			tmp = ft_jump_nxt_operand(tree, tmp);
-		else if (ft_ispipe(father) == 1 && ret == -1)
+		if (ft_ispipe(father) == 1 && ret == -1)
 			tmp = ft_jump_nxt_operand(tree, tmp);
 		else
 			tmp = ft_goto_nxt_operand(tmp, father);

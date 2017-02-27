@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 22:23:08 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 19:50:47 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 17:18:19 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int			ft_execute_pipe(char *path, t_btree *node, t_info *info)
 		dup2(fd[0], 0);
 	}
 	info->status = status;
-	ft_tabdel(arg);
+	if (arg)
+		ft_tabdel(arg);
 	return (1);
 }

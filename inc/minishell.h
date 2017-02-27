@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 19:56:20 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 17:00:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,6 @@ typedef struct		s_info
 	char			**env;
 	t_dlist			**list_bin;
 	t_dlist			**delim;
-	t_dlist			*history;
-	int				sizehist;
-	int				heredoc;
-	int				buff_heredoc;
-	int				heredocsize;
 	char			*previous_eof;
 	char			*buff_auxi;
 	int				quote;
@@ -87,7 +82,6 @@ typedef struct		s_info
 	t_btree			*prev_father;
 	t_btree			*prev_node;
 	char			*previous_path;
-	int				ismultidir;
 	int				file;
 	char			*prev_path;
 	char			**av;
@@ -278,7 +272,7 @@ void		ft_clean_list(t_dlist **list_files, t_dlist **list_show);
  * Functions to handle signals
 */
 
-int			ft_interrupt(char c, char *buffer, t_screen *screen, t_info *info);
+int			ft_interrupt(char c, char *buffer, t_screen *screen);
 
 void		ft_sigint_handler(int signo);
 
@@ -292,7 +286,7 @@ int			ft_home_error(void);
 
 int			ft_syntax_error(t_dlist *list_token);
 
-int			ft_semantic_error(char *s);
+int			ft_semantic_error(char *s, t_info *info);
 
 int			ft_permission_error(char *s, char **env);
 

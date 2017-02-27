@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/31 15:47:32 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 18:25:02 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 16:59:20 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ int			ft_isoperand(char *stream, t_info *info)
 {
 	int		ret;
 
+	(void)info;
 	ret = 0;
 	while (*stream != ';' && *stream != '|' && *stream)
 	{
-		if (*stream == '\n' && info->buff_heredoc == 1)
+		if (*stream == '\n')
 			break ;
 		if (*stream == '>' || *stream == '<')
 		{

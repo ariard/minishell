@@ -6,7 +6,7 @@
 #    By: ariard <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/30 15:31:26 by ariard            #+#    #+#              #
-#    Updated: 2017/02/26 18:34:57 by ariard           ###   ########.fr        #
+#    Updated: 2017/02/27 17:02:24 by ariard           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,6 @@ SRC = src/minishell.c \
 	  src/macro_read.c \
 	  src/macro_read2.c \
 	  src/macro_read3.c \
-	  src/macro_read4.c \
 	  src/macro_column.c \
 	  src/macro_column2.c \
 	  src/macro_column3.c \

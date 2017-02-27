@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 00:09:45 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 18:25:49 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 18:05:25 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ char		*ft_set_new_arg(char *buffer, t_dlist **list)
 	while (spaces--)
 		ft_strcat(new, " ");
 	ft_strcat(new, tmp->key);
+	if (buffer[0] == '/')
+		ft_strcat(new, "/");
 	return (new);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 22:33:38 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 17:36:32 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 18:06:27 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,4 @@ void		ft_complete_bin(char *buffer, t_dlist **list_bin, t_screen *screen)
 	else if (size == 1)
 		ft_swap_buffer(buffer, tmp->key, screen);
 	return (ft_list_clear(list_show, &free));
-}
-
-int			ft_isuncompletepath(char *str)
-{
-	char	tmp[256];
-	char	*tmp2;
-
-	if (str[0] != '/')
-		return (-1);
-	str++;
-	ft_bzero(tmp, 256);
-	ft_strcat(tmp, "/");
-	while (*str)
-	{
-		tmp2 = str;
-		while (*str && *str != '/')
-			str++;
-		ft_strncat(tmp, tmp2, ft_strlenchr(tmp2, '/'));
-		ft_strcat(tmp, "/");
-		if (ft_isdir(tmp) == 0)
-			return (1);
-		str++;
-	}
-	return (0);
 }
