@@ -6,13 +6,13 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/27 17:00:45 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 18:25:35 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void			ft_process_buffer(char *buffer, t_info *info) 
+static void			ft_process_buffer(char *buffer, t_info *info)
 {
 	t_dlist			**list_token;
 	t_root			*tree;
@@ -22,7 +22,7 @@ static void			ft_process_buffer(char *buffer, t_info *info)
 	if (list_token)
 		tree = ft_syntax_analyze(list_token);
 	if (tree)
-		ft_execute_ast(tree, info); 
+		ft_execute_ast(tree, info);
 	if (list_token)
 		ft_list_clear(list_token, &ft_token_free);
 	if (tree)
@@ -36,7 +36,7 @@ static void			ft_process_buffer(char *buffer, t_info *info)
 
 static void			ft_init_read(t_info *info, t_screen *screen)
 {
-	screen->cursor = 0; 
+	screen->cursor = 0;
 	screen->vertical = 1;
 	screen->quote = 0;
 	info->pipe = 0;
@@ -63,9 +63,9 @@ static char			*ft_read_input(t_screen *screen, t_info *info)
 		if (screen->quote != 0)
 			info->quote = 1;
 		if (ft_interrupt(c, buffer, screen))
-			break;
-		if (ft_isend(c, buffer, buffquote, screen) == 1) 
-			break;
+			break ;
+		if (ft_isend(c, buffer, buffquote, screen) == 1)
+			break ;
 		if (ft_strlen(buffer) >= 1024)
 			return (ft_buffer_error());
 	}
@@ -99,10 +99,11 @@ static int			ft_shell(t_info *info)
 	return (0);
 }
 
-int					main(int __unused ac, char **av, char **ev)
+int					main(int ac, char **av, char **ev)
 {
 	t_info			*info;
 
+	(void)ac;
 	if (isatty(0) == 0)
 		return (-1);
 	signal(SIGINT, ft_sigint_handler);
