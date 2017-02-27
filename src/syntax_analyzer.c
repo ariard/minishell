@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 21:39:33 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 19:27:51 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 20:31:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_root			*ft_syntax_analyze(t_dlist **list_token)
 			father = ft_ast_insert_sequence(tree, father, tmp, tmp->next);
 		free(expr);
 		if (ret == -1)
-			return (NULL);
+			return (tree);
 		if (ret == 1)
 			father = ft_ast_insert_cmd(tree, father, tmp);
 		tmp = ft_list_next(tmp, ret);

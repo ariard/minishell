@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/27 19:12:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 20:40:37 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -492,8 +492,7 @@ void				ft_add_heredoc(char *buffer, t_info *info);
 
 char				*ft_extract_file(char *eof, char *buffer, t_info *info);
 
-int					ft_isend(int c, char *buffer, char *buffquote,
-					t_screen *screen);
+int					ft_isend(int c);
 
 int					ft_isquote(int c, char *buffer, char *buffquote,
 					t_screen *screen);

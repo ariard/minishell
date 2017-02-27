@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 18:32:40 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 17:32:29 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 20:36:29 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,10 @@ char		**ft_setenv(char *arg, t_info *info)
 		if (!del)
 			var = arg;
 		else
+		{
 			var = *del;
-		info->env = ft_array_del(info->env, var);
+			info->env = ft_array_del(info->env, var);
+		}
 		info->env = ft_array_add(info->env, arg);
 	}
 	return (info->env);
@@ -87,11 +89,13 @@ int			ft_unsetenv(char **arg, t_info *info)
 {
 	char	**del;
 
+	del = NULL;
 	if (!arg || !info->env)
 		return (1);
 	arg++;
 	if (*arg)
 	{
+		ft_putstr_fd("still alive", 3);
 		del = ft_grep_env(info->env, *arg);
 		if (del)
 			if (*del)

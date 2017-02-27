@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/27 17:34:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 20:29:57 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ int				ft_distribute_execution(t_btree *node, t_btree *father,
 	t_entry		*entry;
 	int			ret;
 
+	ret = 0;
+	entry = NULL;
 	if (ft_full_path(info->generic))
 		ret = ft_execute_cmd(node, father, tree, info);
-	if (info->generic[0] == '/')
-		ret = ft_existence_error("ariard", info->generic);
-	if (ft_redir(info->prev_father))
+	else if (ft_redir(info->prev_father))
 		ret = 1;
-	entry = ft_add_bin(info->generic, info);
-	if (!entry)
+	if (ret == 0)
+		entry = ft_add_bin(info->generic, info);
+	if (!entry && ret == 0)
 		ret = ft_semantic_error(info->generic, info);
 	else if (entry)
 	{

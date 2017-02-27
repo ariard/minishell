@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/27 18:25:35 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/27 20:45:08 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,22 @@ static void			ft_init_read(t_info *info, t_screen *screen)
 static char			*ft_read_input(t_screen *screen, t_info *info)
 {
 	char			*buffer;
-	char			*buffquote;
 	char			c;
 
 	ft_init_read(info, screen);
 	buffer = ft_strnew(1024);
-	buffquote = ft_strnew(1024);
 	while (42)
 	{
 		c = '\0';
 		read(0, &c, 1);
 		ft_process_input(c, buffer, screen, info);
-		screen->quote = ft_isquote(c, buffer, buffquote, screen);
-		if (screen->quote != 0)
-			info->quote = 1;
 		if (ft_interrupt(c, buffer, screen))
 			break ;
-		if (ft_isend(c, buffer, buffquote, screen) == 1)
+		if (ft_isend(c) == 1)
 			break ;
 		if (ft_strlen(buffer) >= 1024)
 			return (ft_buffer_error());
 	}
-	ft_strdel(&buffquote);
 	return (buffer);
 }
 
