@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/26 16:35:47 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 16:36:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/28 11:00:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int			ft_isbuiltin(t_btree *node)
 		return (1);
 	if (ft_strncmp("setenv", str, 6) == 0)
 		return (1);
-	if (ft_strcmp("unsetenv", str) == 0)
+	if (ft_strncmp("unsetenv", str, 8) == 0)
 		return (1);
-	if (ft_strcmp("env", str) == 0)
+	if (ft_strncmp("env", str, 3) == 0)
 		return (1);
 	return (0);
 }
@@ -45,9 +45,9 @@ int			ft_builtin(char *name, char **str, t_info *info)
 		ft_strdel(&name);
 		return (1);
 	}
-	if (ft_strcmp("unsetenv", name) == 0)
+	if (ft_strncmp("unsetenv", name, 8) == 0)
 		ret = ft_unsetenv(str, info);
-	if (ft_strcmp("env", name) == 0)
+	if (ft_strncmp("env", name, 3) == 0)
 		ret = ft_env(str, info);
 	ft_strdel(&name);
 	return (ret);

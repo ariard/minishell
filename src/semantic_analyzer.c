@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/27 20:29:28 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/28 11:39:21 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ int				ft_execute_operand(t_btree *node, t_btree *father, t_info *info,
 		ft_strdel(&info->generic);
 		exit(0);
 	}
-	else if (ft_strcmp(info->generic, "setenv") == 0
-		|| ft_strcmp(info->generic, "unsetenv") == 0
-		|| ft_strcmp(info->generic, "echo") == 0
-		|| ft_strcmp(info->generic, "env") == 0
-		|| ft_strcmp(info->generic, "cd") == 0)
+	else if (ft_strncmp(info->generic, "setenv", 6) == 0
+		|| ft_strncmp(info->generic, "unsetenv", 8) == 0
+		|| ft_strncmp(info->generic, "echo", 4) == 0
+		|| ft_strncmp(info->generic, "env", 3) == 0
+		|| ft_strncmp(info->generic, "cd", 2) == 0)
 	{
 		ret = ft_execute_cmd(node, father, tree, info);
 		ft_strdel(&info->generic);

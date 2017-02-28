@@ -6,11 +6,19 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/27 20:29:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/28 11:51:45 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int		ft_derr(char *str)
+{
+	ft_putstr_fd("ariard: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": is a directory\n", 2);
+	return (1);
+}
 
 int				ft_distribute_execution(t_btree *node, t_btree *father,
 				t_info *info, t_root *tree)
@@ -22,8 +30,8 @@ int				ft_distribute_execution(t_btree *node, t_btree *father,
 	entry = NULL;
 	if (ft_full_path(info->generic))
 		ret = ft_execute_cmd(node, father, tree, info);
-	else if (ft_redir(info->prev_father))
-		ret = 1;
+	ret = (ft_isdir(info->generic) && ret == 0) ? ft_derr(info->generic) : ret;
+	ret = ((ft_redir(info->prev_father) && ret == 0) ? 1 : ret);
 	if (ret == 0)
 		entry = ft_add_bin(info->generic, info);
 	if (!entry && ret == 0)

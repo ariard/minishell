@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 22:09:47 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/27 17:18:23 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/28 11:30:54 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int				ft_syntax_error(t_dlist *list_token)
 
 int				ft_semantic_error(char *s, t_info *info)
 {
+	ft_putstr_fd("error\n", 3);
 	ft_putstr_fd("ariard: ", 2);
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd(": commmand not found\n", 2);

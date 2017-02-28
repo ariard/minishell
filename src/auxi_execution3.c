@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 15:33:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/26 16:35:33 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/28 11:49:55 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static t_entry		*ft_gen_entry(char *bin, char *path)
 {
 	t_entry		*entry;
 
-	(void)path;
-	(void)bin;
 	entry = ft_memalloc(sizeof(t_entry));
 	entry->path = ft_strjoin(ft_strcat(path, "/"), bin);
 	entry->perm = access(entry->path, X_OK);
@@ -52,7 +50,6 @@ t_entry				*ft_add_bin(char *bin, t_info *info)
 	char	*dir;
 	t_entry *entry;
 
-	(void)info;
 	path = ft_grep_envdata(info->env, "PATH");
 	if (!path)
 		return (NULL);
@@ -76,6 +73,8 @@ t_entry				*ft_add_bin(char *bin, t_info *info)
 
 int					ft_full_path(char *full_path)
 {
+	if (ft_isdir(full_path))
+		return (0);
 	if (!(ft_strchr(full_path, '/')))
 		return (0);
 	if (access(full_path, F_OK) == -1)
