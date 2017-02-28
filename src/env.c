@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 18:32:40 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/28 14:58:10 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/28 17:36:58 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@ int			ft_env(char **arg, t_info *info)
 	return (1);
 }
 
+static int	ft_syntax_env(char *str)
+{
+	while (*str)
+	{
+		if (*str == '=')
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 char		**ft_setenv(char *arg, t_info *info)
 {
 	char	*var;
@@ -68,6 +79,8 @@ char		**ft_setenv(char *arg, t_info *info)
 		return (NULL);
 	if (arg)
 	{
+		if (ft_syntax_env(arg))
+			return (info->env);
 		tmp = ft_strnew(256);
 		ft_strchrcpy(tmp, arg, '=');
 		ft_str_substitute(tmp, '=', 0);
