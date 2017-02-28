@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 15:50:17 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/27 20:40:37 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/28 12:51:03 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,8 @@ void				ft_sigint_handler_child(int signo);
 ** Functions to print errors
 */
 
+int					ft_error_access(char *str);
+
 int					ft_home_error(void);
 
 int					ft_syntax_error(t_dlist *list_token);
@@ -415,6 +417,8 @@ int					ft_isaggregation(char **args);
 /*
 ** Macros to detect operator type
 */
+
+int					ft_isaccess(char *str);
 
 int					ft_ispipe(t_btree *father);
 

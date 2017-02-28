@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 21:20:36 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/27 20:45:08 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/28 14:53:12 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,16 @@ int					main(int ac, char **av, char **ev)
 	signal(SIGINT, ft_sigint_handler);
 	info = ft_memalloc(sizeof(t_info));
 	info->env = ft_array_strdup(ev);
+	ft_putstr_fd("env youhou", 3);
 	info->list_bin = ft_memalloc(sizeof(t_dlist));
 	*(info->list_bin) = NULL;
 	info->sym_tab = ft_gen_symtab(info);
-	ft_insert_cmpsort(info->list_bin, &ft_stralphcmp);
-	ft_list_reverse(info->list_bin);
+	ft_putstr_fd("sym tab youhou", 3);
+	if (*(info->list_bin))
+	{
+		ft_insert_cmpsort(info->list_bin, &ft_stralphcmp);
+		ft_list_reverse(info->list_bin);
+	}
 	ft_init_term_data();
 	info->av = av;
 	ft_shell(info);

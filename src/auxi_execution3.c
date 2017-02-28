@@ -6,7 +6,7 @@
 /*   By: ariard <ariard@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 15:33:31 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/28 11:49:55 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/28 14:44:26 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int					ft_full_path(char *full_path)
 		return (0);
 	if (!(ft_strchr(full_path, '/')))
 		return (0);
-	if (access(full_path, F_OK) == -1)
+	if (access(full_path, X_OK) == -1)
 		return (0);
 	return (1);
 }

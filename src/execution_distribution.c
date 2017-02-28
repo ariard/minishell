@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 18:37:58 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/28 11:51:45 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/28 14:45:32 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int				ft_distribute_execution(t_btree *node, t_btree *father,
 	int			ret;
 
 	ret = 0;
-	entry = NULL;
 	if (ft_full_path(info->generic))
 		ret = ft_execute_cmd(node, father, tree, info);
 	ret = (ft_isdir(info->generic) && ret == 0) ? ft_derr(info->generic) : ret;
-	ret = ((ft_redir(info->prev_father) && ret == 0) ? 1 : ret);
-	if (ret == 0)
-		entry = ft_add_bin(info->generic, info);
+	ret = (ft_redir(info->prev_father) && ret == 0) ? 1 : ret;
+	entry = (ret == 0) ? ft_add_bin(info->generic, info) : NULL;
+	if (!entry && ret == 0 && open(info->generic, O_RDONLY) > 0)
+		ret = ft_error_access(info->generic);
 	if (!entry && ret == 0)
 		ret = ft_semantic_error(info->generic, info);
 	else if (entry)

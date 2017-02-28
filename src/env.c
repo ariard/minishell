@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 18:32:40 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/28 11:40:36 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/28 14:58:10 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char		**ft_setenv(char *arg, t_info *info)
 	char	**del;
 	char	*tmp;
 
-	if (!arg || !info->env)
+	if (!arg)
 		return (NULL);
 	if (arg)
 	{

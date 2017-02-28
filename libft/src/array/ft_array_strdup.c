@@ -6,7 +6,7 @@
 /*   By: ariard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:44:53 by ariard            #+#    #+#             */
-/*   Updated: 2017/02/27 20:51:57 by ariard           ###   ########.fr       */
+/*   Updated: 2017/02/28 14:46:56 by ariard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char			**ft_array_strdup(char **array)
 	char		**tab;
 	char		**tmp;
 
+	if (!array || !*array)
+		return (NULL);
 	size = ft_array_size(array);
 	tab = ft_memalloc(size * sizeof(char *) + 1);
 	tmp = tab;
